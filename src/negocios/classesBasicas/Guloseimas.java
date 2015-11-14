@@ -1,6 +1,6 @@
 package negocios.classesBasicas;
 
-public class Guloseimas extends Produtos {
+public class Guloseimas extends Produto {
 	
 	private String sabor;
 	

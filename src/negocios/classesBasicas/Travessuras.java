@@ -1,6 +1,6 @@
 package negocios.classesBasicas;
 
-public class Travessuras extends Produtos {
+public class Travessuras extends Produto {
 	
 	private double nivelPericulosidade;
 	private int censura;
