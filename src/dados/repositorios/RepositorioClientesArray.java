@@ -15,7 +15,7 @@ public class RepositorioClientesArray implements RepositoriosClientes {
 	}
 
 
-	@Override
+	
 	public void inserir(Cliente clientes) {
 		if(indice > this.clientes.length){
 			Cliente[] aux = new Cliente[ 2*(this.clientes.length)];
