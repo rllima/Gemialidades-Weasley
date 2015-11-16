@@ -9,8 +9,7 @@ public class Guloseimas extends Produto {
 		this.sabor = sabor;
 	}
 
-	public void venda() {
-		
+	public void venda() {	
 		
 	}
 
