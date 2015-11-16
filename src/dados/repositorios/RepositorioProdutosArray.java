@@ -1,6 +1,8 @@
 package dados.repositorios;
 
+import negocios.classesBasicas.Cliente;
 import negocios.classesBasicas.Produto;
+import negocios.exceptions.ProdutoNaoEncontradoException;
 
 public class RepositorioProdutosArray implements RepositorioProdutos {
 
@@ -26,7 +28,7 @@ public class RepositorioProdutosArray implements RepositorioProdutos {
 		indice++;
 	}
 
-	public Produto procurar(String codigo) {
+	public Produto procurar(String codigo) throws ProdutoNaoEncontradoException {
 		Produto resposta = null;
 		for(int i = 0; i < this.indice; i++) {
 			if (repositorioProdutos[i].getCodigo().equals(codigo)) {
@@ -40,8 +42,21 @@ public class RepositorioProdutosArray implements RepositorioProdutos {
 		
 	}
 
-	public void remover(String id) {
+	public void remover(String id) throws ProdutoNaoEncontradoException {
 		
+	}
+	
+	public int buscarCodigo(String codigo){
+		int resposta = -1;
+		for (int i = 0; i < indice; i++) {
+			Produto aux = this.repositorioProdutos[i];
+			if (aux.getCodigo().equals(codigo)) {
+				resposta = i;
+
+			}
+		}
+		return resposta;
+
 	}
 
 }

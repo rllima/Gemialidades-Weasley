@@ -4,6 +4,7 @@ import negocios.classesBasicas.Cliente;
 import negocios.exceptions.ClienteNaoEncontradoException;
 
 public class RepositorioClientesArray implements RepositoriosClientes {
+	
 	private Cliente [] clientes;
 	private int indice;
 
@@ -15,7 +16,7 @@ public class RepositorioClientesArray implements RepositoriosClientes {
 
 
 	@Override
-	public void inserir( Cliente clientes) {
+	public void inserir(Cliente clientes) {
 		if(indice > this.clientes.length){
 			Cliente[] aux = new Cliente[ 2*(this.clientes.length)];
 			for(int i = 0; i < this.clientes.length; i++){
