@@ -20,8 +20,6 @@ public class RepositorioClientesArray implements RepositoriosClientes {
 			Cliente[] aux = new Cliente[ 2*(this.clientes.length)];
 			for(int i = 0; i < this.clientes.length; i++){
 				aux[i] = this.clientes[i];
-
-
 			}
 			aux[indice] = clientes;
 			this.clientes = aux;
@@ -35,7 +33,6 @@ public class RepositorioClientesArray implements RepositoriosClientes {
 
 	}
 
-	@Override
 	public Cliente procurar(String id) throws ClienteNaoEncontradoException {
 		Cliente resposta = null;
 		int b = this.buscarId(id);
@@ -51,16 +48,11 @@ public class RepositorioClientesArray implements RepositoriosClientes {
 		return resposta;
 	}
 
-
-
-
-	@Override
 	public void atualizar(String id) {
-		// TODO Auto-generated method stub
+		
 
 	}
 
-	@Override
 	public void remover(String id) throws ClienteNaoEncontradoException {
 		int b = this.buscarId(id);
 		if( b >= 0){
