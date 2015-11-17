@@ -28,7 +28,7 @@ public class RepositorioProdutosArray implements RepositorioProdutos {
 		indice++;
 	}
 
-	public Produto procurar(String codigo) throws ProdutoNaoEncontradoException {
+	public Produto procurar(String codigo)  {
 		Produto resposta = null;
 		for(int i = 0; i < this.indice; i++) {
 			if (repositorioProdutos[i].getCodigo().equals(codigo)) {
@@ -42,7 +42,7 @@ public class RepositorioProdutosArray implements RepositorioProdutos {
 		
 	}
 
-	public void remover(String id) throws ProdutoNaoEncontradoException {
+	public void remover(String id)  {
 		
 	}
 	

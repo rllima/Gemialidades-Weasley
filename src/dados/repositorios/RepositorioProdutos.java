@@ -6,8 +6,8 @@ import negocios.exceptions.ProdutoNaoEncontradoException;
 public interface RepositorioProdutos {
 	
 	void inserir(Produto produto);
-	Produto procurar(String codigo) throws ProdutoNaoEncontradoException;
+	Produto procurar(String codigo) ;
 	void atualizar();
-	void remover(String id) throws ProdutoNaoEncontradoException;
+	void remover(String id);
 
 }

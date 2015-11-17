@@ -34,17 +34,13 @@ public class RepositorioClientesArray implements RepositoriosClientes {
 
 	}
 
-	public Cliente procurar(String id) throws ClienteNaoEncontradoException {
+	public Cliente procurar(String id){
 		Cliente resposta = null;
 		int b = this.buscarId(id);
 
 		if (b >= 0) {
 			
 			resposta = this.clientes[b];
-		}else{
-			
-			throw new ClienteNaoEncontradoException();
-
 		}
 		return resposta;
 	}
@@ -54,7 +50,7 @@ public class RepositorioClientesArray implements RepositoriosClientes {
 
 	}
 
-	public void remover(String id) throws ClienteNaoEncontradoException {
+	public void remover(String id) {
 		int b = this.buscarId(id);
 		if( b >= 0){
 			for (int i = 0; i < indice; i++) {
@@ -66,9 +62,7 @@ public class RepositorioClientesArray implements RepositoriosClientes {
 				}
 			}
 		}
-		else{
-			throw new ClienteNaoEncontradoException();
-		}
+		
 	}
 	public int buscarId(String id){
 		int resposta = -1;
