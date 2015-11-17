@@ -7,7 +7,7 @@ public interface RepositorioProdutos {
 	
 	void inserir(Produto produto);
 	Produto procurar(String codigo) ;
-	void atualizar();
+	void atualizar(String codigo, Produto produtos);
 	void remover(String id);
 
 }

@@ -15,15 +15,15 @@ public class RepositorioProdutosArray implements RepositorioProdutos {
 	}
 
 	public void inserir(Produto produto) {
-		if (this.indice > repositorioProdutos.length) {
+		if (this.indice > this.repositorioProdutos.length) {
 			Produto[] aux = new Produto[repositorioProdutos.length * 2];
 			for (int i = 0; i < indice; i++) {
-				aux[i] = repositorioProdutos[i];
+				aux[i] = this.repositorioProdutos[i];
 			}
 			aux[indice] = produto;
 			repositorioProdutos = aux;
 		} else {
-			repositorioProdutos[indice] = produto;
+			this.repositorioProdutos[indice] = produto;
 		}
 		indice++;
 	}
@@ -31,14 +31,14 @@ public class RepositorioProdutosArray implements RepositorioProdutos {
 	public Produto procurar(String codigo)  {
 		Produto resposta = null;
 		for(int i = 0; i < this.indice; i++) {
-			if (repositorioProdutos[i].getCodigo().equals(codigo)) {
-				resposta = repositorioProdutos[i];
+			if (this.repositorioProdutos[i].getCodigo().equals(codigo)) {
+				resposta = this.repositorioProdutos[i];
 			}
 		}
 		return resposta;
 	}
 
-	public void atualizar() {
+	public void atualizar(String codigo, Produto produtos) {
 		
 	}
 
@@ -48,9 +48,9 @@ public class RepositorioProdutosArray implements RepositorioProdutos {
 	
 	public int buscarCodigo(String codigo){
 		int resposta = -1;
-		for (int i = 0; i < indice; i++) {
+		for (int i = 0; i < this.indice; i++) {
 			Produto aux = this.repositorioProdutos[i];
-			if (aux.getCodigo().equals(codigo)) {
+			if (aux.getCodigo().equalsIgnoreCase(codigo)) {
 				resposta = i;
 
 			}
@@ -58,5 +58,7 @@ public class RepositorioProdutosArray implements RepositorioProdutos {
 		return resposta;
 
 	}
+
+	
 
 }
