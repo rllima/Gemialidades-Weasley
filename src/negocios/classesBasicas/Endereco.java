@@ -56,6 +56,10 @@ public class Endereco {
 	public void setComplemento(String complemento) {
 		this.complemento = complemento;
 	}
+	public String toString(){
+		return "Cidade: " + this.getCidade() + "\nLogradouro: " + this.getLogradouro() + "Número: " + this.getNumero() + "CEP: " + this.getCep() + "Complemento: " + this.getComplemento();
+		
+	}
 	
 	
 
