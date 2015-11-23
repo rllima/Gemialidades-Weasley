@@ -51,16 +51,29 @@ public class RepositorioClientesExcel implements RepositoriosClientes {
 		String celula = "";
 		Row linha = null;
 		Cliente resposta = null;
+		Endereco endereco = null;
 		for(int i = 0; i < this.indice; i++){
 			linha = planilha.getRow(i);
 			celula = linha.getCell(3).toString();
 			if(id.equalsIgnoreCase(celula)){
 				String nome = linha.getCell(1).toString();
-				int idade = linha.getCell(arg0)
+				int idade =  (int) linha.getCell(2).getNumericCellValue();
+				String id1 = linha.getCell(3).toString();
+				String cidade = linha.getCell(4).toString();
+				String logradouro = linha.getCell(5).toString();
+				String numero = linha.getCell(6).toString();
+				String cep = linha.getCell(7).toString();
+				String cpmt = linha.getCell(8).toString();
+				endereco = new Endereco(cidade, logradouro, numero, cep, cpmt);
+				
+				resposta = new Cliente(nome,idade, endereco, id1);
+						
+				
+				
 			}
 		}
 		
-		return null;
+		return resposta;
 	}
 
 	public void atualizar(String id) {
