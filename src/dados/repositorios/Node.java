@@ -18,6 +18,16 @@ public class Node<T> {
 		this.dado = objeto;
 		this.proximo = proximo;
 	}
+	
+	public Node(Node<T> anterior, T objeto, Node<T> proximo) {
+		this.anterior = anterior;
+		this.dado = objeto;
+		this.proximo = proximo;
+	}
+
+	public void setDado(T dado) {
+		this.dado = dado;
+	}
 
 	// Retorna os dados daquele no
 	public T getDado() {

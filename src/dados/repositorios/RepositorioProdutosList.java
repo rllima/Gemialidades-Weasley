@@ -16,11 +16,18 @@ public class RepositorioProdutosList implements RepositorioProdutos{
 	}
 
 	// Insere objeto no fim da lista
-	public void inserir(Produto produto) {
+	public void inserir(Produto produto)/* throws ProdutoJaExisteException */ {
 		if(isEmpty()) {
 			primeiroNo = ultimoNo = new Node<Produto>(produto);
 		} else {
-			ultimoNo = new Node<Produto>(produto);
+			Node<Produto> aux = ultimoNo;
+			Node<Produto> novo = new Node<Produto>(ultimoNo, produto, null);
+			ultimoNo = novo;
+			if (aux == null){
+				primeiroNo = novo;
+			} else {
+				aux.setProximo(novo);
+			}
 		}
 	}
 
@@ -38,23 +45,37 @@ public class RepositorioProdutosList implements RepositorioProdutos{
 		}
 		return resposta;
 	}
-	
+
 	public void remover(String codigo) /*Throws ProdutoNaoEncontradoException*/ {
-		Node<Produto> anterior = this.procurarNode(codigo).getAnterior();
-		Node<Produto> atual = anterior.getProximo();
-		Node<Produto> proximo = atual.getProximo();
-		
-		anterior.setProximo(proximo);
-		proximo.setAnterior(anterior);
+		if(this.procurarNode(codigo) == null) {
+			System.out.println("Nao existe na lista");
+		} else {
+			final Node<Produto> atual = this.procurarNode(codigo);
+			final Node<Produto> proximo = atual.getProximo();
+			final Node<Produto> anterior = atual.getAnterior();
+
+			if(anterior == null) {
+				primeiroNo = proximo;
+			} else {
+				anterior.setProximo(proximo);
+			}
+			
+			if(proximo == null) {
+				ultimoNo = anterior;
+			} else {
+				proximo.setAnterior(anterior);
+			}
+		}
 	}
-	
+
 	public void atualizar(String codigo, Produto produto){
-		
+		Node<Produto> atual = this.procurarNode(codigo);
+		atual.setDado(produto);
 	}
-	
+
 	public boolean existe(Produto produto) {
 		Node<Produto> atual = this.primeiroNo;
-		
+
 		while(atual != null) {
 			if(atual.getDado().equals(produto)) {
 				return true;
@@ -62,56 +83,6 @@ public class RepositorioProdutosList implements RepositorioProdutos{
 			atual = atual.getProximo();
 		}
 		return false;
-	}
-
-	// Insere objeto no comeco da lista
-	public void inserirNoComeco(Produto produto) {
-		if (isEmpty()) {
-			primeiroNo = ultimoNo = new Node<Produto>(produto);
-		} else {
-			primeiroNo = new Node<Produto>(produto, primeiroNo);
-		}
-	}
-
-
-	// Remove o primeiro objeto da lista
-	public Produto removerPelaFrente() throws EmptyListException {
-		Produto itemRemovido = null; // Objeto que vai ser retirado
-		if(isEmpty()) {
-			throw new EmptyListException();
-		} else {
-			itemRemovido = primeiroNo.getDado(); // Pega o objeto removido pra retornar
-			if(primeiroNo == ultimoNo) { // Ou seja, se apenas ha um objeto {
-				primeiroNo = ultimoNo = null; // Lista fica vazia
-			} else {
-				primeiroNo = primeiroNo.getProximo();
-			}
-		}
-		return itemRemovido;
-	}
-
-	// Remove o ultimo objeto da lista
-	public Produto removerUltimo() throws EmptyListException {
-		Produto itemRemovido = null;
-		if(isEmpty()) {
-			throw new EmptyListException();
-
-		} else { // Localiza o novo ultimo no da lista
-			itemRemovido = ultimoNo.getDado();
-
-			if(primeiroNo == ultimoNo) {
-				primeiroNo = ultimoNo = null;
-			} else { // Varre lista do primeiro ate encontrar o ultimo
-				Node<Produto> atual = primeiroNo;
-
-				while(atual.getProximo() != ultimoNo) {
-					atual = atual.getProximo();
-				} 
-				ultimoNo = atual;
-				atual.setProximo(null);
-			}
-		}
-		return itemRemovido;
 	}
 
 	// Retorna true se a lista esta vazia. (Se o primeiro no esta vazio, a lista esta vazia.
@@ -134,9 +105,9 @@ public class RepositorioProdutosList implements RepositorioProdutos{
 		}
 		return resposta;
 	}
-	
+
 	// Retorna o no em que se encontra o produto do codigo passado
-	public Node<Produto> procurarNode(String codigo)/* throws EmptyListException*/ {
+	private Node<Produto> procurarNode(String codigo)/* throws EmptyListException*/ {
 		Node<Produto> resposta = null;
 		boolean achou = false;
 		Node<Produto> atual = primeiroNo;
