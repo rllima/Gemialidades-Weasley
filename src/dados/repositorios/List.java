@@ -1,5 +1,6 @@
 package dados.repositorios;
 
+import negocios.classesBasicas.Produto;
 import negocios.exceptions.EmptyListException;
 
 public class List<T> {
@@ -13,6 +14,51 @@ public class List<T> {
 		this.nome = nome;
 		this.primeiroNo = this.ultimoNo = null;
 	}
+	// Insere objeto no fim da lista
+	public void inserir(T objeto) {
+		if(isEmpty()) {
+			primeiroNo = ultimoNo = new Node<T>(objeto);
+		} else {
+			Node<T> novo = new Node<T>(objeto, primeiroNo);
+			this.primeiroNo.setAnterior(novo);
+			this.primeiroNo = novo;
+		}
+	}
+	
+	public void remover(T objeto) {
+		Node<T> anterior = this.procurarNode(objeto).getAnterior();
+		Node<T> atual = anterior.getProximo();
+		Node<T> proximo = atual.getProximo();
+		
+		anterior.setProximo(proximo);
+		proximo.setAnterior(anterior);
+	}
+	
+	private Node<T> procurarNode(T objeto)/* throws EmptyListException*/ {
+		Node<T> resposta = null;
+		boolean achou = false;
+		Node<T> atual = primeiroNo;
+		while(atual != null && achou == false) {
+			if(atual.getDado().equals(objeto)){
+				resposta = atual;
+				achou = true;
+			}
+			atual = atual.getProximo();
+		}
+		return resposta;
+	}
+	
+	public boolean existe(T objeto) {
+		Node<T> atual = this.primeiroNo;
+		
+		while(atual != null) {
+			if(atual.getDado().equals(objeto)) {
+				return true;
+			}
+			atual = atual.getProximo();
+		}
+		return false;
+	}
 
 	// Insere objeto no comeco da lista
 	public void inserirNoComeco(T objeto) {
@@ -23,17 +69,9 @@ public class List<T> {
 		}
 	}
 
-	// Insere objeto no fim da lista
-	public void inserirNoFim(T objeto) {
-		if(isEmpty()) {
-			primeiroNo = ultimoNo = new Node<T>(objeto);
-		} else {
-			ultimoNo = new Node<T>(objeto);
-		}
-	}
 
 	// Remove o primeiro objeto da lista
-	public T removerPelaFrente() throws EmptyListException {
+	public T removerPrimeiro() throws EmptyListException {
 		T itemRemovido = null; // Objeto que vai ser retirado
 		if(isEmpty()) {
 			throw new EmptyListException();
@@ -47,21 +85,21 @@ public class List<T> {
 		}
 		return itemRemovido;
 	}
-	
+
 	// Remove o ultimo objeto da lista
 	public T removerUltimo() throws EmptyListException {
 		T itemRemovido = null;
 		if(isEmpty()) {
 			throw new EmptyListException();
-			
+
 		} else { // Localiza o novo ultimo no da lista
 			itemRemovido = ultimoNo.getDado();
-			
+
 			if(primeiroNo == ultimoNo) {
 				primeiroNo = ultimoNo = null;
 			} else { // Varre lista do primeiro ate encontrar o ultimo
 				Node<T> atual = primeiroNo;
-				
+
 				while(atual.getProximo() != ultimoNo) {
 					atual = atual.getProximo();
 				} 
@@ -76,7 +114,7 @@ public class List<T> {
 	public boolean isEmpty() {
 		return primeiroNo == null;
 	}
-	
+
 	// Retorna uma string com os dados de todos objetos contidos na lista
 	public String toString() {
 		String resposta = "";
@@ -92,7 +130,7 @@ public class List<T> {
 		}
 		return resposta;
 	}
-	
-	
+
+
 
 }

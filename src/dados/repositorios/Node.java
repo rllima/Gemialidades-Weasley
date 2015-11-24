@@ -4,6 +4,7 @@ public class Node<T> {
 	
 	private T dado;
 	private Node<T> proximo;
+	private Node<T> anterior;
 	
 	/* Construtor que cria no e prepara a lista pra receber o
 	 * proximo objeto. É usado quando a lista está vazia
@@ -32,5 +33,12 @@ public class Node<T> {
 		this.proximo = proximo;
 	}
 
+	public Node<T> getAnterior() {
+		return anterior;
+	}
+	
+	public void setAnterior(Node<T> anterior) {
+		this.anterior = anterior;
+	}
 
 }
