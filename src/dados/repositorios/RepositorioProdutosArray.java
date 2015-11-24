@@ -30,10 +30,9 @@ public class RepositorioProdutosArray implements RepositorioProdutos {
 
 	public Produto procurar(String codigo)  {
 		Produto resposta = null;
-		for(int i = 0; i < this.indice; i++) {
-			if (this.repositorioProdutos[i].getCodigo().equals(codigo)) {
-				resposta = this.repositorioProdutos[i];
-			}
+		int indice = this.buscarCodigo(codigo);
+		if (indice > -1) {
+			resposta = this.repositorioProdutos[indice];
 		}
 		return resposta;
 	}
@@ -48,11 +47,12 @@ public class RepositorioProdutosArray implements RepositorioProdutos {
 	
 	public int buscarCodigo(String codigo){
 		int resposta = -1;
-		for (int i = 0; i < this.indice; i++) {
+		boolean achou = false;
+		for (int i = 0; i < this.indice && !achou; i++) {
 			Produto aux = this.repositorioProdutos[i];
 			if (aux.getCodigo().equalsIgnoreCase(codigo)) {
 				resposta = i;
-
+				achou = true;
 			}
 		}
 		return resposta;
