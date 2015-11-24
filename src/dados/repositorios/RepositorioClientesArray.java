@@ -4,7 +4,7 @@ import negocios.classesBasicas.Cliente;
 import negocios.exceptions.ClienteNaoEncontradoException;
 
 public class RepositorioClientesArray implements RepositoriosClientes {
-	
+
 	private Cliente [] clientes;
 	private int indice;
 
@@ -15,7 +15,6 @@ public class RepositorioClientesArray implements RepositoriosClientes {
 	}
 
 
-	
 	public void inserir(Cliente clientes) {
 		if(indice > this.clientes.length){
 			Cliente[] aux = new Cliente[ 2*(this.clientes.length)];
@@ -38,21 +37,27 @@ public class RepositorioClientesArray implements RepositoriosClientes {
 		Cliente resposta = null;
 		int b = this.buscarId(id);
 
-		if (b >= 0) {
-			
+		if (b != -1) {
+
 			resposta = this.clientes[b];
 		}
 		return resposta;
 	}
 
 	public void atualizar(String id, Cliente clientes) {
-		
+		int b = this.buscarId(id);
+
+		if(b != -1){
+			this.clientes[b] = clientes;
+
+		}
 
 	}
 
+
 	public void remover(String id) {
 		int b = this.buscarId(id);
-		if( b >= 0){
+		if( b != -1){
 			for (int i = 0; i < indice; i++) {
 				Cliente aux = this.clientes[i];
 				if (aux.getId().equals(id)) {
@@ -62,14 +67,16 @@ public class RepositorioClientesArray implements RepositoriosClientes {
 				}
 			}
 		}
-		
+
 	}
 	public int buscarId(String id){
 		int resposta = -1;
-		for (int i = 0; i < indice; i++) {
+		boolean achou = false;
+		for (int i = 0; i < indice && !achou; i++) {
 			Cliente aux = this.clientes[i];
 			if (aux.getId().equals(id)) {
 				resposta = i;
+				achou = true;
 
 			}
 		}
