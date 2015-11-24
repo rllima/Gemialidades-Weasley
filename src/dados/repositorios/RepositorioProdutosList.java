@@ -5,8 +5,8 @@ import negocios.exceptions.EmptyListException;
 
 public class RepositorioProdutosList implements RepositorioProdutos{
 
-	private Node<Produto> primeiroNo;
-	private Node<Produto> ultimoNo;
+	private Node <Produto> primeiroNo;
+	private Node <Produto> ultimoNo;
 	private String nome;
 
 	// Construtor que cria lista vazia com um nome.
@@ -50,9 +50,9 @@ public class RepositorioProdutosList implements RepositorioProdutos{
 		if(this.procurarNode(codigo) == null) {
 			System.out.println("Nao existe na lista");
 		} else {
-			final Node<Produto> atual = this.procurarNode(codigo);
-			final Node<Produto> proximo = atual.getProximo();
-			final Node<Produto> anterior = atual.getAnterior();
+			 Node<Produto> atual = this.procurarNode(codigo);
+			 Node<Produto> proximo = atual.getProximo();
+			 Node<Produto> anterior = atual.getAnterior();
 
 			if(anterior == null) {
 				primeiroNo = proximo;
