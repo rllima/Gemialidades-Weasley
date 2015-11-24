@@ -7,7 +7,7 @@ public interface RepositoriosClientes {
 	
 	void inserir(Cliente clientes);
 	Cliente procurar(String id);
-	void atualizar(String id);
+	void atualizar(String id, Cliente clientes);
 	void remover(String id);
 	
 

@@ -76,13 +76,28 @@ public class RepositorioClientesExcel implements RepositoriosClientes {
 		return resposta;
 	}
 
-	public void atualizar(String id) {
-		// TODO Auto-generated method stub
+	public void atualizar(String id, Cliente clientes) {
+		int aux = this.procurarLinha(id);
+		planilha.getRow(aux).getCell(1).setCellValue(clientes.getNome());
+		planilha.getRow(aux).getCell(3).setCellValue(id);
+		planilha.getRow(aux).getCell(2).setCellValue(clientes.getIdade());
+		planilha.getRow(aux).getCell(4).setCellValue(clientes.getEndereco().getCidade());
+		planilha.getRow(aux).getCell(5).setCellValue(clientes.getEndereco().getLogradouro());
+		planilha.getRow(aux).getCell(5).setCellValue(clientes.getEndereco().getNumero());
+		planilha.getRow(aux).getCell(6).setCellValue(clientes.getEndereco().getCep());
+		planilha.getRow(aux).getCell(7).setCellValue(clientes.getEndereco().getComplemento());
+		
+		
+
 		
 	}
 
 	public void remover(String id) {
-		// TODO Auto-generated method stub
+		int posicao = this.procurarLinha(id);
+		Row aux = planilha.getRow(posicao);
+		planilha.removeRow(aux);
+		planilha.shiftRows((posicao+1), (indice-1), -1);
+		indice--;
 		
 	}
 	public int procurarLinha(String id){

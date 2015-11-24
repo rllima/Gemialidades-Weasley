@@ -45,7 +45,7 @@ public class RepositorioClientesArray implements RepositoriosClientes {
 		return resposta;
 	}
 
-	public void atualizar(String id) {
+	public void atualizar(String id, Cliente clientes) {
 		
 
 	}
