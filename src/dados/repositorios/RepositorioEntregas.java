@@ -7,7 +7,7 @@ public interface RepositorioEntregas {
 	
 	void inserir(Entrega entrega);
 	Entrega procurar(String id) throws EntregaNaoEncontradaException;
-	void atualizar(String id);
+	void atualizar(String id, Entrega entrega);
 	void remover(String id) throws EntregaNaoEncontradaException;
 
 }
