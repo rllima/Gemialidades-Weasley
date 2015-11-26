@@ -1,6 +1,7 @@
 package dados.repositorios;
 
 import negocios.classesBasicas.Entrega;
+import negocios.classesBasicas.Produto;
 import negocios.exceptions.EntregaNaoEncontradaException;
 
 public class RepositorioEntregasFila implements RepositorioEntregas {
@@ -48,8 +49,31 @@ public class RepositorioEntregasFila implements RepositorioEntregas {
 		Node<Entrega> atual = this.procurarNode(id);
 		atual.setDado(entrega);
 	}
+	
+	public void remover(String id) {
+		if(this.procurarNode(id) == null) {
+			System.out.println("Nao existe na lista");
+		} else {
+			final Node<Entrega> atual = this.procurarNode(id);
+			final Node<Entrega> proximo = atual.getProximo();
+			final Node<Entrega> anterior = atual.getAnterior();
 
-	public Entrega remover(){
+			if(anterior == null) {
+				primeiroNo = proximo;
+			} else {
+				anterior.setProximo(proximo);
+			}
+			
+			if(proximo == null) {
+				ultimoNo = anterior;
+			} else {
+				proximo.setAnterior(anterior);
+			}
+		}
+	}
+
+	// Remove Entrega do comeco e retorna o objeto p/ ser inserido na lista de enviados
+	public Entrega enviar(){
 		Entrega removida = primeiroNo.getDado();
 		
 		if(primeiroNo == ultimoNo) {

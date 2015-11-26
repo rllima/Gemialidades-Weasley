@@ -44,7 +44,7 @@ public class RepositorioEntregasExcel implements RepositorioEntregas {
 		
 	}
 
-	public Entrega procurar(String id) throws EntregaNaoEncontradaException {
+	public Entrega procurar(String id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -54,10 +54,14 @@ public class RepositorioEntregasExcel implements RepositorioEntregas {
 		
 	}
 
-	public void remover(String id) throws EntregaNaoEncontradaException {
+	public void remover(String id) {
 		// TODO Auto-generated method stub
 		
 	}
 	
+	// Remove Entrega do comeco e retorna o objeto p/ ser inserido na lista de enviados
+	public Entrega enviar() {
+		return null;
+	}
 
 }

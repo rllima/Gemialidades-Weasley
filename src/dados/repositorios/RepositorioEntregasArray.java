@@ -29,7 +29,7 @@ public class RepositorioEntregasArray implements RepositorioEntregas {
 		indice++;
 	}
 
-	public Entrega procurar(String id) throws EntregaNaoEncontradaException {
+	public Entrega procurar(String id) {
 		Entrega resposta = null;
 		int indice = this.buscarCodigo(id);
 		if(indice > -1) {
@@ -46,7 +46,7 @@ public class RepositorioEntregasArray implements RepositorioEntregas {
 
 	}
 
-	public void remover(String id) throws EntregaNaoEncontradaException {
+	public void remover(String id) {
 		int b = this.buscarCodigo(id);
 		if( b >= 0){
 			for (int i = 0; i < indice; i++) {
@@ -58,6 +58,21 @@ public class RepositorioEntregasArray implements RepositorioEntregas {
 				}
 			}
 		}
+	}
+	
+	// Remove Entrega do comeco e retorna o objeto p/ ser inserido na lista de enviados
+	public Entrega enviar() {
+		Entrega enviada = this.repositorioEntregas[0];
+		indice = indice - 1;
+		
+		for (int i = 0; i < indice; i++) {
+			this.repositorioEntregas[i] = this.repositorioEntregas[i + 1];
+		}
+		for(int i = indice; i < indice + 1; i++) {
+			this.repositorioEntregas[i] = null;
+		}
+		
+		return enviada;
 	}
 
 	private int buscarCodigo(String id){
