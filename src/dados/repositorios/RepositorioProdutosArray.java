@@ -77,6 +77,12 @@ public class RepositorioProdutosArray implements RepositorioProdutos {
 
 	}
 
-	
+	public boolean existe(String codigo) {
+		boolean resposta = false;
+		if (this.buscarCodigo(codigo) != -1) {
+			resposta = true;
+		}
+		return resposta;
+	}
 
 }

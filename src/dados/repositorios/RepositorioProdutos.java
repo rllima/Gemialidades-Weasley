@@ -8,6 +8,6 @@ public interface RepositorioProdutos {
 	void inserir(Produto produto);
 	Produto procurar(String codigo) ;
 	void atualizar(String codigo, Produto produtos);
-	void remover(String id);
+	void remover(String codigo);
 
 }
