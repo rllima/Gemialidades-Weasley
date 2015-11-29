@@ -4,8 +4,8 @@ public class Guloseimas extends Produto {
 	
 	private String sabor;
 	
-	public Guloseimas(String nome, String codigo, String descricao, String sabor) {
-		super(nome, codigo, descricao);
+	public Guloseimas(String nome, String codigo, String descricao, String sabor, double preco) {
+		super(nome, codigo, descricao, preco);
 		this.sabor = sabor;
 	}
 
@@ -22,7 +22,7 @@ public class Guloseimas extends Produto {
 	}
 	
 	public String toString() {
-		return "Nome: " + this.getNome() + "\nCodigo: " + this.getCodigo() + "\nDescricao: " + this.getDescricao() + "\nSabor: " + this.getSabor();
+		return "Nome: " + this.getNome() + "\nCodigo: " + this.getCodigo() + "\nDescricao: " + this.getDescricao() + "\nSabor: " + this.getSabor() + "\nPreco: " + this.getPreco();
 	}
 
 }
