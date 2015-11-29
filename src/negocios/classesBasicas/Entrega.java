@@ -2,35 +2,31 @@ package negocios.classesBasicas;
 
 public class Entrega {
 	
-	private Produto produto;
-	private Cliente cliente;
-	private String id;
+	
+	private String idCliente;
+	private String idProduto;
 	
 	public Entrega(String id, Produto produto, Cliente cliente) {
-		this.produto = produto;
-		this.cliente = cliente;
-		this.id = id;
+		this.idCliente = idCliente;
+		this.idProduto = idProduto;
 	}
 
-	public String getId() {
-		return id;
+	public String getIdCliente() {
+		return idCliente;
 	}
 
-	public Produto getProduto() {
-		return produto;
+	public void setIdCliente(String idCliente) {
+		this.idCliente = idCliente;
 	}
 
-	public void setProduto(Produto produto) {
-		this.produto = produto;
+	public String getIdProduto() {
+		return idProduto;
 	}
 
-	public Cliente getCliente() {
-		return cliente;
+	public void setIdProduto(String idProduto) {
+		this.idProduto = idProduto;
 	}
 
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
-	}
 	
 	
 
