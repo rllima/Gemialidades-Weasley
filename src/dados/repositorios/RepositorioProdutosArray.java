@@ -63,6 +63,17 @@ public class RepositorioProdutosArray implements RepositorioProdutos {
 		
 	}
 	
+	public Produto procurarNome(String nome) {
+		Produto aux = null;
+		for(int i =0; i < indice; i++) {
+			if(repositorioProdutos[i].getNome().equalsIgnoreCase(nome)) {
+				aux = repositorioProdutos[i];
+				this.remover(aux.getCodigo());
+			}
+		}
+		return aux;
+	}
+	
 	public int buscarCodigo(String codigo){
 		int resposta = -1;
 		boolean achou = false;

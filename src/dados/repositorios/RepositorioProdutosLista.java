@@ -59,7 +59,7 @@ public class RepositorioProdutosLista implements RepositorioProdutos{
 			} else {
 				anterior.setProximo(proximo);
 			}
-			
+
 			if(proximo == null) {
 				ultimoNo = anterior;
 			} else {
@@ -71,6 +71,20 @@ public class RepositorioProdutosLista implements RepositorioProdutos{
 	public void atualizar(String codigo, Produto produto) /*throws EmptyListException, ProdutoNaoEncontradoException*/{
 		Node<Produto> atual = this.procurarNode(codigo);
 		atual.setDado(produto);
+	}
+
+	public Produto procurarNome(String nome) {
+		Produto resposta = null;
+		boolean achou = false;
+		Node<Produto> atual = primeiroNo;
+		while(atual != null && achou == false) {
+			if(atual.getDado().getNome().equals(nome)){
+				resposta = atual.getDado();
+				achou = true;
+			}
+			atual = atual.getProximo();
+		}
+		return resposta;
 	}
 
 	public boolean existe(Produto produto) {

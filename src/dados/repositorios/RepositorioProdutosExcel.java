@@ -70,7 +70,7 @@ public class RepositorioProdutosExcel implements RepositorioProdutos {
 	}
 
 	public void atualizar(String codigo, Produto produtos) {
-		
+
 		int aux = this.procurarLinha(codigo);
 		planilha.getRow(aux).getCell(1).setCellValue(produtos.getNome());
 		planilha.getRow(aux).getCell(2).setCellValue(codigo);
@@ -96,6 +96,34 @@ public class RepositorioProdutosExcel implements RepositorioProdutos {
 
 
 	}
+
+	public Produto procurarNome(String nome) {
+		String celula = "";
+		Row linha = null;
+		Produto resposta = null;
+
+		for(int i = 0; i < this.indice; i++) {
+			linha = planilha.getRow(i);
+			celula = linha.getCell(1).toString();
+			if (nome.equalsIgnoreCase(celula)) {
+				if(linha.getCell(0).toString().equalsIgnoreCase("Guloseima")) {
+					String descricao = linha.getCell(3).toString();
+					String sabor = linha.getCell(4).toString();
+					String codigo = linha.getCell(2).toString();
+					resposta = new Guloseimas(nome, codigo, descricao, sabor);
+				} else {
+					String codigo = linha.getCell(2).toString();
+					String descricao = linha.getCell(3).toString();
+					double nivel =  linha.getCell(4).getNumericCellValue();
+					int censura = (int) Math.round(linha.getCell(5).getNumericCellValue());
+					resposta = new Travessuras(nome, codigo, descricao, nivel, censura);
+				}
+
+			}
+		}
+		return resposta;
+	}
+	
 	public int procurarLinha(String codigo){
 		String celula = "";
 		int posicao = -1;
