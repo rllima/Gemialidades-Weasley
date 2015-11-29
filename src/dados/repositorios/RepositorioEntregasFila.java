@@ -8,7 +8,7 @@ public class RepositorioEntregasFila implements RepositorioEntregas {
 
 	private Node<Entrega> primeiroNo;
 	private Node<Entrega> ultimoNo;
-
+    
 	public RepositorioEntregasFila() {
 		this.primeiroNo = null;
 		this.ultimoNo = null;
@@ -73,7 +73,7 @@ public class RepositorioEntregasFila implements RepositorioEntregas {
 	}
 
 	// Remove Entrega do comeco e retorna o objeto p/ ser inserido na lista de enviados
-	public Entrega enviar(){
+	public void enviar(){
 		Entrega removida = primeiroNo.getDado();
 		
 		if(primeiroNo == ultimoNo) {
@@ -82,7 +82,7 @@ public class RepositorioEntregasFila implements RepositorioEntregas {
 			primeiroNo = primeiroNo.getProximo();
 		}
 		
-		return removida;
+		
 	}
 
 	public boolean existe(Entrega entrega) {

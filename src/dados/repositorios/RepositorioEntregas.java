@@ -9,6 +9,6 @@ public interface RepositorioEntregas {
 	Entrega procurar(String id);
 	void atualizar(String id, Entrega entrega);
 	void remover(String id);
-	Entrega enviar(); 
+	void enviar(); 
 
 }

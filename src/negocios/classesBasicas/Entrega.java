@@ -5,10 +5,12 @@ public class Entrega {
 	
 	private String idCliente;
 	private String idProduto;
+	private String id;
 	
-	public Entrega(String id, Produto produto, Cliente cliente) {
+	public Entrega(String id, String idCliente, String idProduto) {
 		this.idCliente = idCliente;
 		this.idProduto = idProduto;
+		this.id = id;
 	}
 
 	public String getIdCliente() {
@@ -25,6 +27,14 @@ public class Entrega {
 
 	public void setIdProduto(String idProduto) {
 		this.idProduto = idProduto;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	

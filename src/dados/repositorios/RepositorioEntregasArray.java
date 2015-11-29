@@ -8,11 +8,15 @@ import negocios.exceptions.EntregaNaoEncontradaException;
 public class RepositorioEntregasArray implements RepositorioEntregas {
 
 	private Entrega[] repositorioEntregas;
+	private Entrega[] repositorioEntregues;
 	private int indice;
+	private int indiceEntregue;
 
 	public RepositorioEntregasArray() {
 		this.repositorioEntregas = new Entrega[100];
 		this.indice = 0;
+		this.repositorioEntregues = new Entrega[100];
+		this.indiceEntregue = 0;
 	}
 
 	public void inserir(Entrega entrega) {
@@ -27,6 +31,18 @@ public class RepositorioEntregasArray implements RepositorioEntregas {
 			this.repositorioEntregas[indice] = entrega;
 		}
 		indice++;
+	}
+	public void entregues(Entrega entrega){
+		if( indiceEntregue > this.repositorioEntregues.length){
+			Entrega[] aux = new Entrega[repositorioEntregues.length * 2];
+			for(int i = 0; i < indiceEntregue; i++){
+				aux[i] = this.repositorioEntregues[i];
+			}
+			aux[indiceEntregue] = entrega;
+		}else{
+			this.repositorioEntregues[indiceEntregue] = entrega;
+		}
+		indiceEntregue++;
 	}
 
 	public Entrega procurar(String id) {
@@ -61,18 +77,15 @@ public class RepositorioEntregasArray implements RepositorioEntregas {
 	}
 	
 	// Remove Entrega do comeco e retorna o objeto p/ ser inserido na lista de enviados
-	public Entrega enviar() {
+	public void enviar() {
 		Entrega enviada = this.repositorioEntregas[0];
 		indice = indice - 1;
+		this.entregues(enviada);
+		String codigo = enviada.getId();
+		this.remover(codigo);
 		
-		for (int i = 0; i < indice; i++) {
-			this.repositorioEntregas[i] = this.repositorioEntregas[i + 1];
-		}
-		for(int i = indice; i < indice + 1; i++) {
-			this.repositorioEntregas[i] = null;
-		}
 		
-		return enviada;
+		
 	}
 
 	private int buscarCodigo(String id){
@@ -88,6 +101,11 @@ public class RepositorioEntregasArray implements RepositorioEntregas {
 		return resposta;
 
 	}
+
+	
+
+
+	
 
 
 }

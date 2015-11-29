@@ -26,26 +26,25 @@ public class RepositorioEntregasExcel implements RepositorioEntregas {
 		Cell celula;
 		Row linha = planilhaPendentes.createRow(indicePendentes);
 		celula = linha.createCell(1);
-		celula.setCellValue(entrega.getCliente().getId());
-		celula = linha.createCell(2);
 		celula.setCellValue(entrega.getId());
+		celula = linha.createCell(2);
+		celula.setCellValue(entrega.getIdCliente());
 		celula = linha.createCell(3);
-		celula.setCellValue(entrega.getProduto().getDescricao());
-		
-		if(entrega.getProduto() instanceof Guloseimas) {
-			celula = linha.createCell(0);
-			celula.setCellValue("Guloseima");
-			celula = linha.createCell(4);
-			celula.setCellValue(((Guloseimas)entrega.getProduto()).getSabor());
-		} else if (entrega.getProduto() instanceof Travessuras) {
-			celula = linha.createCell(0);
-			celula.setCellValue("Travessura");
-			celula = linha.createCell(4);
-			celula.setCellValue(((Travessuras)entrega.getProduto()).getNivelPericulosidade());
-			celula = linha.createCell(5);
-			celula.setCellValue(((Travessuras)entrega.getProduto()).getCensura());
-		}
+		celula.setCellValue(entrega.getIdProduto());
 		indicePendentes++;
+	}
+	public void Entregues(Entrega entrega) {
+		Cell celula;
+		Row linha = planilhaEnviadas.createRow(indiceEnviadas);
+		celula = linha.createCell(1);
+		celula.setCellValue(entrega.getId());
+		celula = linha.createCell(2);
+		celula.setCellValue(entrega.getIdCliente());
+		celula = linha.createCell(3);
+		celula.setCellValue(entrega.getIdProduto());
+		indiceEnviadas++;
+		
+		
 	}
     
 	// Procura entrega pendente
@@ -56,11 +55,12 @@ public class RepositorioEntregasExcel implements RepositorioEntregas {
 		
 		for(int i = 0; i < this.indicePendentes; i++) {
 			linha = planilhaPendentes.getRow(i);
-			celula = linha.getCell(2).getStringCellValue();
+			celula = linha.getCell(1).getStringCellValue();
 			if (id.equalsIgnoreCase(celula)) {
-				String idCliente = linha.getCell(1).getStringCellValue();
-				String idProduto = linha.getCell(1).getStringCellValue();
-				// oontinua...
+				String idCliente = linha.getCell(2).getStringCellValue();
+				String idProduto = linha.getCell(3).getStringCellValue();
+				resposta = new Entrega(id, idCliente, idProduto);
+				
 			}
 		}
 		
@@ -68,7 +68,12 @@ public class RepositorioEntregasExcel implements RepositorioEntregas {
 	}
 
 	public void atualizar(String id, Entrega entrega) {
-		// TODO Auto-generated method stub
+		int aux = this.procurarLinha(id);
+		planilhaPendentes.getRow(aux).getCell(1).setCellValue(entrega.getId());
+		planilhaPendentes.getRow(aux).getCell(2).setCellValue(entrega.getIdCliente());
+		planilhaPendentes.getRow(aux).getCell(3).setCellValue(entrega.getIdProduto());
+		
+		
 		
 	}
 
@@ -82,8 +87,15 @@ public class RepositorioEntregasExcel implements RepositorioEntregas {
 	}
 	
 	// Remove Entrega do comeco e retorna o objeto p/ ser inserido na lista de enviados
-	public Entrega enviar() {
-		return null;
+	public void enviar() {
+		Row aux = planilhaPendentes.getRow(0);
+		String id = planilhaPendentes.getRow(0).getCell(1).toString();
+		String idCliente = planilhaPendentes.getRow(0).getCell(2).toString();
+		String idProduto = planilhaPendentes.getRow(0).getCell(3).toString();
+		Entrega temp = new Entrega(id, idCliente, idProduto);
+		this.remover(id);
+		this.Entregues(temp);
+
 	}
 	
 	// Recebe identificador e retorna a linha a qual ele se encontra (PENDENTES)
