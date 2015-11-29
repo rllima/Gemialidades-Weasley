@@ -8,8 +8,7 @@ public class RepositorioEntregasFila implements RepositorioEntregas {
 
 	private Node<Entrega> primeiroNo;
 	private Node<Entrega> ultimoNo;
-    
-	public RepositorioEntregasFila() {
+    	public RepositorioEntregasFila() {
 		this.primeiroNo = null;
 		this.ultimoNo = null;
 	}
