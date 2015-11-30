@@ -7,11 +7,9 @@ public class RepositorioProdutosLista implements RepositorioProdutos{
 
 	private Node<Produto> primeiroNo;
 	private Node<Produto> ultimoNo;
-	private String nome;
 
 	// Construtor que cria lista vazia com um nome.
-	public RepositorioProdutosLista(String nome) {
-		this.nome = nome;
+	public RepositorioProdutosLista() {
 		this.primeiroNo = this.ultimoNo = null;
 	}
 
@@ -108,7 +106,7 @@ public class RepositorioProdutosLista implements RepositorioProdutos{
 	public String toString() {
 		String resposta = "";
 		if(isEmpty()) {
-			resposta = "Lista" + this.nome + "vazia";
+			resposta = "Lista de produtos vazia";
 		} else {
 			Node<Produto> atual = primeiroNo;
 			// Enquanto nao chegar ao fim, coloca os dados de cada objeto na resposta
