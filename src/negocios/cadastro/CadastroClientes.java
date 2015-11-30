@@ -11,6 +11,10 @@ import dados.repositorios.RepositoriosClientes;
 
 public class CadastroClientes {
 	private RepositoriosClientes cliente;
+	
+	public CadastroClientes(RepositoriosClientes cliente) {
+		this.cliente = cliente;
+	}
 
 	public void inserir(Cliente clientes) throws ClienteJaExisteException {
 		if(cliente.procurar(clientes.getId()) == null) {

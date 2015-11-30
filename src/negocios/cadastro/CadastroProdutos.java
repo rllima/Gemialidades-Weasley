@@ -9,6 +9,10 @@ public class CadastroProdutos {
 	
 	private RepositorioProdutos repositorioProdutos;
 	
+	public CadastroProdutos(RepositorioProdutos repositorioProdutos) {
+		this.repositorioProdutos = repositorioProdutos;
+	}
+	
 	public void cadastrar(Produto produto) throws ProdutoJaExisteException {
 		if(repositorioProdutos.procurar(produto.getCodigo()) == null) {
 			repositorioProdutos.inserir(produto);

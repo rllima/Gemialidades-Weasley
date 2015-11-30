@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="config"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="excel/poi-3.13/poi-3.13-20150929.jar"/>
 	<classpathentry kind="lib" path="excel/poi-3.13/poi-examples-3.13-20150929.jar"/>
