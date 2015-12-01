@@ -35,7 +35,7 @@ public class GemialidadesLoja {
 			this.repProdutos = new CadastroProdutos(new RepositorioProdutosArray());
 			this.repEntregas = new CadastroEntregas(new RepositorioEntregasArray());
 			
-		} else if (tipoRep == 'L' || tipoRep == 'b') {
+		} else if (tipoRep == 'L' || tipoRep == 'l') {
 			this.repClientes = new CadastroClientes(new RepositorioClientesLista());
 			this.repProdutos = new CadastroProdutos(new RepositorioProdutosLista());
 			this.repEntregas = new CadastroEntregas(new RepositorioEntregasFila());
