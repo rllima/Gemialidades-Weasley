@@ -10,9 +10,12 @@ import org.apache.poi.ss.usermodel.Workbook;
 import dados.repositorios.*;
 import negocios.cadastro.*;
 import negocios.classesBasicas.Cliente;
+import negocios.classesBasicas.Entrega;
 import negocios.classesBasicas.Produto;
 import negocios.exceptions.ClienteJaExisteException;
 import negocios.exceptions.ClienteNaoEncontradoException;
+import negocios.exceptions.EntregaJaExisteException;
+import negocios.exceptions.EntregaNaoEncontradaException;
 import negocios.exceptions.ProdutoJaExisteException;
 import negocios.exceptions.ProdutoNaoEncontradoException;
 
@@ -84,6 +87,26 @@ public class GemialidadesLoja {
 	public void atualizarProduto(String codigo, Produto produto)
 			throws ProdutoNaoEncontradoException {
 		repProdutos.atualizar(codigo, produto);
+	}
+
+	
+	//Entregas
+	
+	public void cadastrarEntrega(Entrega entrega) throws EntregaJaExisteException {
+		repEntregas.cadastrar(entrega);
+	}
+
+	public void removerEntrega(String id) throws EntregaNaoEncontradaException {
+		repEntregas.remover(id);
+	}
+
+	public Entrega entregaEntrega(String id) throws EntregaNaoEncontradaException {
+		return repEntregas.entrega(id);
+	}
+
+	public void atualizarEntrega(String id, Entrega entrega)
+			throws EntregaNaoEncontradaException {
+		repEntregas.atualizar(id, entrega);
 	}
 	
 	
