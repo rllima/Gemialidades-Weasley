@@ -3,8 +3,10 @@ package fachada;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Workbook;
 
 import dados.repositorios.*;
@@ -23,31 +25,45 @@ public class GemialidadesLoja {
 	private CadastroClientes repClientes;
 	private CadastroProdutos repProdutos;
 	private CadastroEntregas repEntregas;
-	private File file;
+	private File config;
+	private File excel;
 	private FileInputStream in;
 	private char tipoRep;
 	private Workbook workbook;
-	
+
 	public GemialidadesLoja( File file) throws IOException, FileNotFoundException{
-		this.file = new File("config.txt");
+		this.config = new File("config.txt");
 		this.in = new FileInputStream(file);
 		this.tipoRep = (char) in.read();
-		
+
 		if(tipoRep == 'A' || tipoRep == 'a') {
 			this.repClientes = new CadastroClientes(new RepositorioClientesArray());
 			this.repProdutos = new CadastroProdutos(new RepositorioProdutosArray());
 			this.repEntregas = new CadastroEntregas(new RepositorioEntregasArray());
-			
+
 		} else if (tipoRep == 'L' || tipoRep == 'l') {
 			this.repClientes = new CadastroClientes(new RepositorioClientesLista());
 			this.repProdutos = new CadastroProdutos(new RepositorioProdutosLista());
 			this.repEntregas = new CadastroEntregas(new RepositorioEntregasFila());
+			
 		} else if (tipoRep == 'E' || tipoRep == 'e') {
+			this.excel = new File("planilha.xls");
+			excel.createNewFile();
+			if(!excel.exists()) {
+				FileOutputStream saidaArquivo = new FileOutputStream(excel);
+				workbook = new HSSFWorkbook();
+			} else {
+				FileInputStream entradaArquivo = new FileInputStream(excel);
+				workbook = new HSSFWorkbook(entradaArquivo);
+				
+			}
 			this.repClientes = new CadastroClientes(new RepositorioClientesExcel(workbook));
 			this.repProdutos = new CadastroProdutos(new RepositorioProdutosExcel(workbook));
 			this.repEntregas = new CadastroEntregas(new RepositorioEntregasExcel(workbook));
 		}
-						
+		
+		/* Lembrar de colocar IF's nos repositorios pra conferir se ja existe a planilha(aba) */
+
 	}
 
 	public void atualizarCliente(String id, Cliente clientes)
@@ -67,11 +83,11 @@ public class GemialidadesLoja {
 		repClientes.remover(id);
 	}
 
-	
-	
+
+
 	//Produtos
 
-	
+
 	public void cadastrarProduto(Produto produto) throws ProdutoJaExisteException {
 		repProdutos.cadastrar(produto);
 	}
@@ -89,9 +105,9 @@ public class GemialidadesLoja {
 		repProdutos.atualizar(codigo, produto);
 	}
 
-	
+
 	//Entregas
-	
+
 	public void cadastrarEntrega(Entrega entrega) throws EntregaJaExisteException {
 		repEntregas.cadastrar(entrega);
 	}
@@ -108,7 +124,7 @@ public class GemialidadesLoja {
 			throws EntregaNaoEncontradaException {
 		repEntregas.atualizar(id, entrega);
 	}
-	
-	
+
+
 
 }
