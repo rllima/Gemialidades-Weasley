@@ -9,11 +9,12 @@ public class Cliente {
 	private String senha;
 
 
-	public Cliente(String nome, int idade, Endereco endereco, String id) {
+	public Cliente(String nome, int idade, Endereco endereco, String id, String senha) {
 		this.nome = nome;
 		this.idade = idade;
 		this.endereco = endereco;
 		this.id = id;
+		this.senha = senha;
 	}
 
 	public String getNome() {
