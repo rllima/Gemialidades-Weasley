@@ -20,6 +20,14 @@ import fachada.*;
 import negocios.classesBasicas.*;
 import negocios.exceptions.ClienteNaoEncontradoException;
 import negocios.exceptions.SenhaIncoretaException;
+import javax.swing.ImageIcon;
+import java.awt.Rectangle;
+import javax.swing.border.BevelBorder;
+import java.awt.Color;
+import javax.swing.SwingConstants;
+import javax.swing.UIManager;
+import javax.swing.border.TitledBorder;
+import javax.swing.border.MatteBorder;
 
 public class TelaLogin extends JFrame {
 
@@ -46,9 +54,11 @@ public class TelaLogin extends JFrame {
 	 * Create the frame.
 	 */
 	public TelaLogin() {
+		setBackground(new Color(255, 255, 255));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 642, 482);
 		telaLogin = new JPanel();
+		telaLogin.setBackground(new Color(255, 250, 205));
 		telaLogin.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(telaLogin);
 		telaLogin.setLayout(null);
@@ -84,13 +94,29 @@ public class TelaLogin extends JFrame {
 		telaLogin.add(btnNewButton);
 
 		JLabel lblNovoPorAqui = new JLabel("Novo por aqui? Cadastre-se abaixo!");
+		lblNovoPorAqui.setBackground(Color.white);
+		lblNovoPorAqui.setBorder(UIManager.getBorder("ComboBox.editorBorder"));
+		lblNovoPorAqui.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNovoPorAqui.setForeground(Color.BLACK);
 		lblNovoPorAqui.setFont(new Font("Arial", Font.PLAIN, 14));
-		lblNovoPorAqui.setBounds(199, 367, 228, 17);
+		lblNovoPorAqui.setBounds(187, 369, 250, 19);
 		telaLogin.add(lblNovoPorAqui);
 
 		JButton btnCadastrar = new JButton("Cadastrar");
 		btnCadastrar.setBounds(259, 392, 107, 29);
 		telaLogin.add(btnCadastrar);
+		
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setBackground(new Color(255, 255, 255));
+		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\rlo\\Downloads\\logo.png"));
+		lblNewLabel.setBounds(-75, -38, 721, 512);
+		telaLogin.add(lblNewLabel);
+		
+		JPanel panel = new JPanel();
+		panel.setBorder(null);
+		panel.setBackground(new Color(255, 255, 255));
+		panel.setBounds(190, 371, 244, 14);
+		telaLogin.add(panel);
 
 		try {
 			this.loja = new GemialidadesLoja();
