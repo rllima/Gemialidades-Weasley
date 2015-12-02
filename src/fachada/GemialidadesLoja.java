@@ -33,7 +33,7 @@ public class GemialidadesLoja {
 	private Workbook workbook;
 
 	public GemialidadesLoja () throws IOException, FileNotFoundException{
-		this.config = new File("config.txt");
+		this.config = new File("config\\config.txt");
 		this.in = new FileInputStream(config);
 		this.tipoRep = (char) in.read();
 

@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
@@ -22,6 +23,8 @@ import negocios.exceptions.SenhaIncoretaException;
 
 public class TelaLogin extends JFrame {
 
+	private GemialidadesLoja loja;
+
 	private JPanel telaLogin;
 	private JTextField tf_ID;
 	private JPasswordField tf_Senha;
@@ -30,29 +33,19 @@ public class TelaLogin extends JFrame {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		try {
-			final GemialidadesLoja loja = new GemialidadesLoja();
-			EventQueue.invokeLater(new Runnable() {
-				public void run() {
-					try {
-						TelaLogin frame = new TelaLogin(loja);
-						frame.setVisible(true);
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-				}
-			});
-		} catch (FileNotFoundException e1) {
-			e1.printStackTrace();
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}		
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				TelaLogin frame = new TelaLogin();
+				frame.setVisible(true);
+			}
+		});
+
 	}
 
 	/**
 	 * Create the frame.
 	 */
-	public TelaLogin(final GemialidadesLoja loja) {
+	public TelaLogin() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 642, 482);
 		telaLogin = new JPanel();
@@ -81,15 +74,9 @@ public class TelaLogin extends JFrame {
 		JButton btnNewButton = new JButton("Login");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				try {
-					if(loja.login(tf_ID.getText(), tf_Senha.getPassword().toString())) {
-						TelaPrincipal telaPrincipal = new TelaPrincipal();
-						telaPrincipal.setVisible(true);
-					}
-				} catch (ClienteNaoEncontradoException e1) {
-					e1.printStackTrace();
-				} catch (SenhaIncoretaException e1) {
-					e1.printStackTrace();
+				if(login(tf_ID.getText(), tf_Senha.getPassword().toString())) {
+					TelaPrincipal telaPrincipal = new TelaPrincipal();
+					telaPrincipal.setVisible(true);
 				}
 			}
 		});
@@ -104,5 +91,25 @@ public class TelaLogin extends JFrame {
 		JButton btnCadastrar = new JButton("Cadastrar");
 		btnCadastrar.setBounds(259, 392, 107, 29);
 		telaLogin.add(btnCadastrar);
+
+		try {
+			this.loja = new GemialidadesLoja();
+		} catch (FileNotFoundException e1) {
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+	}
+
+	public boolean login(String id, String senha) {
+		boolean resposta = false;
+		try {
+			resposta = loja.login(id, senha);
+		} catch (ClienteNaoEncontradoException e) {
+			JOptionPane.showMessageDialog(this, e.getMessage());
+		} catch (SenhaIncoretaException e) {
+			JOptionPane.showMessageDialog(this, e.getMessage());
+		}
+		return resposta;
 	}
 }
