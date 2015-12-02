@@ -20,6 +20,7 @@ import negocios.exceptions.EntregaJaExisteException;
 import negocios.exceptions.EntregaNaoEncontradaException;
 import negocios.exceptions.ProdutoJaExisteException;
 import negocios.exceptions.ProdutoNaoEncontradoException;
+import negocios.exceptions.SenhaIncoretaException;
 
 public class GemialidadesLoja {
 	private CadastroClientes repClientes;
@@ -31,9 +32,9 @@ public class GemialidadesLoja {
 	private char tipoRep;
 	private Workbook workbook;
 
-	public GemialidadesLoja( File file) throws IOException, FileNotFoundException{
+	public GemialidadesLoja () throws IOException, FileNotFoundException{
 		this.config = new File("config.txt");
-		this.in = new FileInputStream(file);
+		this.in = new FileInputStream(config);
 		this.tipoRep = (char) in.read();
 
 		if(tipoRep == 'A' || tipoRep == 'a') {
@@ -123,6 +124,19 @@ public class GemialidadesLoja {
 	public void atualizarEntrega(String id, Entrega entrega)
 			throws EntregaNaoEncontradaException {
 		repEntregas.atualizar(id, entrega);
+	}
+	
+	//Login
+	
+	public boolean login(String id, String senha) throws ClienteNaoEncontradoException, SenhaIncoretaException {
+		boolean resposta = false;
+		Cliente cliente = this.procurarCliente(id);
+		if(senha.equals(cliente.getSenha())) {
+			resposta = true;
+		} else {
+			throw new SenhaIncoretaException();
+		}
+		return resposta;
 	}
 
 

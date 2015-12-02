@@ -6,6 +6,8 @@ public class Cliente {
 	private int idade;
 	private Endereco endereco;
 	private String id;
+	private String senha;
+
 
 	public Cliente(String nome, int idade, Endereco endereco, String id) {
 		this.nome = nome;
@@ -44,6 +46,14 @@ public class Cliente {
 
 	public void setId(String id) {
 		this.id = id;
+	}
+	
+	public String getSenha() {
+		return senha;
+	}
+	
+	public void setSenha(String senha) {
+		this.senha = senha;
 	}
 
 }
