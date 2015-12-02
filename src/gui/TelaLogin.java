@@ -92,6 +92,10 @@ public class TelaLogin extends JFrame {
 		});
 		btnNewButton.setBounds(260, 270, 105, 42);
 		telaLogin.add(btnNewButton);
+		
+				JButton btnCadastrar = new JButton("Cadastrar");
+				btnCadastrar.setBounds(259, 392, 107, 29);
+				telaLogin.add(btnCadastrar);
 
 		JLabel lblNovoPorAqui = new JLabel("Novo por aqui? Cadastre-se abaixo!");
 		lblNovoPorAqui.setBackground(Color.white);
@@ -99,23 +103,19 @@ public class TelaLogin extends JFrame {
 		lblNovoPorAqui.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNovoPorAqui.setForeground(Color.BLACK);
 		lblNovoPorAqui.setFont(new Font("Arial", Font.PLAIN, 14));
-		lblNovoPorAqui.setBounds(187, 369, 250, 19);
+		lblNovoPorAqui.setBounds(188, 362, 250, 19);
 		telaLogin.add(lblNovoPorAqui);
-
-		JButton btnCadastrar = new JButton("Cadastrar");
-		btnCadastrar.setBounds(259, 392, 107, 29);
-		telaLogin.add(btnCadastrar);
 		
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setBackground(new Color(255, 255, 255));
-		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\rlo\\Downloads\\logo.png"));
-		lblNewLabel.setBounds(-75, -38, 721, 512);
+		lblNewLabel.setBounds(0, 0, 0, 0);
 		telaLogin.add(lblNewLabel);
+		lblNewLabel.setBackground(new Color(255, 255, 255));
+		lblNewLabel.setIcon(new ImageIcon("images\\logo.jpg"));
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(null);
 		panel.setBackground(new Color(255, 255, 255));
-		panel.setBounds(190, 371, 244, 14);
+		panel.setBounds(148, 36, 306, 102);
 		telaLogin.add(panel);
 
 		try {
