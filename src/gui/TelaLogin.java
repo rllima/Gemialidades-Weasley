@@ -58,7 +58,8 @@ public class TelaLogin extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 642, 482);
 		telaLogin = new JPanel();
-		telaLogin.setBackground(new Color(255, 250, 205));
+		telaLogin.setForeground(new Color(210, 105, 30));
+		telaLogin.setBackground(new Color(255, 140, 0));
 		telaLogin.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(telaLogin);
 		telaLogin.setLayout(null);
@@ -74,14 +75,18 @@ public class TelaLogin extends JFrame {
 		tf_Senha.setColumns(10);
 
 		JLabel lblId = new JLabel("ID");
-		lblId.setBounds(223, 181, 19, 14);
+		lblId.setForeground(Color.WHITE);
+		lblId.setBounds(203, 181, 19, 14);
 		telaLogin.add(lblId);
 
 		JLabel lblSenha = new JLabel("Senha");
-		lblSenha.setBounds(212, 221, 30, 14);
+		lblSenha.setForeground(Color.WHITE);
+		lblSenha.setBackground(Color.WHITE);
+		lblSenha.setBounds(203, 221, 55, 14);
 		telaLogin.add(lblSenha);
 
 		JButton btnNewButton = new JButton("Login");
+		btnNewButton.setBorder(UIManager.getBorder("TextPane.border"));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(login(tf_ID.getText(), tf_Senha.getPassword().toString())) {
@@ -90,33 +95,32 @@ public class TelaLogin extends JFrame {
 				}
 			}
 		});
-		btnNewButton.setBounds(260, 270, 105, 42);
+		btnNewButton.setBounds(260, 270, 105, 29);
 		telaLogin.add(btnNewButton);
 		
 				JButton btnCadastrar = new JButton("Cadastrar");
-				btnCadastrar.setBounds(259, 392, 107, 29);
+				btnCadastrar.setBorder(UIManager.getBorder("TextPane.border"));
+				btnCadastrar.setBounds(259, 392, 107, 19);
 				telaLogin.add(btnCadastrar);
 
 		JLabel lblNovoPorAqui = new JLabel("Novo por aqui? Cadastre-se abaixo!");
 		lblNovoPorAqui.setBackground(Color.white);
 		lblNovoPorAqui.setBorder(UIManager.getBorder("ComboBox.editorBorder"));
 		lblNovoPorAqui.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNovoPorAqui.setForeground(Color.BLACK);
+		lblNovoPorAqui.setForeground(Color.WHITE);
 		lblNovoPorAqui.setFont(new Font("Arial", Font.PLAIN, 14));
-		lblNovoPorAqui.setBounds(188, 362, 250, 19);
+		lblNovoPorAqui.setBounds(187, 362, 250, 19);
 		telaLogin.add(lblNovoPorAqui);
 		
-		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setBounds(0, 0, 0, 0);
-		telaLogin.add(lblNewLabel);
-		lblNewLabel.setBackground(new Color(255, 255, 255));
-		lblNewLabel.setIcon(new ImageIcon("images\\logo.jpg"));
+		JLabel lblNewLabel_1 = new JLabel("");
+		lblNewLabel_1.setIcon(new ImageIcon("C:\\Users\\rlo\\git\\gemialidades-weasley\\images\\logo.png"));
+		lblNewLabel_1.setBounds(128, 11, 378, 146);
+		telaLogin.add(lblNewLabel_1);
 		
-		JPanel panel = new JPanel();
-		panel.setBorder(null);
-		panel.setBackground(new Color(255, 255, 255));
-		panel.setBounds(148, 36, 306, 102);
-		telaLogin.add(panel);
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\rlo\\git\\gemialidades-weasley\\images\\Fundo.jpg"));
+		lblNewLabel.setBounds(0, 0, 626, 444);
+		telaLogin.add(lblNewLabel);
 
 		try {
 			this.loja = new GemialidadesLoja();
