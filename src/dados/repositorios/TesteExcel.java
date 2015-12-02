@@ -19,13 +19,13 @@ public class TesteExcel {
 			
 			RepositorioProdutosExcel repositorio = new RepositorioProdutosExcel(workbook);
 			
-			repositorio.inserir(new Travessuras("Orelha Extensível", "666", "Ouvir conversa alheia", 2, 15));
-			repositorio.inserir(new Guloseimas("Sapo de chocolate", "555", "Feijoeszinhos com sabores diversos", "Nunca saberás"));
-			repositorio.inserir(new Travessuras("Kit mata-aula", "777", "Kit fugir-de-ricardo", 0, 0));
+			repositorio.inserir(new Travessuras("Orelha Extensível", "666", "Ouvir conversa alheia", 2, 15, 15.2));
+			repositorio.inserir(new Guloseimas("Sapo de chocolate", "555", "Feijoeszinhos com sabores diversos", "Nunca saberás", 15.2));
+			repositorio.inserir(new Travessuras("Kit mata-aula", "777", "Kit fugir-de-ricardo", 0, 0, 6.8));
 			
 			System.out.println(repositorio.procurar("555").toString());
 			repositorio.remover("666");
-			Produto produtos = new Guloseimas("Feijoes Magicos", "555", "Feijoeszinhos com sabores diversos", "Nunca saberás");
+			Produto produtos = new Guloseimas("Feijoes Magicos", "555", "Feijoeszinhos com sabores diversos", "Nunca saberás", 8.5);
 			repositorio.atualizar("555", produtos);
 			
 			workbook.write(saidaArquivo);
