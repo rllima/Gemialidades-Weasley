@@ -55,7 +55,7 @@ public class TelaLogin extends JFrame {
 	 */
 	public TelaLogin() {
 		setBackground(new Color(255, 255, 255));
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 642, 482);
 		telaLogin = new JPanel();
 		telaLogin.setForeground(new Color(210, 105, 30));
@@ -101,7 +101,7 @@ public class TelaLogin extends JFrame {
 				JButton btnCadastrar = new JButton("Cadastrar");
 				btnCadastrar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						TelaCadastro telaCadastro = new TelaCadastro();
+						TelaCadastro telaCadastro = new TelaCadastro(loja);
 						telaCadastro.setVisible(true);
 					}
 				});
@@ -129,7 +129,7 @@ public class TelaLogin extends JFrame {
 		telaLogin.add(lblNewLabel);
 
 		try {
-			this.loja = new GemialidadesLoja();
+			this.loja = GemialidadesLoja.getInstance();
 		} catch (FileNotFoundException e1) {
 			e1.printStackTrace();
 		} catch (IOException e1) {

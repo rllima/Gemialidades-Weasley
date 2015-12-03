@@ -31,6 +31,14 @@ public class GemialidadesLoja {
 	private FileInputStream in;
 	private char tipoRep;
 	private Workbook workbook;
+	private static GemialidadesLoja instance;
+	
+	public static GemialidadesLoja getInstance() throws FileNotFoundException, IOException{
+		if(instance == null){
+			instance = new GemialidadesLoja();
+		}
+		return instance;
+	}
 
 	public GemialidadesLoja () throws IOException, FileNotFoundException{
 		this.config = new File("config\\config.txt");
@@ -138,7 +146,7 @@ public class GemialidadesLoja {
 		}
 		return resposta;
 	}
-
+   
 
 
 }

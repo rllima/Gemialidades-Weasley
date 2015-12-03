@@ -59,7 +59,7 @@ public class RepositorioClientesExcel implements RepositoriosClientes {
 			celula = linha.getCell(3).toString();
 			if(id.equalsIgnoreCase(celula)){
 				String nome = linha.getCell(1).toString();
-				int idade =  (int) linha.getCell(2).getNumericCellValue();
+				String idade =  linha.getCell(2).toString();
 				String id1 = linha.getCell(3).toString();
 				String cidade = linha.getCell(4).toString();
 				String logradouro = linha.getCell(5).toString();

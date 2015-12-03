@@ -3,13 +3,13 @@ package negocios.classesBasicas;
 public class Cliente {
 	
 	private String nome;
-	private int idade;
+	private String idade;
 	private Endereco endereco;
 	private String id;
 	private String senha;
 
 
-	public Cliente(String nome, int idade, Endereco endereco, String id, String senha) {
+	public Cliente(String nome, String idade, Endereco endereco, String id, String senha) {
 		this.nome = nome;
 		this.idade = idade;
 		this.endereco = endereco;
@@ -25,11 +25,11 @@ public class Cliente {
 		this.nome = nome;
 	}
 
-	public int getIdade() {
+	public String getIdade() {
 		return idade;
 	}
 
-	public void setIdade(int idade) {
+	public void setIdade(String idade) {
 		this.idade = idade;
 	}
 
