@@ -42,6 +42,8 @@ public class RepositorioClientesExcel implements RepositoriosClientes {
 		celula.setCellValue(clientes.getEndereco().getCep());
 		celula = linha.createCell(8);
 		celula.setCellValue(clientes.getEndereco().getComplemento());
+		celula = linha.createCell(9);
+		celula.setCellValue(clientes.getSenha());
 		
 		indice++;
 		
@@ -64,9 +66,10 @@ public class RepositorioClientesExcel implements RepositoriosClientes {
 				String numero = linha.getCell(6).toString();
 				String cep = linha.getCell(7).toString();
 				String cpmt = linha.getCell(8).toString();
+				String senha = linha.getCell(9).toString();
 				endereco = new Endereco(cidade, logradouro, numero, cep, cpmt);
 				
-				resposta = new Cliente(nome,idade, endereco, id1);
+				resposta = new Cliente(nome,idade, endereco, id1, senha);
 						
 				
 				
