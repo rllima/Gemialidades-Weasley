@@ -99,6 +99,12 @@ public class TelaLogin extends JFrame {
 		telaLogin.add(btnNewButton);
 		
 				JButton btnCadastrar = new JButton("Cadastrar");
+				btnCadastrar.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						TelaCadastro telaCadastro = new TelaCadastro();
+						telaCadastro.setVisible(true);
+					}
+				});
 				btnCadastrar.setBorder(UIManager.getBorder("TextPane.border"));
 				btnCadastrar.setBounds(259, 392, 107, 19);
 				telaLogin.add(btnCadastrar);
@@ -113,12 +119,12 @@ public class TelaLogin extends JFrame {
 		telaLogin.add(lblNovoPorAqui);
 		
 		JLabel lblNewLabel_1 = new JLabel("");
-		lblNewLabel_1.setIcon(new ImageIcon("C:\\Users\\rlo\\git\\gemialidades-weasley\\images\\logo.png"));
+		lblNewLabel_1.setIcon(new ImageIcon("images\\logo.png"));
 		lblNewLabel_1.setBounds(128, 11, 378, 146);
 		telaLogin.add(lblNewLabel_1);
 		
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\rlo\\git\\gemialidades-weasley\\images\\Fundo.jpg"));
+		lblNewLabel.setIcon(new ImageIcon("images\\Fundo.jpg"));
 		lblNewLabel.setBounds(0, 0, 626, 444);
 		telaLogin.add(lblNewLabel);
 
