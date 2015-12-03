@@ -13,16 +13,18 @@ import javax.swing.JTextPane;
 import java.awt.Color;
 import javax.swing.JTextField;
 import java.awt.Font;
+import javax.swing.JPasswordField;
+import javax.swing.SwingConstants;
 
 public class TelaCadastro extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField tf_CadID;
-	private JTextField tf_CadSenha;
 	private JTextField tf_Logradouro;
 	private JTextField tf_CEP;
 	private JTextField tf_Numero;
 	private JTextField tf_Complemento;
+	private JPasswordField passwordField;
 
 	/**
 	 * Launch the application.
@@ -56,26 +58,23 @@ public class TelaCadastro extends JFrame {
 		contentPane.add(btnCadastrar);
 		
 		JLabel lblId = new JLabel("ID");
+		lblId.setHorizontalAlignment(SwingConstants.TRAILING);
 		lblId.setForeground(Color.ORANGE);
 		lblId.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		lblId.setBounds(90, 191, 22, 14);
+		lblId.setBounds(76, 191, 36, 14);
 		contentPane.add(lblId);
 		
 		JLabel lblSenha = new JLabel("Senha");
+		lblSenha.setHorizontalAlignment(SwingConstants.TRAILING);
 		lblSenha.setForeground(Color.ORANGE);
 		lblSenha.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		lblSenha.setBounds(76, 224, 36, 14);
 		contentPane.add(lblSenha);
 		
 		tf_CadID = new JTextField();
-		tf_CadID.setBounds(122, 189, 101, 20);
+		tf_CadID.setBounds(122, 189, 109, 23);
 		contentPane.add(tf_CadID);
 		tf_CadID.setColumns(10);
-		
-		tf_CadSenha = new JTextField();
-		tf_CadSenha.setBounds(122, 222, 101, 20);
-		contentPane.add(tf_CadSenha);
-		tf_CadSenha.setColumns(10);
 		
 		JLabel lblEndereo = new JLabel("Endere\u00E7o");
 		lblEndereo.setForeground(Color.ORANGE);
@@ -126,6 +125,25 @@ public class TelaCadastro extends JFrame {
 		tf_Complemento.setBounds(382, 284, 217, 20);
 		contentPane.add(tf_Complemento);
 		tf_Complemento.setColumns(10);
+		
+		passwordField = new JPasswordField();
+		passwordField.setBounds(122, 225, 109, 23);
+		contentPane.add(passwordField);
+		
+		JLabel label_1 = new JLabel("");
+		label_1.setIcon(new ImageIcon("C:\\Users\\rlo\\git\\gemialidades-weasley\\images\\equerda.png"));
+		label_1.setBounds(342, 113, 88, 14);
+		contentPane.add(label_1);
+		
+		JLabel label_2 = new JLabel("");
+		label_2.setIcon(new ImageIcon("C:\\Users\\rlo\\git\\gemialidades-weasley\\images\\direita.png"));
+		label_2.setBounds(526, 113, 90, 14);
+		contentPane.add(label_2);
+		
+		JLabel label = new JLabel("");
+		label.setIcon(new ImageIcon("C:\\Users\\rlo\\git\\gemialidades-weasley\\images\\topo.png"));
+		label.setBounds(208, 11, 224, 65);
+		contentPane.add(label);
 		
 		JLabel lblBackground = new JLabel("");
 		lblBackground.setBackground(Color.GRAY);
