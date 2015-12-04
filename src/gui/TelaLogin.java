@@ -18,6 +18,7 @@ import java.awt.event.ActionEvent;
 import java.awt.Font;
 import fachada.*;
 import negocios.classesBasicas.*;
+import negocios.exceptions.ClienteJaExisteException;
 import negocios.exceptions.ClienteNaoEncontradoException;
 import negocios.exceptions.SenhaIncoretaException;
 import javax.swing.ImageIcon;
@@ -36,6 +37,7 @@ public class TelaLogin extends JFrame {
 	private JPanel telaLogin;
 	private JTextField tf_ID;
 	private JPasswordField tf_Senha;
+	
 
 	/**
 	 * Launch the application.
@@ -45,6 +47,17 @@ public class TelaLogin extends JFrame {
 			public void run() {
 				TelaLogin frame = new TelaLogin();
 				frame.setVisible(true);
+				try {
+					GemialidadesLoja.getInstance().inserirCliente((new Cliente("Wealey", "21", null, "Admin", "Admin")));
+				} catch (ClienteJaExisteException e2) {
+					e2.printStackTrace();
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		});
 
@@ -89,25 +102,29 @@ public class TelaLogin extends JFrame {
 		btnNewButton.setBorder(UIManager.getBorder("TextPane.border"));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(login(tf_ID.getText(), tf_Senha.getPassword().toString())) {
+				if(tf_ID.getText().equalsIgnoreCase("Admin") && tf_Senha.getText().equalsIgnoreCase("Admin")){
+					TelaAdmin telaAdmin = new TelaAdmin();
+					telaAdmin.setVisible(true);
+				}else if(login(tf_ID.getText(), tf_Senha.getText())) {
 					TelaPrincipal telaPrincipal = new TelaPrincipal();
 					telaPrincipal.setVisible(true);
+					}
 				}
-			}
+			
 		});
 		btnNewButton.setBounds(260, 270, 105, 29);
 		telaLogin.add(btnNewButton);
-		
-				JButton btnCadastrar = new JButton("Cadastrar");
-				btnCadastrar.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						TelaCadastro telaCadastro = new TelaCadastro(loja);
-						telaCadastro.setVisible(true);
-					}
-				});
-				btnCadastrar.setBorder(UIManager.getBorder("TextPane.border"));
-				btnCadastrar.setBounds(259, 392, 107, 19);
-				telaLogin.add(btnCadastrar);
+
+		JButton btnCadastrar = new JButton("Cadastrar");
+		btnCadastrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TelaCadastro telaCadastro = new TelaCadastro(loja);
+				telaCadastro.setVisible(true);
+			}
+		});
+		btnCadastrar.setBorder(UIManager.getBorder("TextPane.border"));
+		btnCadastrar.setBounds(259, 392, 107, 19);
+		telaLogin.add(btnCadastrar);
 
 		JLabel lblNovoPorAqui = new JLabel("Novo por aqui? Cadastre-se abaixo!");
 		lblNovoPorAqui.setBackground(Color.white);
@@ -117,12 +134,12 @@ public class TelaLogin extends JFrame {
 		lblNovoPorAqui.setFont(new Font("Arial", Font.PLAIN, 14));
 		lblNovoPorAqui.setBounds(187, 362, 250, 19);
 		telaLogin.add(lblNovoPorAqui);
-		
+
 		JLabel lblNewLabel_1 = new JLabel("");
 		lblNewLabel_1.setIcon(new ImageIcon("images\\logo.png"));
 		lblNewLabel_1.setBounds(128, 11, 378, 146);
 		telaLogin.add(lblNewLabel_1);
-		
+
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon("images\\Fundo.jpg"));
 		lblNewLabel.setBounds(0, 0, 626, 444);
@@ -148,4 +165,5 @@ public class TelaLogin extends JFrame {
 		}
 		return resposta;
 	}
+	
 }

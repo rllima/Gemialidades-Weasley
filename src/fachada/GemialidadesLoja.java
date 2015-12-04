@@ -139,7 +139,7 @@ public class GemialidadesLoja {
 	public boolean login(String id, String senha) throws ClienteNaoEncontradoException, SenhaIncoretaException {
 		boolean resposta = false;
 		Cliente cliente = this.procurarCliente(id);
-		if(senha.equals(cliente.getSenha())) {
+		if((cliente.getSenha().equals(senha))) {
 			resposta = true;
 		} else {
 			throw new SenhaIncoretaException();

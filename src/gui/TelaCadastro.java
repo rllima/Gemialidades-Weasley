@@ -1,39 +1,29 @@
+
 package gui;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JButton;
-import javax.swing.JTextPane;
-
 import java.awt.Color;
-
-import javax.swing.JTextField;
-
+import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-
-import fachada.GemialidadesLoja;
-
-import javax.swing.JTextArea;
-
-import com.sun.media.jfxmedia.events.NewFrameEvent;
+import javax.swing.border.EmptyBorder;
 
 import negocios.classesBasicas.Cliente;
 import negocios.classesBasicas.Endereco;
 import negocios.exceptions.ClienteJaExisteException;
+import fachada.GemialidadesLoja;
 
 public class TelaCadastro extends JFrame {
 
@@ -82,7 +72,7 @@ public class TelaCadastro extends JFrame {
 		btnCadastrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Endereco endereco = new Endereco(tf_Cidade.getText(), tf_Logradouro.getText(), tf_Numero.getText(), tf_CEP.getText(), tf_Complemento.getText());
-				if(cadastrar( tf_Nome.getText(), tf_IDADE.getText(), endereco, tf_CadID.getText(), tf_Complemento.getText())){
+				if(cadastrar( tf_Nome.getText(), tf_IDADE.getText(), endereco, tf_CadID.getText(), passwordField.getText())){
 					JOptionPane.showMessageDialog(null, "Cadastro Efetuado com sucesso");         //Não é essa a caixa que eu queria, vê se tu consegue por so a caixa da menssagem mesmo!
 					setVisible(false);
 
