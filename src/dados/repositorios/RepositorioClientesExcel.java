@@ -11,17 +11,20 @@ import org.apache.poi.ss.usermodel.Workbook;
 import negocios.classesBasicas.*;
 
 public class RepositorioClientesExcel implements RepositoriosClientes {
-	
-	
+
+
 	private Sheet planilha;
 	private int indice;
-	
+
 	public RepositorioClientesExcel (Workbook workbook){
-		this.planilha = workbook.createSheet("Clientes");
+		if(workbook.getSheet("Clientes") != null) {
+			this.planilha = workbook.getSheet("Clientes");
+		} else {
+			this.planilha = workbook.createSheet("Clientes");
+		}
 		this.indice = 0;
-		
+
 	}
-	
 
 	public void inserir(Cliente clientes) {
 		Cell celula;
@@ -44,9 +47,9 @@ public class RepositorioClientesExcel implements RepositoriosClientes {
 		celula.setCellValue(clientes.getEndereco().getComplemento());
 		celula = linha.createCell(9);
 		celula.setCellValue(clientes.getSenha());
-		
+
 		indice++;
-		
+
 	}
 
 	public Cliente procurar(String id) {
@@ -68,14 +71,14 @@ public class RepositorioClientesExcel implements RepositoriosClientes {
 				String cpmt = linha.getCell(8).toString();
 				String senha = linha.getCell(9).toString();
 				endereco = new Endereco(cidade, logradouro, numero, cep, cpmt);
-				
+
 				resposta = new Cliente(nome,idade, endereco, id1, senha);
-						
-				
-				
+
+
+
 			}
 		}
-		
+
 		return resposta;
 	}
 
@@ -89,10 +92,10 @@ public class RepositorioClientesExcel implements RepositoriosClientes {
 		planilha.getRow(aux).getCell(5).setCellValue(clientes.getEndereco().getNumero());
 		planilha.getRow(aux).getCell(6).setCellValue(clientes.getEndereco().getCep());
 		planilha.getRow(aux).getCell(7).setCellValue(clientes.getEndereco().getComplemento());
-		
-		
 
-		
+
+
+
 	}
 
 	public void remover(String id) {
@@ -101,7 +104,7 @@ public class RepositorioClientesExcel implements RepositoriosClientes {
 		planilha.removeRow(aux);
 		planilha.shiftRows((posicao+1), (indice-1), -1);
 		indice--;
-		
+
 	}
 	public int procurarLinha(String id){
 		String celula = "";

@@ -16,8 +16,16 @@ public class RepositorioEntregasExcel implements RepositorioEntregas {
 	private int indiceEnviadas;
 	
 	public RepositorioEntregasExcel(Workbook workbook) {
-		this.planilhaPendentes = workbook.createSheet("Entregas - Pendentes");
-		this.planilhaEnviadas = workbook.createSheet("Entregas - Enviadas");
+		if(workbook.getSheet("Entregas - Pendentes") != null) {
+			this.planilhaPendentes = workbook.getSheet("Entregas - Pendentes");
+		} else {
+			this.planilhaPendentes = workbook.createSheet("Entregas - Pendentes");
+		}
+		if(workbook.getSheet("Entregas - Enviadas") != null) {
+			this.planilhaEnviadas = workbook.getSheet("Entregas - Enviadas");
+		} else {
+			this.planilhaEnviadas = workbook.createSheet("Entregas - Enviadas");
+		}
 		this.indicePendentes = 0;
 		this.indiceEnviadas = 0;
 	}

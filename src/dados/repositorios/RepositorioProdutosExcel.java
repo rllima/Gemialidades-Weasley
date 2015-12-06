@@ -12,7 +12,11 @@ public class RepositorioProdutosExcel implements RepositorioProdutos {
 	private int indice;
 
 	public RepositorioProdutosExcel(Workbook workbook) {
-		this.planilha = workbook.createSheet("Produtos");
+		if(workbook.getSheet("Produtos") != null) {
+			this.planilha = workbook.getSheet("Produtos");
+		} else {
+			this.planilha = workbook.createSheet("Produtos");
+		}
 		this.indice = 0;
 	}
 
@@ -25,7 +29,7 @@ public class RepositorioProdutosExcel implements RepositorioProdutos {
 		celula.setCellValue(produto.getCodigo());
 		celula = linha.createCell(3);
 		celula.setCellValue(produto.getDescricao());
-		
+
 
 		if(produto instanceof Guloseimas) {
 			celula = linha.createCell(0);
@@ -132,7 +136,7 @@ public class RepositorioProdutosExcel implements RepositorioProdutos {
 		}
 		return resposta;
 	}
-	
+
 	public int procurarLinha(String codigo){
 		String celula = "";
 		int posicao = -1;
