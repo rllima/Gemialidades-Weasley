@@ -101,6 +101,7 @@ public class GemialidadesLoja {
 		repProdutos.cadastrar(produto);
 		FileOutputStream saidaArquivo = new FileOutputStream(excel);
 		workbook.write(saidaArquivo);
+		
 	}
 
 	public void removerProduto(String codigo) throws ProdutoNaoEncontradoException {

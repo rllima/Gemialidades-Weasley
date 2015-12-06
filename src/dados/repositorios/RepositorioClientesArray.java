@@ -59,10 +59,10 @@ public class RepositorioClientesArray implements RepositoriosClientes, Iterator 
 	public void remover(String id) {
 		int b = this.buscarId(id);
 		if( b != -1){
-			for (Iterator it = getIterator(); it.hasNext();) {
-				Cliente aux = (Cliente) it.next();
+			for (int i = 0; i < this.indice; i++) {
+				Cliente aux = clientes[i];
 				if (aux.getId().equals(id)) {
-					this.clientes[i] = this.clientes[indice--];
+					this.clientes[indice] = this.clientes[indice--];
 					indice = indice--;
 
 				}
@@ -73,10 +73,10 @@ public class RepositorioClientesArray implements RepositoriosClientes, Iterator 
 	public int buscarId(String id){
 		int resposta = -1;
 		boolean achou = false;
-		for (Iterator it = getIterator(); it.hasNext();) {
-			Cliente aux = (Cliente) it.next();
+		for (int i = 0; i < this.indice ; i++) {
+			Cliente aux = clientes[i];
 			if (aux.getId().equals(id)) {
-				resposta = indiceIterator;
+				resposta = i;
 				achou = true;
 
 			}
