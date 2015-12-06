@@ -97,8 +97,10 @@ public class GemialidadesLoja {
 	//Produtos
 
 
-	public void cadastrarProduto(Produto produto) throws ProdutoJaExisteException {
+	public void cadastrarProduto(Produto produto) throws ProdutoJaExisteException, IOException {
 		repProdutos.cadastrar(produto);
+		FileOutputStream saidaArquivo = new FileOutputStream(excel);
+		workbook.write(saidaArquivo);
 	}
 
 	public void removerProduto(String codigo) throws ProdutoNaoEncontradoException {
@@ -145,6 +147,10 @@ public class GemialidadesLoja {
 			throw new SenhaIncoretaException();
 		}
 		return resposta;
+	}
+	
+	public void closeWorkbook() throws IOException {
+		workbook.close();
 	}
    
 

@@ -241,14 +241,11 @@ public class TelaCadastro extends JFrame {
 		try {
 			GemialidadesLoja.getInstance().inserirCliente(new Cliente( nome, idade, endereco,id, senha));
 		} catch (FileNotFoundException e) {
-
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(this, e.getMessage());
 		} catch (ClienteJaExisteException e) {
-
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(this, e.getMessage());
 		} catch (IOException e) {
-
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(this, e.getMessage());
 		} 
 
 		return rootPaneCheckingEnabled;
