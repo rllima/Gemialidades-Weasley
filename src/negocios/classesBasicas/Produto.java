@@ -47,6 +47,7 @@ public abstract class Produto {
 		this.codigo = codigo;
 	}
 	
-	public abstract void venda();
+	public abstract boolean aplicaDescontoDe( double porcentagem );
+	
 
 }

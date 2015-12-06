@@ -38,4 +38,14 @@ public class Travessuras extends Produto {
 
 	}
 
+	@Override
+	public boolean aplicaDescontoDe(double porcentagem) {
+		if(porcentagem > 0.15){
+			return false;
+		}else{
+			super.setPreco(super.getPreco() - (super.getPreco() * porcentagem));
+		}
+		return true;
+	}
+
 }

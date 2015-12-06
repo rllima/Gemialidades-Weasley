@@ -3,10 +3,11 @@ package dados.repositorios;
 import negocios.classesBasicas.Cliente;
 import negocios.exceptions.ClienteNaoEncontradoException;
 
-public class RepositorioClientesArray implements RepositoriosClientes {
+public class RepositorioClientesArray implements RepositoriosClientes, Iterator {
 
 	private Cliente [] clientes;
 	private int indice;
+	private int indiceIterator;
 
 	public RepositorioClientesArray(){
 		this.clientes = new Cliente[100];
@@ -58,8 +59,8 @@ public class RepositorioClientesArray implements RepositoriosClientes {
 	public void remover(String id) {
 		int b = this.buscarId(id);
 		if( b != -1){
-			for (int i = 0; i < indice; i++) {
-				Cliente aux = this.clientes[i];
+			for (Iterator it = getIterator(); it.hasNext();) {
+				Cliente aux = (Cliente) it.next();
 				if (aux.getId().equals(id)) {
 					this.clientes[i] = this.clientes[indice--];
 					indice = indice--;
@@ -72,10 +73,10 @@ public class RepositorioClientesArray implements RepositoriosClientes {
 	public int buscarId(String id){
 		int resposta = -1;
 		boolean achou = false;
-		for (int i = 0; i < indice && !achou; i++) {
-			Cliente aux = this.clientes[i];
+		for (Iterator it = getIterator(); it.hasNext();) {
+			Cliente aux = (Cliente) it.next();
 			if (aux.getId().equals(id)) {
-				resposta = i;
+				resposta = indiceIterator;
 				achou = true;
 
 			}
@@ -83,5 +84,29 @@ public class RepositorioClientesArray implements RepositoriosClientes {
 		return resposta;
 
 	}
+	
+	public Object next() {
+		Cliente resposta = null;
+		resposta = this.clientes[this.indiceIterator];
+		this.indiceIterator++;
+		return resposta;
+	}
 
+
+	public boolean hasNext() {
+		boolean resposta = false;
+		if (this.clientes[this.indiceIterator + 1] != null) {
+			resposta = true;
+		} else {
+			resposta = false;
+		}
+		return resposta;
+	}
+	public Iterator getIterator() {
+
+		Cliente respota = null;
+		this.indiceIterator = 0;
+		Cliente[] iterator =  (Cliente[])clientes.clone();
+		return (Iterator) this;
+	}
 }
