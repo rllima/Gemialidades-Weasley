@@ -48,7 +48,8 @@ public class TelaLogin extends JFrame {
 				TelaLogin frame = new TelaLogin();
 				frame.setVisible(true);
 				try {
-					GemialidadesLoja.getInstance().inserirCliente((new Cliente("Wealey", "21", null, "Admin", "Admin")));
+					Endereco endereco = new Endereco("Hogsmeade", "Rua dos Alfeneiros","4","00000000", "Onde o vento faz a curva");
+					GemialidadesLoja.getInstance().inserirCliente((new Cliente("Wealey", "21",endereco, "Admin", "Admin")));
 				} catch (ClienteJaExisteException e2) {
 					e2.printStackTrace();
 				} catch (FileNotFoundException e) {
