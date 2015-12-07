@@ -1,5 +1,7 @@
 package negocios.cadastro;
 
+import java.io.IOException;
+
 import negocios.classesBasicas.Cliente;
 import negocios.classesBasicas.Produto;
 import negocios.exceptions.ClienteJaExisteException;
@@ -16,7 +18,7 @@ public class CadastroClientes {
 		this.cliente = cliente;
 	}
 
-	public void inserir(Cliente clientes) throws ClienteJaExisteException {
+	public void inserir(Cliente clientes) throws ClienteJaExisteException, IOException {
 		if(cliente.procurar(clientes.getId()) == null) {
 			cliente.inserir(clientes);
 			
@@ -34,7 +36,7 @@ public class CadastroClientes {
 		return resposta;
 	}
 
-	public void atualizar(String id, Cliente clientes) throws ClienteNaoEncontradoException {
+	public void atualizar(String id, Cliente clientes) throws ClienteNaoEncontradoException, IOException {
 		if(cliente.procurar(id) == null) {
 			throw new ClienteNaoEncontradoException();
 		} else {
@@ -43,7 +45,7 @@ public class CadastroClientes {
 	}
 	
 
-	public void remover(String id) throws ClienteNaoEncontradoException {
+	public void remover(String id) throws ClienteNaoEncontradoException, IOException {
 		if(cliente.procurar(id) != null) {
 			cliente.remover(id);
 		} else {

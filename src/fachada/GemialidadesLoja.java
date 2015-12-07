@@ -28,9 +28,8 @@ public class GemialidadesLoja {
 	private CadastroEntregas repEntregas;
 	private File config;
 	private File excel;
-	private FileInputStream in;
 	private char tipoRep;
-	private Workbook workbook;
+	private HSSFWorkbook workbook;
 	private static GemialidadesLoja instance;
 	
 	public static GemialidadesLoja getInstance() throws FileNotFoundException, IOException{
@@ -40,10 +39,12 @@ public class GemialidadesLoja {
 		return instance;
 	}
 
+	
 	public GemialidadesLoja () throws IOException, FileNotFoundException{
 		this.config = new File("config\\config.txt");
-		this.in = new FileInputStream(config);
+		FileInputStream in = new FileInputStream(config);
 		this.tipoRep = (char) in.read();
+		in.close();
 
 		if(tipoRep == 'A' || tipoRep == 'a') {
 			this.repClientes = new CadastroClientes(new RepositorioClientesArray());
@@ -57,13 +58,17 @@ public class GemialidadesLoja {
 			
 		} else if (tipoRep == 'E' || tipoRep == 'e') {
 			this.excel = new File("planilha.xls");
-			excel.createNewFile();
 			if(!excel.exists()) {
-				FileOutputStream saidaArquivo = new FileOutputStream(excel);
+				
+				excel.createNewFile();
+				FileOutputStream out = new FileOutputStream(excel);
 				workbook = new HSSFWorkbook();
+				workbook.write(out);
+				out.close();
 			} else {
 				FileInputStream entradaArquivo = new FileInputStream(excel);
 				workbook = new HSSFWorkbook(entradaArquivo);
+				entradaArquivo.close();
 				
 			}
 			this.repClientes = new CadastroClientes(new RepositorioClientesExcel(workbook));
@@ -76,11 +81,11 @@ public class GemialidadesLoja {
 	}
 
 	public void atualizarCliente(String id, Cliente clientes)
-			throws ClienteNaoEncontradoException {
+			throws ClienteNaoEncontradoException, IOException {
 		repClientes.atualizar(id, clientes);
 	}
 
-	public void inserirCliente(Cliente clientes) throws ClienteJaExisteException {
+	public void inserirCliente(Cliente clientes) throws ClienteJaExisteException, IOException {
 		repClientes.inserir(clientes);
 	}
 
@@ -88,7 +93,7 @@ public class GemialidadesLoja {
 		return repClientes.procurar(id);
 	}
 
-	public void removerCliente(String id) throws ClienteNaoEncontradoException {
+	public void removerCliente(String id) throws ClienteNaoEncontradoException, IOException {
 		repClientes.remover(id);
 	}
 

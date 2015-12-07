@@ -1,5 +1,6 @@
 package dados.repositorios;
 
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -12,11 +13,14 @@ import negocios.classesBasicas.*;
 
 public class RepositorioClientesExcel implements RepositoriosClientes {
 
-
+	private HSSFWorkbook workbook;
 	private Sheet planilha;
+	private File excel;
 	private int indice;
 
-	public RepositorioClientesExcel (Workbook workbook){
+	public RepositorioClientesExcel (HSSFWorkbook workbook) throws FileNotFoundException{
+		this.workbook=workbook;
+		excel = new File("planilha.xls"); 
 		if(workbook.getSheet("Clientes") != null) {
 			this.planilha = workbook.getSheet("Clientes");
 		} else {
@@ -26,7 +30,7 @@ public class RepositorioClientesExcel implements RepositoriosClientes {
 
 	}
 
-	public void inserir(Cliente clientes) {
+	public void inserir(Cliente clientes) throws IOException {
 		Cell celula;
 		Row linha = planilha.createRow(indice);
 		celula = linha.createCell(1);
@@ -49,7 +53,7 @@ public class RepositorioClientesExcel implements RepositoriosClientes {
 		celula.setCellValue(clientes.getSenha());
 
 		indice++;
-
+		this.write();
 	}
 
 	public Cliente procurar(String id) {
@@ -82,7 +86,7 @@ public class RepositorioClientesExcel implements RepositoriosClientes {
 		return resposta;
 	}
 
-	public void atualizar(String id, Cliente clientes) {
+	public void atualizar(String id, Cliente clientes) throws IOException {
 		int aux = this.procurarLinha(id);
 		planilha.getRow(aux).getCell(1).setCellValue(clientes.getNome());
 		planilha.getRow(aux).getCell(3).setCellValue(id);
@@ -93,17 +97,18 @@ public class RepositorioClientesExcel implements RepositoriosClientes {
 		planilha.getRow(aux).getCell(6).setCellValue(clientes.getEndereco().getCep());
 		planilha.getRow(aux).getCell(7).setCellValue(clientes.getEndereco().getComplemento());
 
-
+		this.write();
 
 
 	}
 
-	public void remover(String id) {
+	public void remover(String id) throws IOException {
 		int posicao = this.procurarLinha(id);
 		Row aux = planilha.getRow(posicao);
 		planilha.removeRow(aux);
 		planilha.shiftRows((posicao+1), (indice-1), -1);
 		indice--;
+		this.write();
 
 	}
 	public int procurarLinha(String id){
@@ -122,6 +127,12 @@ public class RepositorioClientesExcel implements RepositoriosClientes {
 		}
 		return posicao;
 
+	}
+	
+	private void write() throws IOException {
+		FileOutputStream saidaArquivo = new FileOutputStream(excel);
+		this.workbook.write(saidaArquivo);
+		saidaArquivo.close();
 	}
 
 }
