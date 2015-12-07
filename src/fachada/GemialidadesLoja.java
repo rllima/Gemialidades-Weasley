@@ -99,8 +99,10 @@ public class GemialidadesLoja {
 
 	public void cadastrarProduto(Produto produto) throws ProdutoJaExisteException, IOException {
 		repProdutos.cadastrar(produto);
+		excel = new File("planilha.xls");
 		FileOutputStream saidaArquivo = new FileOutputStream(excel);
 		workbook.write(saidaArquivo);
+		saidaArquivo.close();
 		
 	}
 
