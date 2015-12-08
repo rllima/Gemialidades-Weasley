@@ -1,6 +1,7 @@
 package negocios.cadastro;
 
 import negocios.classesBasicas.Entrega;
+import negocios.exceptions.EmptyListException;
 import negocios.exceptions.EntregaJaExisteException;
 import negocios.exceptions.EntregaNaoEncontradaException;
 import dados.repositorios.RepositorioEntregas;
@@ -21,14 +22,14 @@ public class CadastroEntregas {
 	
 		
 	} 
-	public void remover(String id) throws EntregaNaoEncontradaException{
+	public void remover(String id) throws EntregaNaoEncontradaException, EmptyListException{
 		if(repositorioEntregas.procurar(id) != null){
 			repositorioEntregas.remover(id);
 		}else{
 			throw new EntregaNaoEncontradaException();
 		}
 	}
-	public Entrega entrega(String id) throws EntregaNaoEncontradaException {
+	public Entrega procurar(String id) throws EntregaNaoEncontradaException, EmptyListException {
 		Entrega resposta = repositorioEntregas.procurar(id);
 		if(resposta == null){
 			throw new EntregaNaoEncontradaException();
@@ -36,7 +37,7 @@ public class CadastroEntregas {
 		return resposta;
 		
 	}
-	public void atualizar(String id, Entrega entrega) throws EntregaNaoEncontradaException {
+	public void atualizar(String id, Entrega entrega) throws EntregaNaoEncontradaException, EmptyListException{
 		if(repositorioEntregas.procurar(id) == null){
 			throw new EntregaNaoEncontradaException();
 		}else{

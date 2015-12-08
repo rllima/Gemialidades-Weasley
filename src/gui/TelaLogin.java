@@ -20,6 +20,7 @@ import fachada.*;
 import negocios.classesBasicas.*;
 import negocios.exceptions.ClienteJaExisteException;
 import negocios.exceptions.ClienteNaoEncontradoException;
+import negocios.exceptions.EmptyListException;
 import negocios.exceptions.SenhaIncoretaException;
 import javax.swing.ImageIcon;
 import java.awt.Rectangle;
@@ -160,6 +161,8 @@ public class TelaLogin extends JFrame {
 		} catch (ClienteNaoEncontradoException e) {
 			JOptionPane.showMessageDialog(this, e.getMessage());
 		} catch (SenhaIncoretaException e) {
+			JOptionPane.showMessageDialog(this, e.getMessage());
+		} catch (EmptyListException e) {
 			JOptionPane.showMessageDialog(this, e.getMessage());
 		}
 		return resposta;

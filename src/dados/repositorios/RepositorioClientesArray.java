@@ -3,6 +3,12 @@ package dados.repositorios;
 import negocios.classesBasicas.Cliente;
 import negocios.exceptions.ClienteNaoEncontradoException;
 
+/**
+ * Classe que representa o repositorio de clientes implementado em Array.
+ * @author lfs
+ *
+ */
+
 public class RepositorioClientesArray implements RepositoriosClientes, Iterator {
 
 	private Cliente[] clientes;
@@ -14,6 +20,11 @@ public class RepositorioClientesArray implements RepositoriosClientes, Iterator 
 		this.indice = 0;
 
 	}
+	
+	/**
+	 * Insere, no repositorio, um cliente.
+	 * @param cliente Cliente - cliente
+	 */
 
 	public void inserir(Cliente clientes) {
 		if (indice > this.clientes.length) {
@@ -31,7 +42,12 @@ public class RepositorioClientesArray implements RepositoriosClientes, Iterator 
 		}
 
 	}
-
+	
+	/**
+	 * Recebe um ID e procura, no repositorio, o cliente referente aquele ID.
+	 * @return cliente Cliente - Cliente procurado a ser retornado (Caso encontrado)
+	 * @param id String - Id do objeto que se procura
+	 */
 	public Cliente procurar(String id) {
 		Cliente resposta = null;
 		int b = this.buscarId(id);
@@ -43,6 +59,11 @@ public class RepositorioClientesArray implements RepositoriosClientes, Iterator 
 		return resposta;
 	}
 
+	/**
+	 * Atualiza um objeto a partir de seu ID
+	 * @param id String - Id do objeto a ser atualizado
+	 * @param cliente Cliente - Objeto atualizado a ser inserido no lugar do antigo
+	 */
 	public void atualizar(String id, Cliente clientes) {
 		int b = this.buscarId(id);
 
@@ -53,6 +74,10 @@ public class RepositorioClientesArray implements RepositoriosClientes, Iterator 
 
 	}
 
+	/**
+	 * Remove um objeto a partir de seu ID
+	 * @param id - ID do objeto a ser removido
+	 */
 	public void remover(String id) {
 		int b = this.buscarId(id);
 		if (b != -1) {
@@ -61,7 +86,11 @@ public class RepositorioClientesArray implements RepositoriosClientes, Iterator 
 			}
 		}
 	}
-
+/**
+ * Recebe um id e retorna a localizacao(indice) do objeto que aquele id identifica.	
+ * @param id String - Id do objeto que se quer encontrar
+ * @return resposta int - Indice do objeto referente ao ID
+ */
 	public int buscarId(String id) {
 		int resposta = -1;
 		boolean achou = false;

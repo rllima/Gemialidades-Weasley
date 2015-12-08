@@ -11,6 +11,11 @@ import org.apache.poi.ss.usermodel.Workbook;
 
 import negocios.classesBasicas.*;
 
+/**
+ * Classe que representa o repositorio de clientes implementado em Excel(Dados continuos)
+ * @author lfs
+ *
+ */
 public class RepositorioClientesExcel implements RepositoriosClientes {
 
 	private HSSFWorkbook workbook;
@@ -30,6 +35,12 @@ public class RepositorioClientesExcel implements RepositoriosClientes {
 
 	}
 
+	/**
+	 * Recebe e insere um cliente na planilha a partir da criacao de uma linha para o mesmo. 
+	 * Cada celula da linha corresponde a um dado(atributo) de Cliente.
+	 * Dessa forma, dentro do repositorio, cada linha armazena os dados de um unico cliente.
+	 * @param clientes Cliente - Objeto Cliente a ser inserido
+	 */
 	public void inserir(Cliente clientes) throws IOException {
 		Cell celula;
 		Row linha = planilha.createRow(indice);
@@ -56,6 +67,15 @@ public class RepositorioClientesExcel implements RepositoriosClientes {
 		this.write();
 	}
 
+	/** 
+	 * Metodo que recebe um ID e procura, na coluna referente ao id dos Clientes,
+	 * um id que se iguale a esse, a fim de retornar os dados do devido Cliente
+	 * em forma de objeto.
+	 * Ao encontrar o ID, o metodo capta os dados contidos naquela linha para 'montar'
+	 * o objeto Cliente a partir daquela linha, e retorna esse objeto.
+	 * @param id String - Id do cliente a ser procurado
+	 * @return cliente Clientes - Objeto Cliente
+	 */
 	public Cliente procurar(String id) {
 		String celula = "";
 		Row linha = null;
@@ -81,6 +101,12 @@ public class RepositorioClientesExcel implements RepositoriosClientes {
 		}
 		return resposta;
 	}
+	
+	/**
+	 * Metodo que atualiza um cliente do repositorio com novos dados inseridos pelo usuario.
+	 * @param id String - ID do objeto a ser atualizado
+	 * @param clientes Cliente - Objeto com dados atualizados a ser inserido no lugar do antigo.
+	 */
 
 	public void atualizar(String id, Cliente clientes) throws IOException {
 		int aux = this.procurarLinha(id);
@@ -98,6 +124,12 @@ public class RepositorioClientesExcel implements RepositoriosClientes {
 
 	}
 
+	/**
+	 * Remove um cliente(Linha) do repositorio a partir de seu ID.
+	 * Ele usa o metodo procurar linha pra encontrar a localização do cliente no repositorio.
+	 * Depois, remove aquela linha e realoca todas as outras abaixo dela uma posicao acima.
+	 * @param id String - id do Cliente a ser removido do repositorio.
+	 */
 	public void remover(String id) throws IOException {
 		int posicao = this.procurarLinha(id);
 		Row aux = planilha.getRow(posicao);
@@ -107,6 +139,13 @@ public class RepositorioClientesExcel implements RepositoriosClientes {
 		this.write();
 
 	}
+	
+	/**
+	 * Metodo que retorna a linha(Indice) na qual se encontra um Cliente especifico, a partir
+	 * de seu ID
+	 * @param id String - id do cliente a ser procurado no repositorio
+	 * @return indice int - posicao da linha na qual se encontram os dados do cliente procurado.
+	 */
 	public int procurarLinha(String id){
 		String celula = "";
 		int posicao = -1;
@@ -125,6 +164,12 @@ public class RepositorioClientesExcel implements RepositoriosClientes {
 
 	}
 	
+	/**
+	 * Metodo que escreve as informacoes adicionadas ao workbook no arquivo planilha.
+	 * Basicamente, ele salva as novas informações após as mesmas serem incluidas no repositorio.
+	 * @throws IOException
+	 */
+	
 	private void write() throws IOException {
 		FileOutputStream saidaArquivo = new FileOutputStream(excel);
 		this.workbook.write(saidaArquivo);
@@ -134,4 +179,4 @@ public class RepositorioClientesExcel implements RepositoriosClientes {
 }
 
 
-
+	

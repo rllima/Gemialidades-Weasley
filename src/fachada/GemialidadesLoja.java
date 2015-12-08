@@ -16,6 +16,7 @@ import negocios.classesBasicas.Entrega;
 import negocios.classesBasicas.Produto;
 import negocios.exceptions.ClienteJaExisteException;
 import negocios.exceptions.ClienteNaoEncontradoException;
+import negocios.exceptions.EmptyListException;
 import negocios.exceptions.EntregaJaExisteException;
 import negocios.exceptions.EntregaNaoEncontradaException;
 import negocios.exceptions.ProdutoJaExisteException;
@@ -81,7 +82,7 @@ public class GemialidadesLoja {
 	}
 
 	public void atualizarCliente(String id, Cliente clientes)
-			throws ClienteNaoEncontradoException, IOException {
+			throws ClienteNaoEncontradoException, IOException, EmptyListException {
 		repClientes.atualizar(id, clientes);
 	}
 
@@ -89,11 +90,11 @@ public class GemialidadesLoja {
 		repClientes.inserir(clientes);
 	}
 
-	public Cliente procurarCliente(String id) throws ClienteNaoEncontradoException {
+	public Cliente procurarCliente(String id) throws ClienteNaoEncontradoException, EmptyListException {
 		return repClientes.procurar(id);
 	}
 
-	public void removerCliente(String id) throws ClienteNaoEncontradoException, IOException {
+	public void removerCliente(String id) throws ClienteNaoEncontradoException, IOException, EmptyListException {
 		repClientes.remover(id);
 	}
 
@@ -131,22 +132,22 @@ public class GemialidadesLoja {
 		repEntregas.cadastrar(entrega);
 	}
 
-	public void removerEntrega(String id) throws EntregaNaoEncontradaException {
+	public void removerEntrega(String id) throws EntregaNaoEncontradaException, EmptyListException {
 		repEntregas.remover(id);
 	}
 
-	public Entrega entregaEntrega(String id) throws EntregaNaoEncontradaException {
-		return repEntregas.entrega(id);
+	public Entrega procurarEntrega(String id) throws EntregaNaoEncontradaException, EmptyListException {
+		return repEntregas.procurar(id);
 	}
 
 	public void atualizarEntrega(String id, Entrega entrega)
-			throws EntregaNaoEncontradaException {
+			throws EntregaNaoEncontradaException, EmptyListException {
 		repEntregas.atualizar(id, entrega);
 	}
 	
 	//Login
 	
-	public boolean login(String id, String senha) throws ClienteNaoEncontradoException, SenhaIncoretaException {
+	public boolean login(String id, String senha) throws ClienteNaoEncontradoException, SenhaIncoretaException, EmptyListException {
 		boolean resposta = false;
 		Cliente cliente = this.procurarCliente(id);
 		if((cliente.getSenha().equals(senha))) {

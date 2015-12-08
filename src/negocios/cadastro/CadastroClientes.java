@@ -6,6 +6,7 @@ import negocios.classesBasicas.Cliente;
 import negocios.classesBasicas.Produto;
 import negocios.exceptions.ClienteJaExisteException;
 import negocios.exceptions.ClienteNaoEncontradoException;
+import negocios.exceptions.EmptyListException;
 import negocios.exceptions.ProdutoNaoEncontradoException;
 import dados.repositorios.RepositorioClientesArray;
 import dados.repositorios.RepositorioProdutos;
@@ -28,7 +29,7 @@ public class CadastroClientes {
 	
 	}
 
-	public Cliente procurar(String id) throws ClienteNaoEncontradoException {
+	public Cliente procurar(String id) throws ClienteNaoEncontradoException, EmptyListException {
 		Cliente resposta = cliente.procurar(id);
 		if(resposta == null) {
 			throw new ClienteNaoEncontradoException();
@@ -36,7 +37,7 @@ public class CadastroClientes {
 		return resposta;
 	}
 
-	public void atualizar(String id, Cliente clientes) throws ClienteNaoEncontradoException, IOException {
+	public void atualizar(String id, Cliente clientes) throws ClienteNaoEncontradoException, IOException, EmptyListException {
 		if(cliente.procurar(id) == null) {
 			throw new ClienteNaoEncontradoException();
 		} else {
@@ -45,7 +46,7 @@ public class CadastroClientes {
 	}
 	
 
-	public void remover(String id) throws ClienteNaoEncontradoException, IOException {
+	public void remover(String id) throws ClienteNaoEncontradoException, IOException, EmptyListException {
 		if(cliente.procurar(id) != null) {
 			cliente.remover(id);
 		} else {
