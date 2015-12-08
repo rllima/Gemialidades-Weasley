@@ -112,16 +112,16 @@ public class GemialidadesLoja {
 		
 	}
 
-	public void removerProduto(String codigo) throws ProdutoNaoEncontradoException {
+	public void removerProduto(String codigo) throws ProdutoNaoEncontradoException, EmptyListException {
 		repProdutos.remover(codigo);
 	}
 
-	public Produto procurarProduto(String codigo) throws ProdutoNaoEncontradoException {
+	public Produto procurarProduto(String codigo) throws ProdutoNaoEncontradoException, EmptyListException {
 		return repProdutos.procurar(codigo);
 	}
 
 	public void atualizarProduto(String codigo, Produto produto)
-			throws ProdutoNaoEncontradoException {
+			throws ProdutoNaoEncontradoException, EmptyListException {
 		repProdutos.atualizar(codigo, produto);
 	}
 

@@ -2,6 +2,11 @@ package dados.repositorios;
 
 import negocios.classesBasicas.Produto;
 
+/**
+ * Classe que representa o repositorio de Produtos implementado em Array
+ * @author lfs
+ *
+ */
 public class RepositorioProdutosArray implements RepositorioProdutos {
 
 	private Produto[] repositorioProdutos;
@@ -12,6 +17,12 @@ public class RepositorioProdutosArray implements RepositorioProdutos {
 		this.repositorioProdutos = new Produto[100];
 	}
 
+	/**
+	 * Insere, no repositorio, um produto.
+	 * 
+	 * @param produto
+	 *            Produto - Produto a ser inserido
+	 */
 	public void inserir(Produto produto) {
 		if (this.indice > this.repositorioProdutos.length) {
 			Produto[] aux = new Produto[repositorioProdutos.length * 2];
@@ -26,6 +37,14 @@ public class RepositorioProdutosArray implements RepositorioProdutos {
 		indice++;
 	}
 
+	/**
+	 * Recebe um ID e procura, no repositorio, o produto referente aquele ID.
+	 * 
+	 * @return produto Produto - Produto procurado a ser retornado (Caso
+	 *         encontrado)
+	 * @param id
+	 *            String - Id do objeto que se procura
+	 */
 	public Produto procurar(String codigo) {
 		Produto resposta = null;
 		int indice = this.buscarCodigo(codigo);
@@ -35,6 +54,14 @@ public class RepositorioProdutosArray implements RepositorioProdutos {
 		return resposta;
 	}
 
+	/**
+	 * Atualiza um objeto a partir de seu ID
+	 * 
+	 * @param id
+	 *            String - Id do objeto a ser atualizado
+	 * @param produto
+	 *            Produto - Objeto atualizado a ser inserido no lugar do antigo
+	 */
 	public void atualizar(String codigo, Produto produtos) {
 		int b = this.buscarCodigo(codigo);
 
@@ -45,6 +72,12 @@ public class RepositorioProdutosArray implements RepositorioProdutos {
 
 	}
 
+	/**
+	 * Remove um objeto a partir de seu ID
+	 * 
+	 * @param id
+	 *            - ID do objeto a ser removido
+	 */
 	public void remover(String codigo) {
 		int b = this.buscarCodigo(codigo);
 		if (b != -1) {
@@ -55,6 +88,11 @@ public class RepositorioProdutosArray implements RepositorioProdutos {
 
 	}
 
+	/**
+	 * Recebe uma String nome e procura, no repositorio, um objeto que tenha este nome.
+	 * Caso encontre, retorna esse objeto.
+	 * @param produto Produto - Produto a ser dado como retorno.
+	 */
 	public Produto procurarNome(String nome) {
 		Produto aux = null;
 		for (int i = 0; i < indice; i++) {
@@ -65,7 +103,11 @@ public class RepositorioProdutosArray implements RepositorioProdutos {
 		}
 		return aux;
 	}
-
+	/**
+	 * Recebe um id e retorna a localizacao(indice) do objeto que aquele id identifica.	
+	 * @param id String - Id do objeto que se quer encontrar
+	 * @return resposta int - Indice do objeto referente ao ID
+	 */
 	public int buscarCodigo(String codigo) {
 		int resposta = -1;
 		boolean achou = false;
@@ -79,13 +121,4 @@ public class RepositorioProdutosArray implements RepositorioProdutos {
 		return resposta;
 
 	}
-
-	public boolean existe(String codigo) {
-		boolean resposta = false;
-		if (this.buscarCodigo(codigo) != -1) {
-			resposta = true;
-		}
-		return resposta;
-	}
-
 }

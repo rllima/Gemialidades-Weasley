@@ -51,10 +51,7 @@ public class RepositorioEntregasFila implements RepositorioEntregas {
 	 *            String - ID da entrega a ser procurada
 	 * @return resposta Entrega - Entrega que possui ID igual ao procurado.
 	 */
-	public Entrega procurar(String id) /*
-										 * throws EmptyListException,
-										 * EntregaNaoEncontradaException
-										 */ {
+	public Entrega procurar(String id) {
 		Entrega resposta = null;
 		boolean achou = false;
 		Node<Entrega> atual = primeiroNo;
@@ -113,8 +110,7 @@ public class RepositorioEntregasFila implements RepositorioEntregas {
 		}
 	}
 
-	// Remove Entrega do comeco e retorna o objeto p/ ser inserido na lista de
-	// enviados
+	// NAO FINALIZADO
 	public void enviar() {
 		Entrega removida = primeiroNo.getDado();
 
@@ -160,7 +156,7 @@ public class RepositorioEntregasFila implements RepositorioEntregas {
 	 * 
 	 * @param id
 	 *            String - ID da entrega que se procura
-	 * @return Node<Cliente> - Nó que contem, como dado, a entrega procurada.
+	 * @return Node<Entrega> - Nó que contem, como dado, a entrega procurada.
 	 */
 	private Node<Entrega> procurarNode(String id){
 		Node<Entrega> resposta = null;

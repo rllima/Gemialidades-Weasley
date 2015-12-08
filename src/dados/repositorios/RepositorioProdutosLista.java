@@ -3,6 +3,12 @@ package dados.repositorios;
 import negocios.classesBasicas.*;
 import negocios.exceptions.EmptyListException;
 
+/**
+ * Classe que representa o repositorio de produtos implementado em Lista.
+ * 
+ * @author lfs
+ *
+ */
 public class RepositorioProdutosLista implements RepositorioProdutos{
 
 	private Node<Produto> primeiroNo;
@@ -13,8 +19,14 @@ public class RepositorioProdutosLista implements RepositorioProdutos{
 		this.primeiroNo = this.ultimoNo = null;
 	}
 
-	// Insere objeto no fim da lista
-	public void inserir(Produto produto)/* throws ProdutoJaExisteException */ {
+	/**
+	 * Metodo que cria um novo No, adiciona a informacao(Produto) nesse nó e
+	 * liga ele à Lista.
+	 * 
+	 * @param produto
+	 *            Produto - Produto a ser inserido na Lista.
+	 */
+	public void inserir(Produto produto) {
 		if(isEmpty()) {
 			primeiroNo = ultimoNo = new Node<Produto>(produto);
 		} else {
@@ -29,8 +41,16 @@ public class RepositorioProdutosLista implements RepositorioProdutos{
 		}
 	}
 
-	// Procura objeto a partir do codigo
-	public Produto procurar(String codigo)/* throws EmptyListException, ProdutoNaoEncontradoException*/ {
+	/**
+	 * Metodo que recebe um ID e procura, na lista, um objeto No que contenha,
+	 * como dado, um objeto Produto que possua um ID igual ao que se procura. Ao
+	 * encontrar, retorna o objeto.
+	 * 
+	 * @param id
+	 *            String - ID do produto a ser procurado
+	 * @return resposta Produto  - Produto que possui ID igual ao procurado.
+	 */
+	public Produto procurar(String codigo) {
 		Produto resposta = null;
 		boolean achou = false;
 		Node<Produto> atual = primeiroNo;
@@ -43,8 +63,13 @@ public class RepositorioProdutosLista implements RepositorioProdutos{
 		}
 		return resposta;
 	}
-
-	public void remover(String codigo) /*throws EmptyListException, ProdutoNaoEncontradoException*/ {
+	/**
+	 * Recebe um ID e, usando o metodo procurarNode(), encontra o Nó que contem aquele produto como dado.
+	 * Depois, simplesmente desvincula aquele nó da lista.
+	 * Mais tarde, ele será pego pelo GarbageCollector
+	 * @param id String - ID do Produto a ser removido da lista.
+	 */
+	public void remover(String codigo){
 		if(this.procurarNode(codigo) == null) {
 			System.out.println("Nao existe na lista");
 		} else {
@@ -66,11 +91,21 @@ public class RepositorioProdutosLista implements RepositorioProdutos{
 		}
 	}
 
-	public void atualizar(String codigo, Produto produto) /*throws EmptyListException, ProdutoNaoEncontradoException*/{
+	/**
+	 * Recebe um ID e um Produto, a fim de trocar as informacoes do produto que possui aquele ID.
+	 * @param id String - ID do produto a ser atualizado.
+	 * @param produto Produto - Novo objeto atualizado a ser alocado no lugar do antigo.
+	 */
+	public void atualizar(String codigo, Produto produto) {
 		Node<Produto> atual = this.procurarNode(codigo);
 		atual.setDado(produto);
 	}
 
+	/**
+	 * Recebe uma String nome e procura, no repositorio, um objeto que tenha este nome.
+	 * Caso encontre, retorna esse objeto.
+	 * @param produto Produto - Produto a ser dado como retorno.
+	 */
 	public Produto procurarNome(String nome) {
 		Produto resposta = null;
 		boolean achou = false;
@@ -84,7 +119,12 @@ public class RepositorioProdutosLista implements RepositorioProdutos{
 		}
 		return resposta;
 	}
-
+	/**
+	 * Recebe um obejto Produto e procura, nó a nó, um objeto idêntico.
+	 * Caso encontre, retorna true. Caso não, retorna false.
+	 * @param produto
+	 * @return boolean - True se existir, False se não.
+	 */
 	public boolean existe(Produto produto) {
 		Node<Produto> atual = this.primeiroNo;
 
@@ -97,7 +137,10 @@ public class RepositorioProdutosLista implements RepositorioProdutos{
 		return false;
 	}
 
-	// Retorna true se a lista esta vazia. (Se o primeiro no esta vazio, a lista esta vazia.
+	/**
+	 * Metodo que retorna a informação de se a lista está ou não vazia.
+	 * @return boolean - True se tiver vazia, False se não.
+	 */
 	public boolean isEmpty() {
 		return primeiroNo == null;
 	}
@@ -118,7 +161,12 @@ public class RepositorioProdutosLista implements RepositorioProdutos{
 		return resposta;
 	}
 
-	// Retorna o no em que se encontra o produto do codigo passado
+	/**
+	 * Metodo que recebe um ID e procura, nó a nó, um objeto Produto que contenha aquele ID.
+	 * Caso encontre, ele retorna o nó que contém o Produto possuidor daquele ID.
+	 * @param id String - ID do produto que se procura
+	 * @return Node<Produto> - Nó que contem, como dado, o produto procurado.
+	 */
 	private Node<Produto> procurarNode(String codigo)/* throws EmptyListException*/ {
 		Node<Produto> resposta = null;
 		boolean achou = false;

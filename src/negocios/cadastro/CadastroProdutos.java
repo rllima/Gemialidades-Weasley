@@ -1,6 +1,7 @@
 package negocios.cadastro;
 
 import negocios.classesBasicas.Produto;
+import negocios.exceptions.EmptyListException;
 import negocios.exceptions.ProdutoJaExisteException;
 import negocios.exceptions.ProdutoNaoEncontradoException;
 import dados.repositorios.RepositorioProdutos;
@@ -21,7 +22,7 @@ public class CadastroProdutos {
 		}
 	}
 	
-	public void remover(String codigo) throws ProdutoNaoEncontradoException {
+	public void remover(String codigo) throws ProdutoNaoEncontradoException, EmptyListException {
 		if(repositorioProdutos.procurar(codigo) != null) {
 			repositorioProdutos.remover(codigo);
 		} else {
@@ -29,7 +30,7 @@ public class CadastroProdutos {
 		}
 	}
 	
-	public Produto procurar(String codigo) throws ProdutoNaoEncontradoException {
+	public Produto procurar(String codigo) throws ProdutoNaoEncontradoException, EmptyListException {
 		Produto resposta = repositorioProdutos.procurar(codigo);
 		if(resposta == null) {
 			throw new ProdutoNaoEncontradoException();
@@ -37,7 +38,7 @@ public class CadastroProdutos {
 		return resposta;
 	}
 	
-	public void atualizar(String codigo, Produto produto) throws ProdutoNaoEncontradoException {
+	public void atualizar(String codigo, Produto produto) throws ProdutoNaoEncontradoException, EmptyListException {
 		if(repositorioProdutos.procurar(codigo) == null) {
 			throw new ProdutoNaoEncontradoException();
 		} else {
