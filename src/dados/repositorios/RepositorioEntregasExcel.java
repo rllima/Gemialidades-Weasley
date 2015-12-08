@@ -61,7 +61,7 @@ public class RepositorioEntregasExcel implements RepositorioEntregas {
 		Row linha = null;
 		Entrega resposta = null;
 		
-		for(int i = 0; i < this.indicePendentes; i++) {
+		for(int i = 0; i <= this.indicePendentes; i++) {
 			linha = planilhaPendentes.getRow(i);
 			celula = linha.getCell(1).getStringCellValue();
 			if (id.equalsIgnoreCase(celula)) {
@@ -113,7 +113,7 @@ public class RepositorioEntregasExcel implements RepositorioEntregas {
 		Row linha = null;
 		Produto resposta = null;
 
-		for(int i = 0; i < this.indicePendentes; i++) {
+		for(int i = 0; i <= this.indicePendentes; i++) {
 			linha = planilhaPendentes.getRow(i);
 			celula = linha.getCell(2).toString();
 			if (codigo.equalsIgnoreCase(celula)){

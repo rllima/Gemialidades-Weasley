@@ -51,13 +51,11 @@ public class TelaLogin extends JFrame {
 					Endereco endereco = new Endereco("Hogsmeade", "Rua dos Alfeneiros","4","00000000", "Onde o vento faz a curva");
 					GemialidadesLoja.getInstance().inserirCliente((new Cliente("Wealey", "21",endereco, "Admin", "Admin")));
 				} catch (ClienteJaExisteException e2) {
-					e2.printStackTrace();
+					
 				} catch (FileNotFoundException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					JOptionPane.showMessageDialog(null, e.getMessage());
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					JOptionPane.showMessageDialog(null, e.getMessage());
 				}
 			}
 		});
@@ -149,9 +147,9 @@ public class TelaLogin extends JFrame {
 		try {
 			this.loja = GemialidadesLoja.getInstance();
 		} catch (FileNotFoundException e1) {
-			e1.printStackTrace();
+			JOptionPane.showMessageDialog(this, e1.getMessage());
 		} catch (IOException e1) {
-			e1.printStackTrace();
+			JOptionPane.showMessageDialog(this, e1.getMessage());
 		}
 	}
 

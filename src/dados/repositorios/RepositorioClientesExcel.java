@@ -61,7 +61,7 @@ public class RepositorioClientesExcel implements RepositoriosClientes {
 		Row linha = null;
 		Cliente resposta = null;
 		Endereco endereco = null;
-		for(int i = 0; i < this.indice; i++){
+		for(int i = 0; i <= this.indice; i++){
 			linha = planilha.getRow(i);
 			celula = linha.getCell(3).toString();
 			if(id.equalsIgnoreCase(celula)){
@@ -75,14 +75,10 @@ public class RepositorioClientesExcel implements RepositoriosClientes {
 				String cpmt = linha.getCell(8).toString();
 				String senha = linha.getCell(9).toString();
 				endereco = new Endereco(cidade, logradouro, numero, cep, cpmt);
-
 				resposta = new Cliente(nome,idade, endereco, id1, senha);
-
-
 
 			}
 		}
-
 		return resposta;
 	}
 
@@ -117,7 +113,7 @@ public class RepositorioClientesExcel implements RepositoriosClientes {
 		Row linha = null;
 		Cliente resposta = null;
 
-		for(int i = 0; i < this.indice; i++) {
+		for(int i = 0; i <= this.indice; i++) {
 			linha = planilha.getRow(i);
 			celula = linha.getCell(3).toString();
 			if (id.equalsIgnoreCase(celula)){
