@@ -72,7 +72,7 @@ public class TelaAdmin extends JFrame {
 		jPanel1.setLayout(null);
 		
 		JLabel label = new JLabel("");
-		label.setIcon(new ImageIcon("gemialidades-weasley\\images\\topo.png"));
+		label.setIcon(new ImageIcon("images\\topo.png"));
 		label.setBounds(10, 11, 214, 65);
 		jPanel1.add(label);
 		
@@ -194,7 +194,7 @@ public class TelaAdmin extends JFrame {
 		
 		JLabel lblBackground = new JLabel("New label");
 		lblBackground.setBounds(0, 0, 624, 428);
-		lblBackground.setIcon(new ImageIcon("C:\\Users\\rlo\\git\\gemialidades-weasley\\images\\Fundo.jpg"));
+		lblBackground.setIcon(new ImageIcon("images\\Fundo.jpg"));
 		jPanel1.add(lblBackground);
 	}
 	
