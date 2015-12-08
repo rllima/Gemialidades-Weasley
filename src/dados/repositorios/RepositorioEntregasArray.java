@@ -21,9 +21,9 @@ public class RepositorioEntregasArray implements RepositorioEntregas {
 
 	public void inserir(Entrega entrega) {
 
-		if(indice > this.repositorioEntregas.length) {
+		if (indice > this.repositorioEntregas.length) {
 			Entrega[] aux = new Entrega[repositorioEntregas.length * 2];
-			for(int i = 0; i < indice; i++) {
+			for (int i = 0; i < indice; i++) {
 				aux[i] = this.repositorioEntregas[i];
 			}
 			aux[indice] = entrega;
@@ -32,14 +32,15 @@ public class RepositorioEntregasArray implements RepositorioEntregas {
 		}
 		indice++;
 	}
-	public void entregues(Entrega entrega){
-		if( indiceEntregue > this.repositorioEntregues.length){
+
+	public void entregues(Entrega entrega) {
+		if (indiceEntregue > this.repositorioEntregues.length) {
 			Entrega[] aux = new Entrega[repositorioEntregues.length * 2];
-			for(int i = 0; i < indiceEntregue; i++){
+			for (int i = 0; i < indiceEntregue; i++) {
 				aux[i] = this.repositorioEntregues[i];
 			}
 			aux[indiceEntregue] = entrega;
-		}else{
+		} else {
 			this.repositorioEntregues[indiceEntregue] = entrega;
 		}
 		indiceEntregue++;
@@ -48,7 +49,7 @@ public class RepositorioEntregasArray implements RepositorioEntregas {
 	public Entrega procurar(String id) {
 		Entrega resposta = null;
 		int indice = this.buscarCodigo(id);
-		if(indice > -1) {
+		if (indice > -1) {
 			resposta = this.repositorioEntregas[indice];
 		}
 		return resposta;
@@ -56,7 +57,7 @@ public class RepositorioEntregasArray implements RepositorioEntregas {
 
 	public void atualizar(String id, Entrega entrega) {
 		int indice = this.buscarCodigo(id);
-		if(indice != -1){
+		if (indice != -1) {
 			this.repositorioEntregas[indice] = entrega;
 		}
 
@@ -64,31 +65,25 @@ public class RepositorioEntregasArray implements RepositorioEntregas {
 
 	public void remover(String id) {
 		int b = this.buscarCodigo(id);
-		if( b >= 0){
-			for (int i = 0; i < indice; i++) {
-				Entrega aux = this.repositorioEntregas[i];
-				if (aux.getId().equals(id)) {
-					this.repositorioEntregas[i] = this.repositorioEntregas[indice--];
-					indice = indice--;
-
-				}
+		if (b != -1) {
+			for (int i = b; i < indice; i++) {
+				this.repositorioEntregas[i] = this.repositorioEntregas[i + 1];
 			}
 		}
 	}
-	
-	// Remove Entrega do comeco e retorna o objeto p/ ser inserido na lista de enviados
+
+	// Remove Entrega do comeco e retorna o objeto p/ ser inserido na lista de
+	// enviados
 	public void enviar() {
 		Entrega enviada = this.repositorioEntregas[0];
 		indice = indice - 1;
 		this.entregues(enviada);
 		String codigo = enviada.getId();
 		this.remover(codigo);
-		
-		
-		
+
 	}
 
-	private int buscarCodigo(String id){
+	private int buscarCodigo(String id) {
 		int resposta = -1;
 		boolean achou = false;
 		for (int i = 0; i < this.indice && !achou; i++) {
@@ -101,11 +96,5 @@ public class RepositorioEntregasArray implements RepositorioEntregas {
 		return resposta;
 
 	}
-
-	
-
-
-	
-
 
 }

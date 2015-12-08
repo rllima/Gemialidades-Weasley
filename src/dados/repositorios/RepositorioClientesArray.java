@@ -5,36 +5,34 @@ import negocios.exceptions.ClienteNaoEncontradoException;
 
 public class RepositorioClientesArray implements RepositoriosClientes, Iterator {
 
-	private Cliente [] clientes;
+	private Cliente[] clientes;
 	private int indice;
 	private int indiceIterator;
 
-	public RepositorioClientesArray(){
+	public RepositorioClientesArray() {
 		this.clientes = new Cliente[100];
 		this.indice = 0;
 
 	}
 
-
 	public void inserir(Cliente clientes) {
-		if(indice > this.clientes.length){
-			Cliente[] aux = new Cliente[ 2*(this.clientes.length)];
-			for(int i = 0; i < this.clientes.length; i++){
+		if (indice > this.clientes.length) {
+			Cliente[] aux = new Cliente[2 * (this.clientes.length)];
+			for (int i = 0; i < this.clientes.length; i++) {
 				aux[i] = this.clientes[i];
 			}
 			aux[indice] = clientes;
 			this.clientes = aux;
 			indice++;
 
-		}
-		else{
+		} else {
 			this.clientes[indice] = clientes;
 			indice++;
 		}
 
 	}
 
-	public Cliente procurar(String id){
+	public Cliente procurar(String id) {
 		Cliente resposta = null;
 		int b = this.buscarId(id);
 
@@ -48,50 +46,42 @@ public class RepositorioClientesArray implements RepositoriosClientes, Iterator 
 	public void atualizar(String id, Cliente clientes) {
 		int b = this.buscarId(id);
 
-		if(b != -1){
+		if (b != -1) {
 			this.clientes[b] = clientes;
 
 		}
 
 	}
 
-
 	public void remover(String id) {
 		int b = this.buscarId(id);
-		if( b != -1){
-			for (int i = 0; i < this.indice; i++) {
-				Cliente aux = clientes[i];
-				if (aux.getId().equals(id)) {
-					this.clientes[indice] = this.clientes[indice--];
-					indice = indice--;
-
-				}
+		if (b != -1) {
+			for (int i = b; i < this.indice; i++) {
+				this.clientes[i] = this.clientes[i + 1];
 			}
 		}
-
 	}
-	public int buscarId(String id){
+
+	public int buscarId(String id) {
 		int resposta = -1;
 		boolean achou = false;
-		for (int i = 0; i < this.indice ; i++) {
+		for (int i = 0; i < this.indice && !achou; i++) {
 			Cliente aux = clientes[i];
 			if (aux.getId().equals(id)) {
 				resposta = i;
 				achou = true;
-
 			}
 		}
 		return resposta;
 
 	}
-	
+
 	public Object next() {
 		Cliente resposta = null;
 		resposta = this.clientes[this.indiceIterator];
 		this.indiceIterator++;
 		return resposta;
 	}
-
 
 	public boolean hasNext() {
 		boolean resposta = false;
@@ -102,11 +92,12 @@ public class RepositorioClientesArray implements RepositoriosClientes, Iterator 
 		}
 		return resposta;
 	}
+
 	public Iterator getIterator() {
 
 		Cliente respota = null;
 		this.indiceIterator = 0;
-		Cliente[] iterator =  (Cliente[])clientes.clone();
+		Cliente[] iterator = (Cliente[]) clientes.clone();
 		return (Iterator) this;
 	}
 }

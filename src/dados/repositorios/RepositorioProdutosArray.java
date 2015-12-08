@@ -1,8 +1,6 @@
 package dados.repositorios;
 
-
 import negocios.classesBasicas.Produto;
-
 
 public class RepositorioProdutosArray implements RepositorioProdutos {
 
@@ -28,7 +26,7 @@ public class RepositorioProdutosArray implements RepositorioProdutos {
 		indice++;
 	}
 
-	public Produto procurar(String codigo)  {
+	public Produto procurar(String codigo) {
 		Produto resposta = null;
 		int indice = this.buscarCodigo(codigo);
 		if (indice > -1) {
@@ -40,41 +38,35 @@ public class RepositorioProdutosArray implements RepositorioProdutos {
 	public void atualizar(String codigo, Produto produtos) {
 		int b = this.buscarCodigo(codigo);
 
-		if(b != -1){
+		if (b != -1) {
 			this.repositorioProdutos[b] = produtos;
 
 		}
-		
-		
+
 	}
 
-	public void remover(String codigo)  {
+	public void remover(String codigo) {
 		int b = this.buscarCodigo(codigo);
-		if( b != -1){
-			for (int i = 0; i < indice; i++) {
-				Produto aux = repositorioProdutos[i];
-				if (aux.getCodigo().equals(codigo)) {
-					this.repositorioProdutos[i] = this.repositorioProdutos[indice--];
-					indice = indice--;
-
-				}
+		if (b != -1) {
+			for (int i = b; i < indice; i++) {
+				this.repositorioProdutos[i] = this.repositorioProdutos[i + 1];
 			}
 		}
-		
+
 	}
-	
+
 	public Produto procurarNome(String nome) {
 		Produto aux = null;
-		for(int i =0; i < indice; i++) {
-			if(repositorioProdutos[i].getNome().equalsIgnoreCase(nome)) {
+		for (int i = 0; i < indice; i++) {
+			if (repositorioProdutos[i].getNome().equalsIgnoreCase(nome)) {
 				aux = repositorioProdutos[i];
 				this.remover(aux.getCodigo());
 			}
 		}
 		return aux;
 	}
-	
-	public int buscarCodigo(String codigo){
+
+	public int buscarCodigo(String codigo) {
 		int resposta = -1;
 		boolean achou = false;
 		for (int i = 0; i < this.indice && !achou; i++) {
