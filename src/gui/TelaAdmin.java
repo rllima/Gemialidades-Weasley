@@ -39,6 +39,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import javax.swing.JFormattedTextField;
 import javax.swing.JTextField;
+import java.awt.Choice;
 
 public class TelaAdmin extends JFrame {
     private static GemialidadesLoja loja;
@@ -78,7 +79,7 @@ public class TelaAdmin extends JFrame {
 		
 		JLabel label = new JLabel("");
 		label.setIcon(new ImageIcon("images\\topo.png"));
-		label.setBounds(10, 11, 214, 65);
+		label.setBounds(205, 11, 214, 65);
 		jPanel1.add(label);
 		
 		final Panel panel = new Panel();
@@ -87,97 +88,83 @@ public class TelaAdmin extends JFrame {
 		panel.setVisible(false);
 		panel.setLayout(null);
 		
-		final Panel panel_AttProduto = new Panel();
-		panel_AttProduto.setLayout(null);
-		panel_AttProduto.setBackground(Color.CYAN);
-		panel_AttProduto.setBounds(0, 0, 358, 235);
-		panel.add(panel_AttProduto);
+		final Panel panel_Trav = new Panel();
+		panel_Trav.setLayout(null);
+		panel_Trav.setBackground(new Color(222, 184, 135));
+		panel_Trav.setBounds(0, 0, 358, 235);
+		panel.add(panel_Trav);
 		
-		tf_AttProdID = new JTextField();
-		tf_AttProdID.setColumns(10);
-		tf_AttProdID.setBounds(123, 100, 128, 20);
-		panel_AttProduto.add(tf_AttProdID);
+		TextField textField = new TextField();
+		textField.setBounds(86, 10, 240, 22);
+		panel_Trav.add(textField);
 		
-		JLabel label_8 = new JLabel("ID");
-		label_8.setBounds(91, 103, 22, 14);
-		panel_AttProduto.add(label_8);
+		Label label_8 = new Label("Nome");
+		label_8.setForeground(Color.WHITE);
+		label_8.setFont(new Font("Arial", Font.BOLD, 13));
+		label_8.setBounds(10, 10, 76, 24);
+		panel_Trav.add(label_8);
 		
-		JLabel lblDigiteAbaixoO_3 = new JLabel("Digite abaixo o ID do produto que deseja atualizar");
-		lblDigiteAbaixoO_3.setBounds(63, 29, 240, 14);
-		panel_AttProduto.add(lblDigiteAbaixoO_3);
+		TextField textField_1 = new TextField();
+		textField_1.setBounds(86, 49, 240, 22);
+		panel_Trav.add(textField_1);
 		
-		JButton btnAttProd = new JButton("Remover");
-		btnAttProd.setBounds(141, 175, 89, 23);
-		panel_AttProduto.add(btnAttProd);
+		Label label_9 = new Label("C\u00F3digo");
+		label_9.setForeground(Color.WHITE);
+		label_9.setFont(new Font("Arial", Font.BOLD, 13));
+		label_9.setBounds(10, 47, 76, 24);
+		panel_Trav.add(label_9);
 		
-		final Panel panel_AttCliente = new Panel();
-		panel_AttCliente.setLayout(null);
-		panel_AttCliente.setBackground(Color.CYAN);
-		panel_AttCliente.setBounds(0, 0, 358, 235);
-		panel.add(panel_AttCliente);
+		TextField textField_2 = new TextField();
+		textField_2.setBounds(86, 86, 240, 22);
+		panel_Trav.add(textField_2);
 		
-		tf_AttClienteID = new JTextField();
-		tf_AttClienteID.setColumns(10);
-		tf_AttClienteID.setBounds(123, 100, 128, 20);
-		panel_AttCliente.add(tf_AttClienteID);
+		Label label_10 = new Label("Descri\u00E7\u00E3o");
+		label_10.setForeground(Color.WHITE);
+		label_10.setFont(new Font("Arial", Font.BOLD, 13));
+		label_10.setBounds(10, 84, 76, 24);
+		panel_Trav.add(label_10);
 		
-		JLabel label_7 = new JLabel("ID");
-		label_7.setBounds(91, 103, 22, 14);
-		panel_AttCliente.add(label_7);
+		TextField textField_3 = new TextField();
+		textField_3.setBounds(86, 124, 240, 22);
+		panel_Trav.add(textField_3);
 		
-		JLabel lblDigiteAbaixoO_2 = new JLabel("Digite abaixo o ID do cliente que deseja atualizar");
-		lblDigiteAbaixoO_2.setBounds(63, 29, 240, 14);
-		panel_AttCliente.add(lblDigiteAbaixoO_2);
+		Choice tf_Censura = new Choice();
 		
-		JButton btnAttClien = new JButton("Remover");
-		btnAttClien.setBounds(141, 175, 89, 23);
-		panel_AttCliente.add(btnAttClien);
+		for(int i = 0; i < 19; i++){
+		tf_Censura.add(Integer.toString(i));
+		}
+		tf_Censura.setBounds(85, 161, 68, 22);
+		panel_Trav.add(tf_Censura);
 		
-		final Panel panel_RmvCliente = new Panel();
-		panel_RmvCliente.setLayout(null);
-		panel_RmvCliente.setBackground(Color.CYAN);
-		panel_RmvCliente.setBounds(0, 0, 358, 235);
-		panel.add(panel_RmvCliente);
+		Choice tf_Peri = new Choice();
+		for(int i = 3; i < 11; i++){
+			tf_Peri.add(Integer.toString(i));
+		}
+		tf_Peri.setBounds(263, 161, 68, 20);
+		panel_Trav.add(tf_Peri);
 		
-		tf_RmvClienteID = new JTextField();
-		tf_RmvClienteID.setColumns(10);
-		tf_RmvClienteID.setBounds(123, 100, 128, 20);
-		panel_RmvCliente.add(tf_RmvClienteID);
+		Label label_11 = new Label("Pre\u00E7o");
+		label_11.setForeground(Color.WHITE);
+		label_11.setFont(new Font("Arial", Font.BOLD, 13));
+		label_11.setBounds(10, 122, 76, 24);
+		panel_Trav.add(label_11);
 		
-		JLabel label_6 = new JLabel("ID");
-		label_6.setBounds(91, 103, 22, 14);
-		panel_RmvCliente.add(label_6);
+		Label label_Periculosidade = new Label("Periculosidade");
+		label_Periculosidade.setForeground(Color.WHITE);
+		label_Periculosidade.setFont(new Font("Arial", Font.BOLD, 13));
+		label_Periculosidade.setBounds(159, 161, 101, 24);
+		panel_Trav.add(label_Periculosidade);
 		
-		JLabel lblDigiteAbaixoO_1 = new JLabel("Digite abaixo o ID do cliente que deseja remover");
-		lblDigiteAbaixoO_1.setBounds(63, 29, 240, 14);
-		panel_RmvCliente.add(lblDigiteAbaixoO_1);
+		Label label_12 = new Label("Censura");
+		label_12.setForeground(Color.WHITE);
+		label_12.setFont(new Font("Arial", Font.BOLD, 13));
+		label_12.setBounds(10, 159, 76, 24);
+		panel_Trav.add(label_12);
 		
-		JButton btnRemoverClien = new JButton("Remover");
-		btnRemoverClien.setBounds(141, 175, 89, 23);
-		panel_RmvCliente.add(btnRemoverClien);
+		JButton button = new JButton("Cadastrar");
+		button.setBounds(127, 205, 104, 23);
+		panel_Trav.add(button);
 		
-		final Panel panel_RmvProd = new Panel();
-		panel_RmvProd.setLayout(null);
-		panel_RmvProd.setBackground(Color.CYAN);
-		panel_RmvProd.setBounds(0, 0, 358, 235);
-		panel.add(panel_RmvProd);
-		
-		tf_RmvProdutoID = new JTextField();
-		tf_RmvProdutoID.setBounds(123, 100, 128, 20);
-		panel_RmvProd.add(tf_RmvProdutoID);
-		tf_RmvProdutoID.setColumns(10);
-		
-		JLabel lblNome = new JLabel("ID");
-		lblNome.setBounds(91, 103, 22, 14);
-		panel_RmvProd.add(lblNome);
-		
-		JLabel lblDigiteAbaixoO = new JLabel("Digite abaixo o ID do produto que deseja remover");
-		lblDigiteAbaixoO.setBounds(63, 29, 240, 14);
-		panel_RmvProd.add(lblDigiteAbaixoO);
-		
-		JButton btnRemoverProd = new JButton("Remover");
-		btnRemoverProd.setBounds(141, 175, 89, 23);
-		panel_RmvProd.add(btnRemoverProd);
 		
 		final Panel panel_CadastroGul = new Panel();
 		panel_CadastroGul.setBounds(0, 0, 358, 235);
@@ -190,7 +177,7 @@ public class TelaAdmin extends JFrame {
 		panel_CadastroGul.add(tf_NomeCad);
 		
 		Label label_1 = new Label("Nome");
-		label_1.setBounds(29, 10, 51, 24);
+		label_1.setBounds(10, 10, 76, 24);
 		label_1.setForeground(Color.WHITE);
 		label_1.setFont(new Font("Arial", Font.BOLD, 13));
 		panel_CadastroGul.add(label_1);
@@ -200,7 +187,7 @@ public class TelaAdmin extends JFrame {
 		panel_CadastroGul.add(tf_CodCad);
 		
 		Label label_2 = new Label("C\u00F3digo");
-		label_2.setBounds(10, 47, 59, 24);
+		label_2.setBounds(10, 47, 76, 24);
 		label_2.setForeground(Color.WHITE);
 		label_2.setFont(new Font("Arial", Font.BOLD, 13));
 		panel_CadastroGul.add(label_2);
@@ -222,29 +209,181 @@ public class TelaAdmin extends JFrame {
 		final TextField tf_SaborCad = new TextField();
 		tf_SaborCad.setBounds(85, 161, 240, 22);
 		panel_CadastroGul.add(tf_SaborCad);
-
-		Label label_4 = new Label("Pre\u00E7o");
-		label_4.setBounds(22, 122, 51, 24);
-		label_4.setForeground(Color.WHITE);
-		label_4.setFont(new Font("Arial", Font.BOLD, 13));
-		panel_CadastroGul.add(label_4);
 		
-		Label label_5 = new Label("Sabor");
-		label_5.setForeground(Color.WHITE);
-		label_5.setFont(new Font("Arial", Font.BOLD, 13));
-		label_5.setBounds(22, 159, 51, 24);
-		panel_CadastroGul.add(label_5);
+				Label label_4 = new Label("Pre\u00E7o");
+				label_4.setBounds(10, 122, 76, 24);
+				label_4.setForeground(Color.WHITE);
+				label_4.setFont(new Font("Arial", Font.BOLD, 13));
+				panel_CadastroGul.add(label_4);
+				
+				Label label_5 = new Label("Sabor");
+				label_5.setForeground(Color.WHITE);
+				label_5.setFont(new Font("Arial", Font.BOLD, 13));
+				label_5.setBounds(10, 159, 76, 24);
+				panel_CadastroGul.add(label_5);
+				
+				
+				
+				JButton btnCadastrar = new JButton("Cadastrar");
+				btnCadastrar.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						cadastrarGuloseima(tf_NomeCad.getText(), tf_CodCad.getText(), tf_DescCad.getText(), tf_SaborCad.getText(), Double.parseDouble(tf_PrecoCad.getText()));
+					}
+				});
+				btnCadastrar.setBounds(127, 205, 104, 23);
+				panel_CadastroGul.add(btnCadastrar);
 		
+		final Panel panel_Escolha = new Panel();
+		panel_Escolha.setLayout(null);
+		panel_Escolha.setBackground(new Color(222, 184, 135));
+		panel_Escolha.setBounds(0, 0, 358, 235);
+		panel.add(panel_Escolha);
 		
+		final Panel panel_AttProduto = new Panel();
+		panel_AttProduto.setLayout(null);
+		panel_AttProduto.setBackground(new Color(222, 184, 135));
+		panel_AttProduto.setBounds(0, 0, 358, 235);
+		panel.add(panel_AttProduto);
 		
-		JButton btnCadastrar = new JButton("Cadastrar");
-		btnCadastrar.addActionListener(new ActionListener() {
+		tf_AttProdID = new JTextField();
+		tf_AttProdID.setColumns(10);
+		tf_AttProdID.setBounds(123, 100, 128, 20);
+		panel_AttProduto.add(tf_AttProdID);
+		
+		JLabel lblId = new JLabel("ID: ");
+		lblId.setFont(new Font("Arial", Font.PLAIN, 13));
+		lblId.setForeground(new Color(255, 255, 255));
+		lblId.setBounds(91, 103, 22, 14);
+		panel_AttProduto.add(lblId);
+		
+		JLabel lblDigiteAbaixoO_3 = new JLabel("Digite abaixo o ID do produto que deseja atualizar");
+		lblDigiteAbaixoO_3.setForeground(new Color(255, 255, 255));
+		lblDigiteAbaixoO_3.setFont(new Font("Arial", Font.PLAIN, 13));
+		lblDigiteAbaixoO_3.setBounds(31, 29, 301, 20);
+		panel_AttProduto.add(lblDigiteAbaixoO_3);
+		
+		JButton btnAttProd = new JButton("Atualizar");
+		btnAttProd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				cadastrarGuloseima(tf_NomeCad.getText(), tf_CodCad.getText(), tf_DescCad.getText(), tf_SaborCad.getText(), Double.parseDouble(tf_PrecoCad.getText()));
 			}
 		});
-		btnCadastrar.setBounds(142, 205, 89, 23);
-		panel_CadastroGul.add(btnCadastrar);
+		btnAttProd.setBounds(141, 175, 89, 23);
+		panel_AttProduto.add(btnAttProd);
+		
+		JButton btnTravessuras = new JButton("Travessuras");
+		btnTravessuras.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				panel.setVisible(true);
+				// Limpando
+				panel.removeAll();
+				panel.repaint();
+				panel.revalidate();
+				// Adicionando novo panel
+				panel.add(panel_Trav);
+				panel.repaint();
+				panel.revalidate();
+			}
+		});
+		
+		btnTravessuras.setBounds(204, 70, 124, 85);
+		panel_Escolha.add(btnTravessuras);
+		
+		JButton btnGuloseimas = new JButton("Guloseimas");
+		btnGuloseimas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				panel.setVisible(true);
+				// Limpando
+				panel.removeAll();
+				panel.repaint();
+				panel.revalidate();
+				// Adicionando novo panel
+				panel.add(panel_CadastroGul);
+				panel.repaint();
+				panel.revalidate();
+			}
+		});
+		btnGuloseimas.setBounds(30, 69, 124, 85);
+		panel_Escolha.add(btnGuloseimas);
+		final Panel panel_AttCliente = new Panel();
+		panel_AttCliente.setLayout(null);
+		panel_AttCliente.setBackground(new Color(222, 184, 135));
+		panel_AttCliente.setBounds(0, 0, 358, 235);
+		panel.add(panel_AttCliente);
+		
+		tf_AttClienteID = new JTextField();
+		tf_AttClienteID.setColumns(10);
+		tf_AttClienteID.setBounds(123, 100, 128, 20);
+		panel_AttCliente.add(tf_AttClienteID);
+		
+		JLabel label_7 = new JLabel("ID");
+		label_7.setForeground(new Color(255, 255, 255));
+		label_7.setFont(new Font("Arial", Font.PLAIN, 13));
+		label_7.setBounds(91, 103, 22, 14);
+		panel_AttCliente.add(label_7);
+		
+		JLabel lblDigiteAbaixoO_2 = new JLabel("Digite abaixo o ID do cliente que deseja atualizar");
+		lblDigiteAbaixoO_2.setFont(new Font("Arial", Font.PLAIN, 13));
+		lblDigiteAbaixoO_2.setForeground(new Color(255, 255, 255));
+		lblDigiteAbaixoO_2.setBounds(31, 32, 301, 20);
+		panel_AttCliente.add(lblDigiteAbaixoO_2);
+		
+		JButton btnAttClien = new JButton("Atualizar");
+		btnAttClien.setBounds(141, 175, 89, 23);
+		panel_AttCliente.add(btnAttClien);
+		
+		final Panel panel_RmvCliente = new Panel();
+		panel_RmvCliente.setLayout(null);
+		panel_RmvCliente.setBackground(new Color(222, 184, 135));
+		panel_RmvCliente.setBounds(0, 0, 358, 235);
+		panel.add(panel_RmvCliente);
+		
+		tf_RmvClienteID = new JTextField();
+		tf_RmvClienteID.setColumns(10);
+		tf_RmvClienteID.setBounds(123, 100, 128, 20);
+		panel_RmvCliente.add(tf_RmvClienteID);
+		
+		JLabel label_6 = new JLabel("ID");
+		label_6.setFont(new Font("Arial", Font.PLAIN, 13));
+		label_6.setForeground(new Color(255, 255, 255));
+		label_6.setBounds(91, 103, 22, 14);
+		panel_RmvCliente.add(label_6);
+		
+		JLabel lblDigiteAbaixoO_1 = new JLabel("Digite abaixo o ID do cliente que deseja remover");
+		lblDigiteAbaixoO_1.setFont(new Font("Arial", Font.PLAIN, 13));
+		lblDigiteAbaixoO_1.setForeground(new Color(255, 255, 255));
+		lblDigiteAbaixoO_1.setBounds(31, 29, 301, 20);
+		panel_RmvCliente.add(lblDigiteAbaixoO_1);
+		
+		JButton btnRemoverClien = new JButton("Remover");
+		btnRemoverClien.setBounds(141, 175, 89, 23);
+		panel_RmvCliente.add(btnRemoverClien);
+		
+		final Panel panel_RmvProd = new Panel();
+		panel_RmvProd.setLayout(null);
+		panel_RmvProd.setBackground(new Color(222, 184, 135));
+		panel_RmvProd.setBounds(0, 0, 358, 235);
+		panel.add(panel_RmvProd);
+		
+		tf_RmvProdutoID = new JTextField();
+		tf_RmvProdutoID.setBounds(123, 100, 128, 20);
+		panel_RmvProd.add(tf_RmvProdutoID);
+		tf_RmvProdutoID.setColumns(10);
+		
+		JLabel lblNome = new JLabel("ID");
+		lblNome.setFont(new Font("Arial", Font.PLAIN, 13));
+		lblNome.setForeground(new Color(255, 255, 255));
+		lblNome.setBounds(91, 103, 22, 14);
+		panel_RmvProd.add(lblNome);
+		
+		JLabel lblDigiteAbaixoO = new JLabel("Digite abaixo o ID do produto que deseja remover");
+		lblDigiteAbaixoO.setFont(new Font("Arial", Font.PLAIN, 13));
+		lblDigiteAbaixoO.setForeground(new Color(255, 255, 255));
+		lblDigiteAbaixoO.setBounds(31, 29, 301, 20);
+		panel_RmvProd.add(lblDigiteAbaixoO);
+		
+		JButton btnRemoverProd = new JButton("Remover");
+		btnRemoverProd.setBounds(141, 175, 89, 23);
+		panel_RmvProd.add(btnRemoverProd);
 		
 		JButton btnRemoverProdutos = new JButton("Remover Produtos");
 		btnRemoverProdutos.addActionListener(new ActionListener() {
@@ -331,7 +470,7 @@ public class TelaAdmin extends JFrame {
 				panel.repaint();
 				panel.revalidate();
 				// Adicionando novo panel
-				panel.add(panel_CadastroGul);
+				panel.add(panel_Escolha);
 				panel.repaint();
 				panel.revalidate();
 			}
