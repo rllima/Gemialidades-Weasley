@@ -21,6 +21,11 @@ public class RepositorioClientesArray implements RepositoriosClientes, Iterator 
 
 	}
 	
+	private RepositorioClientesArray(Cliente[] itr) {
+		this.clientes = itr;
+		this.indiceIterator = 0;
+	}
+	
 	/**
 	 * Insere, no repositorio, um cliente.
 	 * @param cliente Cliente - cliente
@@ -105,7 +110,7 @@ public class RepositorioClientesArray implements RepositoriosClientes, Iterator 
 
 	}
 
-	public Object next() {
+	public Cliente next() {
 		Cliente resposta = null;
 		resposta = this.clientes[this.indiceIterator];
 		this.indiceIterator++;
@@ -122,11 +127,12 @@ public class RepositorioClientesArray implements RepositoriosClientes, Iterator 
 		return resposta;
 	}
 
-	public Iterator getIterator() {
-
-		Cliente respota = null;
-		this.indiceIterator = 0;
-		Cliente[] iterator = (Cliente[]) clientes.clone();
-		return (Iterator) this;
+	public Iterator<Cliente> getIterator() {
+		Cliente[] aux = new Cliente[clientes.length];
+		for(int i = 0; i < this.indice; i++) {
+			aux[i] = this.clientes[i].clone();
+		}
+		RepositorioClientesArray iterator = new RepositorioClientesArray(aux);
+		return iterator;
 	}
 }

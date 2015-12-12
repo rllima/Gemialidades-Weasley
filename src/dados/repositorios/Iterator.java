@@ -1,9 +1,9 @@
 package dados.repositorios;
 
-public interface Iterator {
+public interface Iterator<T> {
 	
 	
-	Object next();
+	T next();
 	boolean hasNext();
 
 }

@@ -14,11 +14,16 @@ public class RepositorioClientesLista implements RepositoriosClientes {
 	private Node<Cliente> primeiroNo;
 	private Node<Cliente> ultimoNo;
 	private String nome;
+	private int indiceIterator;
 
 	public RepositorioClientesLista() {
 		this.nome = nome;
 		this.primeiroNo = this.ultimoNo = null;
-
+	}
+	
+	private RepositorioClientesLista(Cliente[] itr) {
+		this.indiceIterator = 0;
+		
 	}
 
 	/**
@@ -168,5 +173,9 @@ public class RepositorioClientesLista implements RepositoriosClientes {
 		}
 		return resposta;
 	}
+	
+	public Iterator
+	
+	
 
 }
