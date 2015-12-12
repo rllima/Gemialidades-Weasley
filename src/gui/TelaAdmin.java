@@ -100,6 +100,23 @@ public class TelaAdmin extends JFrame {
 		panel_Escolha.setBackground(new Color(222, 184, 135));
 		panel.add(panel_Escolha, "name_84949386013763");
 		
+		final Panel panel_EscolhaA = new Panel();
+		panel_EscolhaA.setLayout(null);
+		panel_EscolhaA.setBackground(new Color(222, 184, 135));
+		panel.add(panel_EscolhaA, "name_93495989090976");
+		
+		JButton button_1 = new JButton("Guloseimas");
+		button_1.setBounds(11, 172, 164, 39);
+		panel_EscolhaA.add(button_1);
+		
+		JButton button_2 = new JButton("Travessuras");
+		button_2.setBounds(182, 172, 164, 39);
+		panel_EscolhaA.add(button_2);
+		
+		JLabel label_19 = new JLabel("");
+		label_19.setBounds(0, 0, 357, 235);
+		panel_EscolhaA.add(label_19);
+		
 		
 		
 		final Panel panel_Trav = new Panel();
@@ -184,6 +201,11 @@ public class TelaAdmin extends JFrame {
 		button.setBounds(127, 205, 104, 23);
 		panel_Trav.add(button);
 		
+		JLabel label_13 = new JLabel("");
+		label_13.setIcon(new ImageIcon("C:\\Users\\rlo\\git\\gemialidades-weasley1\\images\\Mapa-do-Maroto1.jpg"));
+		label_13.setBounds(0, 0, 357, 235);
+		panel_Trav.add(label_13);
+		
 		
 		final Panel panel_CadastroGul = new Panel();
 		panel.add(panel_CadastroGul, "name_84949424298320");
@@ -220,11 +242,16 @@ public class TelaAdmin extends JFrame {
 				panel.revalidate();
 			}
 		});
-		btnGuloseimas.setBounds(10, 69, 164, 85);
+		btnGuloseimas.setBounds(11, 172, 164, 39);
 		panel_Escolha.add(btnGuloseimas);
 		
-		btnTravessuras.setBounds(184, 70, 164, 85);
+		btnTravessuras.setBounds(182, 172, 164, 39);
 		panel_Escolha.add(btnTravessuras);
+		
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\rlo\\git\\gemialidades-weasley1\\images\\Mapa-do-Maroto1.jpg"));
+		lblNewLabel.setBounds(0, 0, 357, 235);
+		panel_Escolha.add(lblNewLabel);
 		final TextField tf_NomeCad = new TextField();
 		tf_NomeCad.setBounds(86, 10, 240, 22);
 		panel_CadastroGul.add(tf_NomeCad);
@@ -285,6 +312,11 @@ public class TelaAdmin extends JFrame {
 				});
 				btnCadastrarG.setBounds(127, 205, 104, 23);
 				panel_CadastroGul.add(btnCadastrarG);
+				
+				JLabel label_14 = new JLabel("");
+				label_14.setIcon(new ImageIcon("C:\\Users\\rlo\\git\\gemialidades-weasley1\\images\\Mapa-do-Maroto1.jpg"));
+				label_14.setBounds(0, 0, 357, 235);
+				panel_CadastroGul.add(label_14);
 		
 		final Panel panel_AttProduto = new Panel();
 		panel_AttProduto.setLayout(null);
@@ -311,10 +343,17 @@ public class TelaAdmin extends JFrame {
 		JButton btnAttProd = new JButton("Atualizar");
 		btnAttProd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				//jfgjhfhfd
+				
 			}
 		});
 		btnAttProd.setBounds(141, 175, 89, 23);
 		panel_AttProduto.add(btnAttProd);
+		
+		JLabel label_15 = new JLabel("");
+		label_15.setIcon(new ImageIcon("C:\\Users\\rlo\\git\\gemialidades-weasley1\\images\\Mapa-do-Maroto1.jpg"));
+		label_15.setBounds(0, 0, 357, 235);
+		panel_AttProduto.add(label_15);
 		final Panel panel_AttCliente = new Panel();
 		panel_AttCliente.setLayout(null);
 		panel_AttCliente.setBackground(new Color(222, 184, 135));
@@ -372,6 +411,11 @@ public class TelaAdmin extends JFrame {
 		btnAttClien.setBounds(141, 175, 89, 23);
 		panel_AttCliente.add(btnAttClien);
 		
+		JLabel label_16 = new JLabel("");
+		label_16.setIcon(new ImageIcon("C:\\Users\\rlo\\git\\gemialidades-weasley1\\images\\Mapa-do-Maroto1.jpg"));
+		label_16.setBounds(0, 0, 357, 235);
+		panel_AttCliente.add(label_16);
+		
 		final Panel panel_RmvCliente = new Panel();
 		panel_RmvCliente.setLayout(null);
 		panel_RmvCliente.setBackground(new Color(222, 184, 135));
@@ -404,6 +448,11 @@ public class TelaAdmin extends JFrame {
 		btnRemoverClien.setBounds(141, 175, 89, 23);
 		panel_RmvCliente.add(btnRemoverClien);
 		
+		JLabel label_17 = new JLabel("");
+		label_17.setIcon(new ImageIcon("C:\\Users\\rlo\\git\\gemialidades-weasley1\\images\\Mapa-do-Maroto1.jpg"));
+		label_17.setBounds(0, 0, 357, 235);
+		panel_RmvCliente.add(label_17);
+		
 		final Panel panel_RmvProd = new Panel();
 		panel_RmvProd.setLayout(null);
 		panel_RmvProd.setBackground(new Color(222, 184, 135));
@@ -434,6 +483,11 @@ public class TelaAdmin extends JFrame {
 		});
 		btnRemoverProd.setBounds(141, 175, 89, 23);
 		panel_RmvProd.add(btnRemoverProd);
+		
+		JLabel label_18 = new JLabel("");
+		label_18.setIcon(new ImageIcon("C:\\Users\\rlo\\git\\gemialidades-weasley1\\images\\Mapa-do-Maroto1.jpg"));
+		label_18.setBounds(0, 0, 357, 235);
+		panel_RmvProd.add(label_18);
 		
 		JButton btnRemoverProdutos = new JButton("Remover Produtos");
 		btnRemoverProdutos.addActionListener(new ActionListener() {
