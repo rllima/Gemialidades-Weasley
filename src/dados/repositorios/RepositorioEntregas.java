@@ -10,5 +10,6 @@ public interface RepositorioEntregas {
 	void atualizar(String id, Entrega entrega);
 	void remover(String id);
 	void enviar(); 
+	Iterator getIterator();
 
 }
