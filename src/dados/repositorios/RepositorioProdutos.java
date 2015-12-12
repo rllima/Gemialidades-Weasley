@@ -10,5 +10,6 @@ public interface RepositorioProdutos {
 	Produto procurarNome(String nome);
 	void atualizar(String codigo, Produto produtos);
 	void remover(String codigo);
+	Iterator getIterator();
 
 }

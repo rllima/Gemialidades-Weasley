@@ -219,8 +219,6 @@ public class RepositorioClientesExcel implements RepositoriosClientes, Iterator 
 		Endereco endereco = new Endereco(cidade, logradouro, numero, cep, cpmt);
 		return new Cliente(nome, idade, endereco, id1, senha);
 	}
-	
-	
 
 }
 
