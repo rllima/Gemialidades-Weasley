@@ -1,6 +1,7 @@
 package dados.repositorios;
 
 import negocios.classesBasicas.Produto;
+import negocios.exceptions.EmptyListException;
 import negocios.exceptions.ProdutoNaoEncontradoException;
 
 public interface RepositorioProdutos {
@@ -10,6 +11,6 @@ public interface RepositorioProdutos {
 	Produto procurarNome(String nome);
 	void atualizar(String codigo, Produto produtos);
 	void remover(String codigo);
-	Iterator getIterator();
+	Iterator getIterator() throws EmptyListException;
 
 }

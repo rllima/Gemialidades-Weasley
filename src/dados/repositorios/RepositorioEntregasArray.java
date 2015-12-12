@@ -165,7 +165,7 @@ public class RepositorioEntregasArray implements RepositorioEntregas, Iterator {
 		RepositorioEntregasArray iterator = new RepositorioEntregasArray(aux);
 		return iterator;
 	}
-	public Iterator<Entrega> getIteratorEntregas() {
+	public Iterator<Entrega> getIteratorEnviadas() {
 		Entrega[] aux = new Entrega[repositorioEnviadas.length];
 		for(int i = 0; i < this.indice; i++) {
 			aux[i] = this.repositorioEnviadas[i].clone();
