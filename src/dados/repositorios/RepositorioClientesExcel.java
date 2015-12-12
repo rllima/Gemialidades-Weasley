@@ -16,12 +16,14 @@ import negocios.classesBasicas.*;
  * @author lfs
  *
  */
-public class RepositorioClientesExcel implements RepositoriosClientes {
+public class RepositorioClientesExcel implements RepositoriosClientes, Iterator {
 
 	private HSSFWorkbook workbook;
 	private Sheet planilha;
 	private File excel;
 	private int indice;
+	private int indiceIterator;
+	private Cliente[] iterator;
 
 	public RepositorioClientesExcel (HSSFWorkbook workbook) throws FileNotFoundException{
 		this.workbook=workbook;
@@ -32,7 +34,11 @@ public class RepositorioClientesExcel implements RepositoriosClientes {
 			this.planilha = workbook.createSheet("Clientes");
 		}
 		this.indice = 0;
-
+	}
+	
+	private RepositorioClientesExcel(Cliente[] itr) {
+		this.indiceIterator = 0;
+		this.iterator = itr;
 	}
 
 	/**
@@ -175,6 +181,46 @@ public class RepositorioClientesExcel implements RepositoriosClientes {
 		this.workbook.write(saidaArquivo);
 		saidaArquivo.close();
 	}
+	
+	public int size() {
+		return planilha.getPhysicalNumberOfRows();
+	}
+	
+	public Iterator<Cliente> getIterator() {
+		Cliente[] itr = new Cliente[this.size()];
+		for(int i = 0; i < size(); i++) {
+			itr[i] = this.clone(planilha.getRow(i));
+		}
+		RepositorioClientesExcel iterator = new RepositorioClientesExcel(itr);
+		return iterator;
+	}
+
+	public Object next() {
+		Cliente resposta = null;
+		resposta = this.iterator[this.indiceIterator];
+		this.indiceIterator++;
+		return resposta;
+	}
+
+	public boolean hasNext() {
+		return this.iterator[this.indiceIterator + 1] != null;
+	}
+	
+	private Cliente clone(Row linha) {
+		String nome = linha.getCell(1).toString();
+		String idade =  linha.getCell(2).toString();
+		String id1 = linha.getCell(3).toString();
+		String cidade = linha.getCell(4).toString();
+		String logradouro = linha.getCell(5).toString();
+		String numero = linha.getCell(6).toString();
+		String cep = linha.getCell(7).toString();
+		String cpmt = linha.getCell(8).toString();
+		String senha = linha.getCell(9).toString();
+		Endereco endereco = new Endereco(cidade, logradouro, numero, cep, cpmt);
+		return new Cliente(nome, idade, endereco, id1, senha);
+	}
+	
+	
 
 }
 
