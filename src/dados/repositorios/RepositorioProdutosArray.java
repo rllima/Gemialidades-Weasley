@@ -1,5 +1,9 @@
 package dados.repositorios;
 
+import negocios.classesBasicas.Cliente;
+import negocios.classesBasicas.Guloseimas;
+import negocios.classesBasicas.Travessuras;
+
 import negocios.classesBasicas.Produto;
 
 /**
@@ -7,14 +11,19 @@ import negocios.classesBasicas.Produto;
  * @author lfs
  *
  */
-public class RepositorioProdutosArray implements RepositorioProdutos {
+public class RepositorioProdutosArray implements RepositorioProdutos, Iterator {
 
 	private Produto[] repositorioProdutos;
 	private int indice;
+	private int indiceIterator;
 
 	public RepositorioProdutosArray() {
 		this.indice = 0;
 		this.repositorioProdutos = new Produto[100];
+	}
+	private RepositorioProdutosArray(Produto[] itr) {
+		this.repositorioProdutos = itr;
+		this.indiceIterator = 0;
 	}
 
 	/**
@@ -120,5 +129,35 @@ public class RepositorioProdutosArray implements RepositorioProdutos {
 		}
 		return resposta;
 
+	}
+	public Produto next() {
+		Produto resposta = null;
+		resposta = this.repositorioProdutos[this.indiceIterator];
+		this.indiceIterator++;
+		return resposta;
+	}
+	public boolean hasNext() {
+		boolean resposta = false;
+		if (this.repositorioProdutos[this.indiceIterator + 1] != null) {
+			resposta = true;
+		} else {
+			resposta = false;
+		}
+		return resposta;
+	}
+	public Iterator<Produto> getIterator() {
+		Produto[] aux = new Produto[repositorioProdutos.length];
+		for(int i = 0; i < this.indice; i++) {
+			if(aux[i] instanceof Guloseimas){
+				aux[i] = ((Guloseimas) this.repositorioProdutos[i]).clone();
+				
+			}else{
+				aux[i] = ((Travessuras) this.repositorioProdutos[i]).clone();
+			}
+			
+			
+		}
+		RepositorioProdutosArray iterator = new RepositorioProdutosArray(aux);
+		return iterator;
 	}
 }

@@ -17,6 +17,8 @@ public class RepositorioEntregasArray implements RepositorioEntregas, Iterator {
 	private Entrega[] repositorioEnviadas;
 	private int indice;
 	private int indiceEntregue;
+	private int indiceIterator;
+	
 
 	public RepositorioEntregasArray() {
 		this.repositorioEntregas = new Entrega[100];
@@ -24,6 +26,11 @@ public class RepositorioEntregasArray implements RepositorioEntregas, Iterator {
 		this.repositorioEnviadas = new Entrega[100];
 		this.indiceEntregue = 0;
 	}
+	private RepositorioEntregasArray(Entrega[] itr) {
+		this.repositorioEntregas = itr;
+		this.indiceIterator = 0;
+	}
+
 
 	/**
 	 * Insere, no repositorio, uma Entrega
@@ -137,14 +144,38 @@ public class RepositorioEntregasArray implements RepositorioEntregas, Iterator {
 
 	}
 
-	public Object next() {
-		// TODO Auto-generated method stub
-		return null;
+	public Entrega next() {
+		Entrega resposta = null;
+		resposta = this.repositorioEntregas[this.indiceIterator];
+		this.indiceIterator++;
+		return resposta;
+		
 	}
 
 	public boolean hasNext() {
-		// TODO Auto-generated method stub
-		return false;
+		boolean resposta = false;
+		if (this.repositorioEntregas[this.indiceIterator + 1] != null) {
+			resposta = true;
+		} else {
+			resposta = false;
+		}
+		return resposta;
+	}
+	public Iterator<Entrega> getIteratorPendentes() {
+		Entrega[] aux = new Entrega[repositorioEntregas.length];
+		for(int i = 0; i < this.indice; i++) {
+			aux[i] = this.repositorioEntregas[i].clone();
+		}
+		RepositorioEntregasArray iterator = new RepositorioEntregasArray(aux);
+		return iterator;
+	}
+	public Iterator<Entrega> getIteratorEntregas() {
+		Entrega[] aux = new Entrega[repositorioEnviadas.length];
+		for(int i = 0; i < this.indice; i++) {
+			aux[i] = this.repositorioEnviadas[i].clone();
+		}
+		RepositorioEntregasArray iterator = new RepositorioEntregasArray(aux);
+		return iterator;
 	}
 
 }
