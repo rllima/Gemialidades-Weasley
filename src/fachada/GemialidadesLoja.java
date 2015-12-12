@@ -39,7 +39,6 @@ public class GemialidadesLoja {
 		}
 		return instance;
 	}
-
 	
 	public GemialidadesLoja () throws IOException, FileNotFoundException{
 		this.config = new File("config\\config.txt");
