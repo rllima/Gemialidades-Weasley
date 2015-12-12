@@ -45,7 +45,7 @@ public abstract class Produto {
 
 	public void setCodigo(String codigo) {
 		this.codigo = codigo;
-	}
+	} 
 	
 	public abstract boolean aplicaDescontoDe( double porcentagem );
 	

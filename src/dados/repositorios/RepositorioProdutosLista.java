@@ -9,14 +9,20 @@ import negocios.exceptions.EmptyListException;
  * @author lfs
  *
  */
-public class RepositorioProdutosLista implements RepositorioProdutos{
+public class RepositorioProdutosLista implements RepositorioProdutos, Iterator{
 
 	private Node<Produto> primeiroNo;
 	private Node<Produto> ultimoNo;
+	private int indiceIterator;
+	private Produto[] iterator;
 
 	// Construtor que cria lista vazia com um nome.
 	public RepositorioProdutosLista() {
 		this.primeiroNo = this.ultimoNo = null;
+	}
+	private RepositorioProdutosLista(Produto[] itr) {
+		this.indiceIterator = 0;
+		this.iterator = itr;
 	}
 
 	/**
@@ -179,6 +185,48 @@ public class RepositorioProdutosLista implements RepositorioProdutos{
 			atual = atual.getProximo();
 		}
 		return resposta;
+	}
+
+	public Produto next() {
+		Produto resposta = null;
+		resposta = this.iterator[this.indiceIterator];
+		this.indiceIterator++;
+		return resposta;
+	}
+
+	public boolean hasNext() {
+		return this.iterator[this.indiceIterator + 1] != null;
+	}
+	public Iterator<Produto> getIterator() throws EmptyListException {
+		if (isEmpty()) {
+			throw new EmptyListException();
+		}
+		int count = 0;
+		Produto[] itr = new Produto[this.size()];
+		Node<Produto> atual = primeiroNo;
+		while (atual != null) {
+			if( atual.getDado() instanceof Guloseimas){
+		
+			itr[count] = ((Guloseimas)atual.getDado()).clone();
+			}else{
+			itr[count] = ((Travessuras)atual.getDado()).clone();
+			
+			}
+			atual = atual.getProximo();
+			count++;
+		}
+		RepositorioProdutosLista iterator =  new RepositorioProdutosLista(itr);
+		return iterator;
+	}
+	
+	public int size() {
+		int count = 0;
+		Node<Produto> atual = primeiroNo;
+		while (atual != null) {
+			count++;
+			atual = atual.getProximo();
+		}
+		return count;
 	}
 
 }

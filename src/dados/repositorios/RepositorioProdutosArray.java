@@ -137,13 +137,7 @@ public class RepositorioProdutosArray implements RepositorioProdutos, Iterator {
 		return resposta;
 	}
 	public boolean hasNext() {
-		boolean resposta = false;
-		if (this.repositorioProdutos[this.indiceIterator + 1] != null) {
-			resposta = true;
-		} else {
-			resposta = false;
-		}
-		return resposta;
+		return this.repositorioProdutos[this.indiceIterator + 1] != null;
 	}
 	public Iterator<Produto> getIterator() {
 		Produto[] aux = new Produto[repositorioProdutos.length];

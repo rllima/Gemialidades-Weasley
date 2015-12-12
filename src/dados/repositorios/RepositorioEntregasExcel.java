@@ -1,5 +1,7 @@
 package dados.repositorios;
 
+import negocios.classesBasicas.Cliente;
+import negocios.classesBasicas.Endereco;
 import negocios.classesBasicas.Entrega;
 import negocios.classesBasicas.Guloseimas;
 import negocios.classesBasicas.Produto;
@@ -15,12 +17,14 @@ import org.apache.poi.ss.usermodel.*;
  * @author lfs
  *
  */
-public class RepositorioEntregasExcel implements RepositorioEntregas {
+public class RepositorioEntregasExcel implements RepositorioEntregas, Iterator {
 
 	private Sheet planilhaPendentes;
 	private Sheet planilhaEnviadas;
 	private int indicePendentes;
 	private int indiceEnviadas;
+	private int indiceIterator;
+	private Entrega[] iterator;
 
 	public RepositorioEntregasExcel(Workbook workbook) {
 		if (workbook.getSheet("Entregas - Pendentes") != null) {
@@ -35,6 +39,10 @@ public class RepositorioEntregasExcel implements RepositorioEntregas {
 		}
 		this.indicePendentes = 0;
 		this.indiceEnviadas = 0;
+	}
+	private RepositorioEntregasExcel(Entrega[] itr) {
+		this.indiceIterator = 0;
+		this.iterator = itr;
 	}
 
 	/**
@@ -161,5 +169,37 @@ public class RepositorioEntregasExcel implements RepositorioEntregas {
 		return posicao;
 
 	}
+
+	public Object next() {
+		Entrega resposta = null;
+		resposta = this.iterator[this.indiceIterator];
+		this.indiceIterator++;
+		return resposta;
+	}
+
+	public boolean hasNext() {
+		return this.iterator[this.indiceIterator + 1] != null;
+	}
+	public int size(Sheet planilha) {
+		return planilha.getPhysicalNumberOfRows();
+	}
+	
+	public Iterator<Entrega> getIteratorPendentes() {
+		Entrega[] itr = new Entrega[this.size(planilhaPendentes)];
+		for(int i = 0; i < size(planilhaPendentes); i++) {
+			itr[i] = this.clone(planilhaPendentes.getRow(i));
+		}
+		RepositorioEntregasExcel iterator = new RepositorioEntregasExcel(itr);
+		return iterator;
+	}
+	
+	private Entrega clone(Row linha) {
+		String id = planilhaPendentes.getRow(0).getCell(1).toString();
+		String idCliente = planilhaPendentes.getRow(0).getCell(2).toString();
+		String idProduto = planilhaPendentes.getRow(0).getCell(3).toString();
+		Entrega temp = new Entrega(id, idCliente, idProduto);
+		return temp;
+	}
+	
 
 }

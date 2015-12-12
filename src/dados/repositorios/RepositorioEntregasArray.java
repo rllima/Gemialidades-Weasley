@@ -153,14 +153,10 @@ public class RepositorioEntregasArray implements RepositorioEntregas, Iterator {
 	}
 
 	public boolean hasNext() {
-		boolean resposta = false;
-		if (this.repositorioEntregas[this.indiceIterator + 1] != null) {
-			resposta = true;
-		} else {
-			resposta = false;
-		}
-		return resposta;
+		return this.repositorioEntregas[this.indiceIterator + 1] != null;
+		
 	}
+	
 	public Iterator<Entrega> getIteratorPendentes() {
 		Entrega[] aux = new Entrega[repositorioEntregas.length];
 		for(int i = 0; i < this.indice; i++) {

@@ -1,7 +1,9 @@
 package dados.repositorios;
 
+import negocios.classesBasicas.Cliente;
 import negocios.classesBasicas.Entrega;
 import negocios.classesBasicas.Produto;
+import negocios.exceptions.EmptyListException;
 import negocios.exceptions.EntregaNaoEncontradaException;
 
 /**
@@ -10,14 +12,20 @@ import negocios.exceptions.EntregaNaoEncontradaException;
  * @author lfs
  *
  */
-public class RepositorioEntregasFila implements RepositorioEntregas {
+public class RepositorioEntregasFila implements RepositorioEntregas, Iterator {
 
 	private Node<Entrega> primeiroNo;
 	private Node<Entrega> ultimoNo;
+	private int indiceIterator;
+	private Entrega[] iterator;
 
 	public RepositorioEntregasFila() {
 		this.primeiroNo = null;
 		this.ultimoNo = null;
+	}
+	private RepositorioEntregasFila(Entrega[] itr) {
+		this.indiceIterator = 0;
+		this.iterator = itr;
 	}
 
 	/**
@@ -41,6 +49,7 @@ public class RepositorioEntregasFila implements RepositorioEntregas {
 			}
 		}
 	}
+	
 
 	/**
 	 * Metodo que recebe um ID e procura, na lista, um objeto No que contenha,
@@ -170,6 +179,41 @@ public class RepositorioEntregasFila implements RepositorioEntregas {
 			atual = atual.getProximo();
 		}
 		return resposta;
+	}
+
+	public Entrega next() {
+		Entrega resposta = null;
+		resposta = this.iterator[this.indiceIterator];
+		this.indiceIterator++;
+		return resposta;
+	}
+
+	public boolean hasNext() {
+		return this.iterator[this.indiceIterator + 1] != null;
+	}
+	public Iterator<Entrega> getIterator() throws EmptyListException {
+		if (isEmpty()) {
+			throw new EmptyListException();
+		}
+		int count = 0;
+		Entrega[] itr = new Entrega[this.size()];
+		Node<Entrega> atual = primeiroNo;
+		while (atual != null) {
+			itr[count] = atual.getDado().clone();
+			atual = atual.getProximo();
+			count++;
+		}
+		RepositorioEntregasFila iterator = new RepositorioEntregasFila(itr);
+		return iterator;
+	}
+	public int size() {
+		int count = 0;
+		Node<Entrega> atual = primeiroNo;
+		while (atual != null) {
+			count++;
+			atual = atual.getProximo();
+		}
+		return count;
 	}
 
 }
