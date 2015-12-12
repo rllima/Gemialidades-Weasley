@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
@@ -14,7 +15,9 @@ import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.LineBorder;
+
 import java.awt.Color;
+
 import javax.swing.border.EtchedBorder;
 
 import fachada.GemialidadesLoja;
@@ -22,9 +25,18 @@ import fachada.GemialidadesLoja;
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 import javax.swing.JEditorPane;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
+
+import negocios.classesBasicas.Cliente;
+import negocios.classesBasicas.Endereco;
+import negocios.classesBasicas.Produto;
+import negocios.exceptions.ClienteJaExisteException;
+import negocios.exceptions.EmptyListException;
 
 public class TelaPrincipal extends JFrame {
 
@@ -95,7 +107,21 @@ public class TelaPrincipal extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				DefaultListModel dlm = new DefaultListModel();
 				// Percorrer o rep Produtos e adicionar um a um na lista;
-				
+				try {
+					if(GemialidadesLoja.getInstance().getIteratorProduto().hasNext() == true) {
+						Produto produto = (Produto) GemialidadesLoja.getInstance().getIteratorProduto().next();
+						dlm.addElement(produto.getNome());
+					}
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (EmptyListException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				list_Produtos.setModel(dlm);
 			}
 		});

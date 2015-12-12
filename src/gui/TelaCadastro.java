@@ -75,6 +75,16 @@ public class TelaCadastro extends JFrame {
 				if(cadastrar( tf_Nome.getText(), tf_IDADE.getText(), endereco, tf_CadID.getText(), passwordField.getText())){
 					JOptionPane.showMessageDialog(null, "Cadastro Efetuado com sucesso");         //Não é essa a caixa que eu queria, vê se tu consegue por so a caixa da menssagem mesmo!
 					setVisible(false);
+					try {
+						Endereco endereco1 = new Endereco("Hogsmeade", "Rua dos Alfeneiros","4","00000000", "Onde o vento faz a curva");
+						GemialidadesLoja.getInstance().inserirCliente((new Cliente("Wealey", "21",endereco1, "Admin", "Admin")));
+					} catch (ClienteJaExisteException e2) {
+						JOptionPane.showMessageDialog(null, e2.getMessage());
+					} catch (FileNotFoundException e) {
+						JOptionPane.showMessageDialog(null, e.getMessage());
+					} catch (IOException e) {
+						JOptionPane.showMessageDialog(null, e.getMessage());
+					}
 
 				}		
 			}

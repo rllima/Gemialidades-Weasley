@@ -96,6 +96,10 @@ public class GemialidadesLoja {
 	public void removerCliente(String id) throws ClienteNaoEncontradoException, IOException, EmptyListException {
 		repClientes.remover(id);
 	}
+	
+	public Iterator getIteratorCliente() throws EmptyListException {
+		return repClientes.getIterator();
+	}
 
 
 
@@ -123,6 +127,10 @@ public class GemialidadesLoja {
 			throws ProdutoNaoEncontradoException, EmptyListException {
 		repProdutos.atualizar(codigo, produto);
 	}
+	
+	public Iterator getIteratorProduto() throws EmptyListException {
+		return repProdutos.getIterator();
+	}
 
 
 	//Entregas
@@ -142,6 +150,14 @@ public class GemialidadesLoja {
 	public void atualizarEntrega(String id, Entrega entrega)
 			throws EntregaNaoEncontradaException, EmptyListException {
 		repEntregas.atualizar(id, entrega);
+	}
+	
+	public Iterator getIteratorEntPendentes() throws EmptyListException {
+		return repEntregas.getIteratorPendentes();
+	}
+	
+	public Iterator getIteratorEntEnviadas() throws EmptyListException {
+		return repEntregas.getIteratorEnviadas();
 	}
 	
 	//Login
