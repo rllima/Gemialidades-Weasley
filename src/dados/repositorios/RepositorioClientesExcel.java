@@ -195,7 +195,7 @@ public class RepositorioClientesExcel implements RepositoriosClientes, Iterator 
 		return iterator;
 	}
 
-	public Object next() {
+	public Cliente next() {
 		Cliente resposta = null;
 		resposta = this.iterator[this.indiceIterator];
 		this.indiceIterator++;

@@ -1,6 +1,7 @@
 package dados.repositorios;
 
 import negocios.classesBasicas.*;
+import negocios.exceptions.EmptyListException;
 
 import java.io.*;
 
@@ -13,10 +14,12 @@ import org.apache.poi.ss.usermodel.*;
  * @author lfs
  *
  */
-public class RepositorioProdutosExcel implements RepositorioProdutos {
+public class RepositorioProdutosExcel implements RepositorioProdutos, Iterator {
 
 	private Sheet planilha;
 	private int indice;
+	private int indiceIterator;
+	private Produto[] iterator;
 
 	public RepositorioProdutosExcel(Workbook workbook) {
 		if (workbook.getSheet("Produtos") != null) {
@@ -25,6 +28,10 @@ public class RepositorioProdutosExcel implements RepositorioProdutos {
 			this.planilha = workbook.createSheet("Produtos");
 		}
 		this.indice = 0;
+	}
+	private RepositorioProdutosExcel(Produto[] itr) {
+		this.indiceIterator = 0;
+		this.iterator = itr;
 	}
 
 	/**
@@ -189,6 +196,50 @@ public class RepositorioProdutosExcel implements RepositorioProdutos {
 
 		}
 		return posicao;
+
+	}
+
+	public Produto next() {
+		Produto resposta = null;
+		resposta = this.iterator[this.indiceIterator];
+		this.indiceIterator++;
+		return resposta;
+	}
+
+	public boolean hasNext() {
+		return this.iterator[this.indiceIterator + 1] != null;
+	}
+
+	public Iterator getIterator() throws EmptyListException {
+		Produto[] itr = new Produto[this.size()];
+		for(int i = 0; i < size(); i++) {
+			itr[i] = this.clone(planilha.getRow(i));
+		}
+		RepositorioProdutosExcel iterator = new RepositorioProdutosExcel(itr);
+		return iterator;
+	}
+	public int size() {
+		return planilha.getPhysicalNumberOfRows();
+	}
+	private Produto clone(Row linha) {
+		Produto resposta = null;
+		if (linha.getCell(0).toString().equalsIgnoreCase("Guloseima")) {
+			String nome = linha.getCell(1).toString();
+			String codigo = linha.getCell(2).toString();
+			String descricao = linha.getCell(3).toString();
+			String sabor = linha.getCell(4).toString();
+			double preco = linha.getCell(5).getNumericCellValue();
+			resposta = new Guloseimas(nome, codigo, descricao, sabor, preco);
+		} else {
+			String nome = linha.getCell(1).toString();
+			String codigo = linha.getCell(2).toString();
+            String descricao = linha.getCell(3).toString();
+			double nivel = linha.getCell(4).getNumericCellValue();
+			int censura = (int) Math.round(linha.getCell(5).getNumericCellValue());
+			double preco = linha.getCell(6).getNumericCellValue();
+			resposta = new Travessuras(nome, codigo, descricao, nivel, censura, preco);
+		}
+		return resposta;
 
 	}
 

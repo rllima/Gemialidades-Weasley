@@ -170,7 +170,7 @@ public class RepositorioEntregasExcel implements RepositorioEntregas, Iterator {
 
 	}
 
-	public Object next() {
+	public Entrega next() {
 		Entrega resposta = null;
 		resposta = this.iterator[this.indiceIterator];
 		this.indiceIterator++;
@@ -187,16 +187,26 @@ public class RepositorioEntregasExcel implements RepositorioEntregas, Iterator {
 	public Iterator<Entrega> getIteratorPendentes() {
 		Entrega[] itr = new Entrega[this.size(planilhaPendentes)];
 		for(int i = 0; i < size(planilhaPendentes); i++) {
-			itr[i] = this.clone(planilhaPendentes.getRow(i));
+			itr[i] = this.clone(planilhaPendentes.getRow(i), planilhaPendentes);
 		}
 		RepositorioEntregasExcel iterator = new RepositorioEntregasExcel(itr);
 		return iterator;
 	}
 	
-	private Entrega clone(Row linha) {
-		String id = planilhaPendentes.getRow(0).getCell(1).toString();
-		String idCliente = planilhaPendentes.getRow(0).getCell(2).toString();
-		String idProduto = planilhaPendentes.getRow(0).getCell(3).toString();
+	public Iterator<Entrega> getIteratorEnviadas() {
+		Entrega[] itr = new Entrega[this.size(planilhaEnviadas)];
+		for(int i = 0; i < size(planilhaEnviadas); i++) {
+			itr[i] = this.clone(planilhaEnviadas.getRow(i), planilhaEnviadas);
+		}
+		RepositorioEntregasExcel iterator = new RepositorioEntregasExcel(itr);
+		return iterator;
+	}
+	
+	
+	private Entrega clone(Row linha, Sheet planilha) {
+		String id = planilha.getRow(0).getCell(1).toString();
+		String idCliente = planilha.getRow(0).getCell(2).toString();
+		String idProduto = planilha.getRow(0).getCell(3).toString();
 		Entrega temp = new Entrega(id, idCliente, idProduto);
 		return temp;
 	}
