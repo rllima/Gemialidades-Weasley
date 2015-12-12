@@ -60,6 +60,10 @@ public class Endereco {
 		return "Cidade: " + this.getCidade() + "\nLogradouro: " + this.getLogradouro() + "Número: " + this.getNumero() + "CEP: " + this.getCep() + "Complemento: " + this.getComplemento();
 		
 	}
+	public Endereco clone(){
+		Endereco endereco = new Endereco(this.cidade, this.logradouro, this.numero, this.cep, this.complemento);
+		return endereco;
+	}
 	
 	
 

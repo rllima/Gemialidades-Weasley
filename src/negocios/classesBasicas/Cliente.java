@@ -59,5 +59,9 @@ public class Cliente {
 	public String toString() {
        return "Nome: " + this.nome + "\nIdade: " + this.idade + "\nEndereço: " + this.endereco + "\nId: " + this.id;
 	}
+	public Cliente clone(){
+		Cliente cliente = new Cliente(this.nome, this.idade, this.getEndereco().clone(), this.id, this.senha);
+		return cliente;
+	}
 
 }

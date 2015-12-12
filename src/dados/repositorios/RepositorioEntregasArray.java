@@ -11,7 +11,7 @@ import negocios.exceptions.EntregaNaoEncontradaException;
  * @author lfs
  *
  */
-public class RepositorioEntregasArray implements RepositorioEntregas {
+public class RepositorioEntregasArray implements RepositorioEntregas, Iterator {
 
 	private Entrega[] repositorioEntregas;
 	private Entrega[] repositorioEnviadas;
@@ -135,6 +135,16 @@ public class RepositorioEntregasArray implements RepositorioEntregas {
 		}
 		return resposta;
 
+	}
+
+	public Object next() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public boolean hasNext() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }
