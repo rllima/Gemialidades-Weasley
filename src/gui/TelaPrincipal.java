@@ -95,9 +95,7 @@ public class TelaPrincipal extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				DefaultListModel dlm = new DefaultListModel();
 				// Percorrer o rep Produtos e adicionar um a um na lista;
-				for(int i = 0; i < 110; i++) {
-					dlm.addElement("Produto "+i);
-				}
+				
 				list_Produtos.setModel(dlm);
 			}
 		});

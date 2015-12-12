@@ -4,6 +4,7 @@ import negocios.classesBasicas.Produto;
 import negocios.exceptions.EmptyListException;
 import negocios.exceptions.ProdutoJaExisteException;
 import negocios.exceptions.ProdutoNaoEncontradoException;
+import dados.repositorios.Iterator;
 import dados.repositorios.RepositorioProdutos;
 
 public class CadastroProdutos {
@@ -44,6 +45,10 @@ public class CadastroProdutos {
 		} else {
 			repositorioProdutos.atualizar(codigo, produto);
 		}
+	}
+	
+	public Iterator getIterator() throws EmptyListException {
+		return repositorioProdutos.getIterator();
 	}
 
 }

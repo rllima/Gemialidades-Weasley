@@ -8,6 +8,7 @@ import negocios.exceptions.ClienteJaExisteException;
 import negocios.exceptions.ClienteNaoEncontradoException;
 import negocios.exceptions.EmptyListException;
 import negocios.exceptions.ProdutoNaoEncontradoException;
+import dados.repositorios.Iterator;
 import dados.repositorios.RepositorioClientesArray;
 import dados.repositorios.RepositorioProdutos;
 import dados.repositorios.RepositoriosClientes;
@@ -52,6 +53,10 @@ public class CadastroClientes {
 		} else {
 			throw new ClienteNaoEncontradoException();
 		}
+	}
+	
+	public Iterator getIterator() throws EmptyListException {
+		return cliente.getIterator();
 	}
 
 

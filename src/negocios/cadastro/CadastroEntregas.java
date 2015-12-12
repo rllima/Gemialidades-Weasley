@@ -4,6 +4,7 @@ import negocios.classesBasicas.Entrega;
 import negocios.exceptions.EmptyListException;
 import negocios.exceptions.EntregaJaExisteException;
 import negocios.exceptions.EntregaNaoEncontradaException;
+import dados.repositorios.Iterator;
 import dados.repositorios.RepositorioEntregas;
 
 public class CadastroEntregas {
@@ -43,6 +44,14 @@ public class CadastroEntregas {
 		}else{
 			repositorioEntregas.atualizar(id, entrega);
 		}
+	}
+	
+	public Iterator getIteratorPendentes() {
+		return repositorioEntregas.getIteratorPendentes();
+	}
+	
+	public Iterator getIteratorEnviadas() {
+		return repositorioEntregas.getIteratorEnviadas();
 	}
 
 }
