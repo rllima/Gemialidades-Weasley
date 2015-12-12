@@ -1,6 +1,7 @@
 package dados.repositorios;
 
 import negocios.classesBasicas.Entrega;
+import negocios.exceptions.EmptyListException;
 import negocios.exceptions.EntregaNaoEncontradaException;
 
 public interface RepositorioEntregas {
@@ -10,7 +11,7 @@ public interface RepositorioEntregas {
 	void atualizar(String id, Entrega entrega);
 	void remover(String id);
 	void enviar(); 
-	Iterator getIteratorPendentes();
-	Iterator getIteratorEnviadas();
+	Iterator getIteratorPendentes() throws EmptyListException;
+	Iterator getIteratorEnviadas() throws EmptyListException;
 
 }

@@ -14,14 +14,17 @@ import negocios.exceptions.EntregaNaoEncontradaException;
  */
 public class RepositorioEntregasFila implements RepositorioEntregas, Iterator {
 
-	private Node<Entrega> primeiroNo;
-	private Node<Entrega> ultimoNo;
+	private Node<Entrega> primeiroNoPend;
+	private Node<Entrega> ultimoNoPend;
+	private Node<Entrega> primeiroNoEnv;
+	private Node<Entrega> ultimoNoEnv;
+	
 	private int indiceIterator;
 	private Entrega[] iterator;
 
 	public RepositorioEntregasFila() {
-		this.primeiroNo = null;
-		this.ultimoNo = null;
+		this.primeiroNoPend = null;
+		this.ultimoNoPend = null;
 	}
 	private RepositorioEntregasFila(Entrega[] itr) {
 		this.indiceIterator = 0;
@@ -37,13 +40,13 @@ public class RepositorioEntregasFila implements RepositorioEntregas, Iterator {
 	 */
 	public void inserir(Entrega entrega) {
 		if (isEmpty()) {
-			primeiroNo = ultimoNo = new Node<Entrega>(entrega);
+			primeiroNoPend = ultimoNoPend = new Node<Entrega>(entrega);
 		} else {
-			Node<Entrega> aux = ultimoNo;
-			Node<Entrega> novo = new Node<Entrega>(ultimoNo, entrega, null);
-			ultimoNo = novo;
+			Node<Entrega> aux = ultimoNoPend;
+			Node<Entrega> novo = new Node<Entrega>(ultimoNoPend, entrega, null);
+			ultimoNoPend = novo;
 			if (aux == null) {
-				primeiroNo = novo;
+				primeiroNoPend = novo;
 			} else {
 				aux.setProximo(novo);
 			}
@@ -63,7 +66,7 @@ public class RepositorioEntregasFila implements RepositorioEntregas, Iterator {
 	public Entrega procurar(String id) {
 		Entrega resposta = null;
 		boolean achou = false;
-		Node<Entrega> atual = primeiroNo;
+		Node<Entrega> atual = primeiroNoPend;
 		while (atual != null && achou == false) {
 			if (atual.getDado().getId().equals(id)) {
 				resposta = atual.getDado();
@@ -106,29 +109,31 @@ public class RepositorioEntregasFila implements RepositorioEntregas, Iterator {
 			final Node<Entrega> anterior = atual.getAnterior();
 
 			if (anterior == null) {
-				primeiroNo = proximo;
+				primeiroNoPend = proximo;
 			} else {
 				anterior.setProximo(proximo);
 			}
 
 			if (proximo == null) {
-				ultimoNo = anterior;
+				ultimoNoPend = anterior;
 			} else {
 				proximo.setAnterior(anterior);
 			}
 		}
 	}
 
-	// NAO FINALIZADO
+	/**
+	 * Método que retira a primeira entrega da lista de entregas pendentes e a insere na de enviadas.
+	 */
 	public void enviar() {
-		Entrega removida = primeiroNo.getDado();
+		Entrega removida = primeiroNoPend.getDado();
 
-		if (primeiroNo == ultimoNo) {
-			primeiroNo = ultimoNo = null;
+		if (primeiroNoPend == ultimoNoPend) {
+			primeiroNoPend = ultimoNoPend = null;
 		} else {
-			primeiroNo = primeiroNo.getProximo();
+			primeiroNoPend = primeiroNoPend.getProximo();
 		}
-
+		this.inserirEnv(removida);
 	}
 
 	/**
@@ -138,7 +143,7 @@ public class RepositorioEntregasFila implements RepositorioEntregas, Iterator {
 	 * @return boolean - True se existir, False se não.
 	 */
 	public boolean existe(Entrega entrega) {
-		Node<Entrega> atual = this.primeiroNo;
+		Node<Entrega> atual = this.primeiroNoPend;
 
 		while (atual != null) {
 			if (atual.getDado().equals(entrega)) {
@@ -148,6 +153,21 @@ public class RepositorioEntregasFila implements RepositorioEntregas, Iterator {
 		}
 		return false;
 	}
+	
+	private void inserirEnv(Entrega entrega) {
+		if (isEmpty()) {
+			primeiroNoEnv = ultimoNoEnv = new Node<Entrega>(entrega);
+		} else {
+			Node<Entrega> aux = ultimoNoEnv;
+			Node<Entrega> novo = new Node<Entrega>(ultimoNoEnv, entrega, null);
+			ultimoNoPend = novo;
+			if (aux == null) {
+				primeiroNoEnv = novo;
+			} else {
+				aux.setProximo(novo);
+			}
+		}
+	}
 
 	/**
 	 * Metodo que retorna a informação de se a lista está ou não vazia.
@@ -155,7 +175,7 @@ public class RepositorioEntregasFila implements RepositorioEntregas, Iterator {
 	 * @return boolean - True se tiver vazia, False se não.
 	 */
 	public boolean isEmpty() {
-		return primeiroNo == null;
+		return primeiroNoPend == null;
 	}
 
 	/**
@@ -170,7 +190,7 @@ public class RepositorioEntregasFila implements RepositorioEntregas, Iterator {
 	private Node<Entrega> procurarNode(String id){
 		Node<Entrega> resposta = null;
 		boolean achou = false;
-		Node<Entrega> atual = primeiroNo;
+		Node<Entrega> atual = primeiroNoPend;
 		while (atual != null && achou == false) {
 			if (atual.getDado().getId().equals(id)) {
 				resposta = atual;
@@ -191,13 +211,13 @@ public class RepositorioEntregasFila implements RepositorioEntregas, Iterator {
 	public boolean hasNext() {
 		return this.iterator[this.indiceIterator + 1] != null;
 	}
-	public Iterator<Entrega> getIterator() throws EmptyListException {
+	public Iterator<Entrega> getIteratorPendentes() throws EmptyListException {
 		if (isEmpty()) {
 			throw new EmptyListException();
 		}
 		int count = 0;
 		Entrega[] itr = new Entrega[this.size()];
-		Node<Entrega> atual = primeiroNo;
+		Node<Entrega> atual = primeiroNoPend;
 		while (atual != null) {
 			itr[count] = atual.getDado().clone();
 			atual = atual.getProximo();
@@ -206,9 +226,26 @@ public class RepositorioEntregasFila implements RepositorioEntregas, Iterator {
 		RepositorioEntregasFila iterator = new RepositorioEntregasFila(itr);
 		return iterator;
 	}
+	
+	public Iterator <Entrega> getIteratorEnviadas() throws EmptyListException {
+		if (isEmpty()) {
+			throw new EmptyListException();
+		}
+		int count = 0;
+		Entrega[] itr = new Entrega[this.size()];
+		Node<Entrega> atual = primeiroNoEnv;
+		while (atual != null) {
+			itr[count] = atual.getDado().clone();
+			atual = atual.getProximo();
+			count++;
+		}
+		RepositorioEntregasFila iterator = new RepositorioEntregasFila(itr);
+		return iterator;
+	}
+	
 	public int size() {
 		int count = 0;
-		Node<Entrega> atual = primeiroNo;
+		Node<Entrega> atual = primeiroNoPend;
 		while (atual != null) {
 			count++;
 			atual = atual.getProximo();

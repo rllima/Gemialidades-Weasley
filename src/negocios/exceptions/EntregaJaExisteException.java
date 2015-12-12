@@ -2,6 +2,6 @@ package negocios.exceptions;
 
 public class EntregaJaExisteException extends Exception {
 	public EntregaJaExisteException() {
-		super("Entrega ja esta cadastrada");
+		super("Já existe uma entrega com este ID!");
 	}
 }

@@ -126,7 +126,6 @@ public class RepositorioEntregasExcel implements RepositorioEntregas, Iterator {
 		planilhaPendentes.removeRow(aux);
 		planilhaPendentes.shiftRows((posicao + 1), (indicePendentes - 1), -1);
 		indicePendentes--;
-
 	}
 
 	/**

@@ -173,6 +173,16 @@ public class GemialidadesLoja {
 	public void closeWorkbook() throws IOException {
 		workbook.close();
 	}
+	
+	public void vender(String idEntrega, String idProduto, String idCliente) throws EntregaJaExisteException, EmptyListException, EntregaNaoEncontradaException, ProdutoNaoEncontradoException {
+		if (repEntregas.procurar(idEntrega) != null) {
+			throw new EntregaJaExisteException();
+		} else {
+			Entrega entrega = new Entrega(idEntrega, idCliente, idProduto);
+			repEntregas.cadastrar(entrega);
+			repProdutos.remover(idProduto);
+		}
+	}
    
 
 

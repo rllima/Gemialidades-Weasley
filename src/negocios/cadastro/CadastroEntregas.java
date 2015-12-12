@@ -6,6 +6,7 @@ import negocios.exceptions.EntregaJaExisteException;
 import negocios.exceptions.EntregaNaoEncontradaException;
 import dados.repositorios.Iterator;
 import dados.repositorios.RepositorioEntregas;
+import dados.repositorios.RepositorioEntregasFila;
 
 public class CadastroEntregas {
 	
@@ -46,12 +47,32 @@ public class CadastroEntregas {
 		}
 	}
 	
-	public Iterator getIteratorPendentes() {
-		return repositorioEntregas.getIteratorPendentes();
+	public Iterator getIteratorPendentes() throws EmptyListException {
+		Iterator itr = null;
+		if (repositorioEntregas instanceof RepositorioEntregasFila) {
+			if (((RepositorioEntregasFila) repositorioEntregas).isEmpty()) {
+				throw new EmptyListException();
+			} else {
+				itr = repositorioEntregas.getIteratorPendentes();
+			}
+		} else {
+			itr = repositorioEntregas.getIteratorPendentes();
+		}
+		return itr;
 	}
 	
-	public Iterator getIteratorEnviadas() {
-		return repositorioEntregas.getIteratorEnviadas();
+	public Iterator getIteratorEnviadas() throws EmptyListException {
+		Iterator itr = null;
+		if (repositorioEntregas instanceof RepositorioEntregasFila) {
+			if (((RepositorioEntregasFila) repositorioEntregas).isEmpty()) {
+				throw new EmptyListException();
+			} else {
+				itr = repositorioEntregas.getIteratorEnviadas();
+			}
+		} else {
+			itr = repositorioEntregas.getIteratorEnviadas();
+		}
+		return itr;
 	}
 
 }
