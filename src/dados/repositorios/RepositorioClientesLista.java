@@ -14,12 +14,10 @@ public class RepositorioClientesLista implements RepositoriosClientes, Iterator 
 
 	private Node<Cliente> primeiroNo;
 	private Node<Cliente> ultimoNo;
-	private String nome;
 	private int indiceIterator;
 	private Cliente[] iterator;
 
 	public RepositorioClientesLista() {
-		this.nome = nome;
 		this.primeiroNo = this.ultimoNo = null;
 	}
 
@@ -185,7 +183,7 @@ public class RepositorioClientesLista implements RepositoriosClientes, Iterator 
 	public String toString() {
 		String resposta = "";
 		if (isEmpty()) {
-			resposta = "Lista" + this.nome + "vazia";
+			resposta = "Lista vazia";
 		} else {
 			Node<Cliente> atual = primeiroNo;
 			// Enquanto nao chegar ao fim, coloca os dados de cada objeto na

@@ -52,7 +52,7 @@ public class TelaLogin extends JFrame {
 					Endereco endereco = new Endereco("Hogsmeade", "Rua dos Alfeneiros","4","00000000", "Onde o vento faz a curva");
 					GemialidadesLoja.getInstance().inserirCliente((new Cliente("Wealey", "21",endereco, "Admin", "Admin")));
 				} catch (ClienteJaExisteException e2) {
-					
+					JOptionPane.showMessageDialog(null, e2.getMessage());
 				} catch (FileNotFoundException e) {
 					JOptionPane.showMessageDialog(null, e.getMessage());
 				} catch (IOException e) {
