@@ -118,13 +118,7 @@ public class RepositorioClientesArray implements RepositoriosClientes, Iterator 
 	}
 
 	public boolean hasNext() {
-		boolean resposta = false;
-		if (this.clientes[this.indiceIterator + 1] != null) {
-			resposta = true;
-		} else {
-			resposta = false;
-		}
-		return resposta;
+		return this.clientes[this.indiceIterator + 1] != null;
 	}
 
 	public Iterator<Cliente> getIterator() {

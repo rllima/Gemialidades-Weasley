@@ -2,28 +2,30 @@ package dados.repositorios;
 
 import negocios.classesBasicas.Cliente;
 import negocios.classesBasicas.Produto;
+import negocios.exceptions.EmptyListException;
 
 /**
  * Classe que representa o repositorio de clientes implementado em Lista.
  * 
  * @author lfs
- *
+ * 
  */
-public class RepositorioClientesLista implements RepositoriosClientes {
+public class RepositorioClientesLista implements RepositoriosClientes, Iterator {
 
 	private Node<Cliente> primeiroNo;
 	private Node<Cliente> ultimoNo;
 	private String nome;
 	private int indiceIterator;
+	private Cliente[] iterator;
 
 	public RepositorioClientesLista() {
 		this.nome = nome;
 		this.primeiroNo = this.ultimoNo = null;
 	}
-	
+
 	private RepositorioClientesLista(Cliente[] itr) {
 		this.indiceIterator = 0;
-		
+		this.iterator = itr;
 	}
 
 	/**
@@ -71,11 +73,16 @@ public class RepositorioClientesLista implements RepositoriosClientes {
 		}
 		return resposta;
 	}
-	
+
 	/**
-	 * Recebe um ID e um Cliente, a fim de trocar as informacoes do cliente que possui aquele ID.
-	 * @param id String - ID do cliente a ser atualizado.
-	 * @param clientes Cliente - Novo objeto atualizado a ser alocado no lugar do antigo.
+	 * Recebe um ID e um Cliente, a fim de trocar as informacoes do cliente que
+	 * possui aquele ID.
+	 * 
+	 * @param id
+	 *            String - ID do cliente a ser atualizado.
+	 * @param clientes
+	 *            Cliente - Novo objeto atualizado a ser alocado no lugar do
+	 *            antigo.
 	 */
 	public void atualizar(String id, Cliente clientes) {
 		Node<Cliente> atual = this.procurarNode(id);
@@ -84,10 +91,12 @@ public class RepositorioClientesLista implements RepositoriosClientes {
 	}
 
 	/**
-	 * Recebe um ID e, usando o metodo procurarNode(), encontra o Nó que contem aquele cliente como dado.
-	 * Depois, simplesmente desvincula aquele nó da lista.
-	 * Mais tarde, ele será pego pelo GarbageCollector
-	 * @param id String - ID do cliente a ser removido da lista.
+	 * Recebe um ID e, usando o metodo procurarNode(), encontra o Nó que contem
+	 * aquele cliente como dado. Depois, simplesmente desvincula aquele nó da
+	 * lista. Mais tarde, ele será pego pelo GarbageCollector
+	 * 
+	 * @param id
+	 *            String - ID do cliente a ser removido da lista.
 	 */
 	public void remover(String id) {
 		if (this.procurarNode(id) == null) {
@@ -114,6 +123,7 @@ public class RepositorioClientesLista implements RepositoriosClientes {
 
 	/**
 	 * Metodo que retorna a informação de se a lista está ou não vazia.
+	 * 
 	 * @return boolean - True se tiver vazia, False se não.
 	 */
 	public boolean isEmpty() {
@@ -121,9 +131,12 @@ public class RepositorioClientesLista implements RepositoriosClientes {
 	}
 
 	/**
-	 * Metodo que recebe um ID e procura, nó a nó, um objeto Cliente que contenha aquele ID.
-	 * Caso encontre, ele retorna o nó que contém o Cliente possuidor daquele ID.
-	 * @param id String - ID do cliente que se procura
+	 * Metodo que recebe um ID e procura, nó a nó, um objeto Cliente que
+	 * contenha aquele ID. Caso encontre, ele retorna o nó que contém o Cliente
+	 * possuidor daquele ID.
+	 * 
+	 * @param id
+	 *            String - ID do cliente que se procura
 	 * @return Node<Cliente> - Nó que contem, como dado, o cliente procurado.
 	 */
 	private Node<Cliente> procurarNode(String id) {
@@ -141,8 +154,9 @@ public class RepositorioClientesLista implements RepositoriosClientes {
 	}
 
 	/**
-	 * Recebe um obejto Cliente e procura, nó a nó, um objeto idêntico.
-	 * Caso encontre, retorna true. Caso não, retorna false.
+	 * Recebe um obejto Cliente e procura, nó a nó, um objeto idêntico. Caso
+	 * encontre, retorna true. Caso não, retorna false.
+	 * 
 	 * @param clientes
 	 * @return boolean - True se existir, False se não.
 	 */
@@ -156,6 +170,16 @@ public class RepositorioClientesLista implements RepositoriosClientes {
 			atual = atual.getProximo();
 		}
 		return false;
+	}
+
+	public int size() {
+		int count = 0;
+		Node<Cliente> atual = primeiroNo;
+		while (atual != null) {
+			count++;
+			atual = atual.getProximo();
+		}
+		return count;
 	}
 
 	public String toString() {
@@ -173,9 +197,32 @@ public class RepositorioClientesLista implements RepositoriosClientes {
 		}
 		return resposta;
 	}
-	
-	public Iterator
-	
-	
+
+	public Iterator<Cliente> getIterator() throws EmptyListException {
+		if (isEmpty()) {
+			throw new EmptyListException();
+		}
+		int count = 0;
+		Cliente[] itr = new Cliente[this.size()];
+		Node<Cliente> atual = primeiroNo;
+		while (atual != null) {
+			itr[count] = atual.getDado().clone();
+			atual = atual.getProximo();
+			count++;
+		}
+		RepositorioClientesLista iterator = new RepositorioClientesLista(itr);
+		return iterator;
+	}
+
+	public Cliente next() {
+		Cliente resposta = null;
+		resposta = this.iterator[this.indiceIterator];
+		this.indiceIterator++;
+		return resposta;
+	}
+
+	public boolean hasNext() {
+		return this.iterator[this.indiceIterator + 1] != null;
+	}
 
 }
