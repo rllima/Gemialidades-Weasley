@@ -2,6 +2,10 @@ package dados.repositorios;
 
 import negocios.classesBasicas.Entrega;
 import negocios.classesBasicas.Produto;
+
+import java.io.File;
+
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.*;
 
 /**
@@ -20,7 +24,7 @@ public class RepositorioEntregasExcel implements RepositorioEntregas, Iterator {
 	private int indiceIterator;
 	private Entrega[] iterator;
 
-	public RepositorioEntregasExcel(Workbook workbook) {
+	public RepositorioEntregasExcel(HSSFWorkbook workbook) {
 		if (workbook.getSheet("Entregas - Pendentes") != null) {
 			this.planilhaPendentes = workbook.getSheet("Entregas - Pendentes");
 		} else {
@@ -31,8 +35,8 @@ public class RepositorioEntregasExcel implements RepositorioEntregas, Iterator {
 		} else {
 			this.planilhaEnviadas = workbook.createSheet("Entregas - Enviadas");
 		}
-		this.indicePendentes = 0;
-		this.indiceEnviadas = 0;
+		this.indicePendentes = workbook.getSheet("Entregas - Pendentes").getPhysicalNumberOfRows();
+		this.indiceEnviadas =  workbook.getSheet("Entregas - Enviadas").getPhysicalNumberOfRows();
 	}
 	private RepositorioEntregasExcel(Entrega[] itr) {
 		this.indiceIterator = 0;

@@ -26,14 +26,12 @@ public class RepositorioClientesExcel implements RepositoriosClientes, Iterator 
 	private Cliente[] iterator;
 
 	public RepositorioClientesExcel (HSSFWorkbook workbook) throws FileNotFoundException{
-		this.workbook=workbook;
-		excel = new File("planilha.xls"); 
 		if(workbook.getSheet("Clientes") != null) {
 			this.planilha = workbook.getSheet("Clientes");
 		} else {
 			this.planilha = workbook.createSheet("Clientes");
 		}
-		this.indice = 0;
+		this.indice = workbook.getSheet("Clientes").getPhysicalNumberOfRows();
 	}
 	
 	private RepositorioClientesExcel(Cliente[] itr) {
