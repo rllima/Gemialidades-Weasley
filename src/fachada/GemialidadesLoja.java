@@ -100,18 +100,15 @@ public class GemialidadesLoja {
 	public Iterator getIteratorCliente() throws EmptyListException {
 		return repClientes.getIterator();
 	}
-
-
-
 	//Produtos
 
 
 	public void cadastrarProduto(Produto produto) throws ProdutoJaExisteException, IOException {
 		repProdutos.cadastrar(produto);
-		excel = new File("planilha.xls");
+		/*excel = new File("planilha.xls");
 		FileOutputStream saidaArquivo = new FileOutputStream(excel);
 		workbook.write(saidaArquivo);
-		saidaArquivo.close();
+		saidaArquivo.close();*/
 		
 	}
 

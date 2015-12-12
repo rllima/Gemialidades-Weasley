@@ -1,13 +1,7 @@
 package dados.repositorios;
 
-import negocios.classesBasicas.Cliente;
-import negocios.classesBasicas.Endereco;
 import negocios.classesBasicas.Entrega;
-import negocios.classesBasicas.Guloseimas;
 import negocios.classesBasicas.Produto;
-import negocios.classesBasicas.Travessuras;
-import negocios.exceptions.EntregaNaoEncontradaException;
-
 import org.apache.poi.ss.usermodel.*;
 
 /**

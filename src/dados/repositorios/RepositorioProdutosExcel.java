@@ -3,8 +3,6 @@ package dados.repositorios;
 import negocios.classesBasicas.*;
 import negocios.exceptions.EmptyListException;
 
-import java.io.*;
-
 import org.apache.poi.ss.usermodel.*;
 
 /**
@@ -207,10 +205,10 @@ public class RepositorioProdutosExcel implements RepositorioProdutos, Iterator {
 	}
 
 	public boolean hasNext() {
-		return this.iterator[this.indiceIterator + 1] != null;
+		return this.iterator[this.indiceIterator+1] != null;
 	}
 
-	public Iterator getIterator() throws EmptyListException {
+	public Iterator<Produto> getIterator() throws EmptyListException {
 		Produto[] itr = new Produto[this.size()];
 		for(int i = 0; i < size(); i++) {
 			itr[i] = this.clone(planilha.getRow(i));

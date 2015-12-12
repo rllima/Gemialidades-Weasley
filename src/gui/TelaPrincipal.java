@@ -32,9 +32,12 @@ import javax.swing.JEditorPane;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 
+import dados.repositorios.Iterator;
 import negocios.classesBasicas.Cliente;
 import negocios.classesBasicas.Endereco;
+import negocios.classesBasicas.Guloseimas;
 import negocios.classesBasicas.Produto;
+import negocios.classesBasicas.Travessuras;
 import negocios.exceptions.ClienteJaExisteException;
 import negocios.exceptions.EmptyListException;
 
@@ -49,6 +52,8 @@ public class TelaPrincipal extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					GemialidadesLoja.getInstance().cadastrarProduto(new Travessuras("Orelhas Extensíveis", "001","Saber de todos os Segredos",3.0, 8, 5.0));
+					GemialidadesLoja.getInstance().cadastrarProduto(new Travessuras("Orelhas Extensíveis", "002","Saber de todos os Segredos",3.0, 8, 5.0));
 					TelaPrincipal frame = new TelaPrincipal();
 					frame.setVisible(true);
 				} catch (Exception e) {
@@ -80,51 +85,50 @@ public class TelaPrincipal extends JFrame {
 		JScrollPane scrollPane_1 = new JScrollPane();
 		scrollPane_1.setBounds(10, 277, 606, 109);
 		contentPane.add(scrollPane_1);
+
+		JButton btnGet = new JButton("Get");
+		btnGet.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				DefaultListModel dlm = new DefaultListModel();
+				Iterator<Produto> itr = getIteratorProd();
+				while(itr.hasNext()) {
+					dlm.addElement(itr.next().getNome());
+				}
+			
+				list_Produtos.setModel(dlm);
+			}
+		});
 		
 		final JList list_Carrinho = new JList();
 		scrollPane_1.setViewportView(list_Carrinho);
 		list_Carrinho.setBorder(new EtchedBorder(EtchedBorder.RAISED, null, null));
 		
-		JButton btnFinalizarCompra = new JButton("Finalizar Compra");
-		btnFinalizarCompra.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		btnFinalizarCompra.setBounds(247, 399, 133, 34);
-		contentPane.add(btnFinalizarCompra);
-		
 		JButton btnAddCarrinho = new JButton("Adicionar ao Carrinho");
 		btnAddCarrinho.addActionListener(new ActionListener() {
-			DefaultListModel dlm2 = new DefaultListModel();
+			DefaultListModel dlmCarrinho = new DefaultListModel();
 			public void actionPerformed(ActionEvent e) {
-				dlm2.addElement(list_Produtos.getSelectedValue());
-				list_Carrinho.setModel(dlm2);
+				dlmCarrinho.addElement(list_Produtos.getSelectedValue());
+				list_Carrinho.setModel(dlmCarrinho);
 			}
 		});
 		btnAddCarrinho.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		btnAddCarrinho.setBounds(239, 186, 148, 23);
 		contentPane.add(btnAddCarrinho);
 		
-		JButton btnGet = new JButton("Get");
-		btnGet.addActionListener(new ActionListener() {
+		JButton btnFinalizarCompra = new JButton("Finalizar Compra");
+		btnFinalizarCompra.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				DefaultListModel dlm = new DefaultListModel();
-				// Percorrer o rep Produtos e adicionar um a um na lista;
-				try {
-					if(GemialidadesLoja.getInstance().getIteratorProduto().hasNext() == true) {
-						Produto produto = (Produto) GemialidadesLoja.getInstance().getIteratorProduto().next();
-						dlm.addElement(produto.getNome());
-					}
-				} catch (FileNotFoundException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (EmptyListException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+				int qtde = list_Carrinho.getModel().getSize();
+				for(int i = 0; i < qtde; i++) {
+					String codigo = (String) list_Carrinho.getModel().getElementAt(i);
+					//GemialidadesLoja.getInstance().pro
 				}
-				list_Produtos.setModel(dlm);
 			}
 		});
+		btnFinalizarCompra.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		btnFinalizarCompra.setBounds(247, 399, 133, 34);
+		contentPane.add(btnFinalizarCompra);
+		
 		btnGet.setBounds(10, 405, 89, 23);
 		contentPane.add(btnGet);
 		
@@ -133,5 +137,22 @@ public class TelaPrincipal extends JFrame {
 		background.setIcon(new ImageIcon("C:\\Users\\lfs\\git\\gemialidades-weasley\\images\\Fundo.jpg"));
 		background.setBounds(0, 0, 626, 444);
 		contentPane.add(background);
+	}
+	
+	public Iterator<Produto> getIteratorProd() {
+		Iterator<Produto> itr = null;
+		try {
+			itr = GemialidadesLoja.getInstance().getIteratorProduto();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (EmptyListException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return itr;
 	}
 }

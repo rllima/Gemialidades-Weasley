@@ -118,7 +118,7 @@ public class RepositorioClientesArray implements RepositoriosClientes, Iterator 
 	}
 
 	public boolean hasNext() {
-		return this.clientes[this.indiceIterator + 1] != null;
+		return this.clientes[this.indiceIterator + 1] != null; // LEMBRA DE TIRAR O +1
 	}
 
 	public Iterator<Cliente> getIterator() {
