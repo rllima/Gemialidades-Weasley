@@ -37,7 +37,10 @@ public class Entrega {
 		this.id = id;
 	}
 	
-	
+	public Entrega clone(){
+		Entrega entrega = new Entrega(this.idCliente, this.idProduto, this.id);
+		return entrega;
+	}
 
 	
 	

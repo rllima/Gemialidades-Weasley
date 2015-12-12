@@ -47,5 +47,9 @@ public class Travessuras extends Produto {
 		}
 		return true;
 	}
+	public Travessuras clone(){
+		Travessuras travessura = new Travessuras(this.getNome(), this.getCodigo(), this.getDescricao(), this.nivelPericulosidade, this.censura, this.getPreco());
+		return travessura;
+	}
 
 }

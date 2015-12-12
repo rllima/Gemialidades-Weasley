@@ -35,5 +35,9 @@ public class Guloseimas extends Produto {
 		}
 		return true;
 	}
+	public Guloseimas clone(){
+		Guloseimas guloseima = new Guloseimas(this.getNome(), this.getCodigo(),this.getDescricao(),this.sabor, this.getPreco());
+		return guloseima;
+	}
 
 }
