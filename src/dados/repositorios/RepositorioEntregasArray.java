@@ -119,10 +119,10 @@ public class RepositorioEntregasArray implements RepositorioEntregas, Iterator {
 	 */
 	public void enviar() {
 		Entrega enviada = this.repositorioEntregas[0];
-		indice = indice - 1;
-		this.inserirEntregues(enviada);
 		String codigo = enviada.getId();
 		this.remover(codigo);
+		this.inserirEntregues(enviada);
+		indice = indice - 1;
 
 	}
 	/**
@@ -142,6 +142,10 @@ public class RepositorioEntregasArray implements RepositorioEntregas, Iterator {
 		}
 		return resposta;
 
+	}
+	
+	public boolean isEmpty() {
+		return this.repositorioEntregas[0] != null; 
 	}
 
 	public Entrega next() {

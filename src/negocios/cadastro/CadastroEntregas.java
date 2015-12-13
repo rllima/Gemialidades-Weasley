@@ -4,14 +4,15 @@ import negocios.classesBasicas.Entrega;
 import negocios.exceptions.EmptyListException;
 import negocios.exceptions.EntregaJaExisteException;
 import negocios.exceptions.EntregaNaoEncontradaException;
+import negocios.exceptions.NaoHaEntregasException;
 import dados.repositorios.Iterator;
 import dados.repositorios.RepositorioEntregas;
 import dados.repositorios.RepositorioEntregasFila;
 
 public class CadastroEntregas {
-	
+
 	private RepositorioEntregas repositorioEntregas;
-	
+
 	public CadastroEntregas(RepositorioEntregas repositorioEntregas) {
 		this.repositorioEntregas = repositorioEntregas;
 	}
@@ -21,8 +22,8 @@ public class CadastroEntregas {
 		}else {
 			throw new EntregaJaExisteException();
 		}
-	
-		
+
+
 	} 
 	public void remover(String id) throws EntregaNaoEncontradaException, EmptyListException{
 		if(repositorioEntregas.procurar(id) != null){
@@ -37,7 +38,7 @@ public class CadastroEntregas {
 			throw new EntregaNaoEncontradaException();
 		}
 		return resposta;
-		
+
 	}
 	public void atualizar(String id, Entrega entrega) throws EntregaNaoEncontradaException, EmptyListException{
 		if(repositorioEntregas.procurar(id) == null){
@@ -46,7 +47,15 @@ public class CadastroEntregas {
 			repositorioEntregas.atualizar(id, entrega);
 		}
 	}
-	
+
+	public void enviar() throws NaoHaEntregasException {
+		if (repositorioEntregas.isEmpty()) {
+			throw new NaoHaEntregasException();
+		} else {
+			repositorioEntregas.enviar();
+		}
+	}
+
 	public Iterator getIteratorPendentes() throws EmptyListException {
 		Iterator itr = null;
 		if (repositorioEntregas instanceof RepositorioEntregasFila) {
@@ -60,7 +69,7 @@ public class CadastroEntregas {
 		}
 		return itr;
 	}
-	
+
 	public Iterator getIteratorEnviadas() throws EmptyListException {
 		Iterator itr = null;
 		if (repositorioEntregas instanceof RepositorioEntregasFila) {

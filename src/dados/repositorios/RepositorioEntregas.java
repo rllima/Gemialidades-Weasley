@@ -11,6 +11,7 @@ public interface RepositorioEntregas {
 	void atualizar(String id, Entrega entrega);
 	void remover(String id);
 	void enviar(); 
+	boolean isEmpty();
 	Iterator getIteratorPendentes() throws EmptyListException;
 	Iterator getIteratorEnviadas() throws EmptyListException;
 

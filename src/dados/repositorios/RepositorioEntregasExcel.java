@@ -207,6 +207,9 @@ public class RepositorioEntregasExcel implements RepositorioEntregas, Iterator {
 		Entrega temp = new Entrega(id, idCliente, idProduto);
 		return temp;
 	}
+	public boolean isEmpty() {
+		return planilhaPendentes.getPhysicalNumberOfRows() == 0;
+	}
 	
 
 }

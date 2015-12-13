@@ -19,6 +19,7 @@ import negocios.exceptions.ClienteNaoEncontradoException;
 import negocios.exceptions.EmptyListException;
 import negocios.exceptions.EntregaJaExisteException;
 import negocios.exceptions.EntregaNaoEncontradaException;
+import negocios.exceptions.NaoHaEntregasException;
 import negocios.exceptions.ProdutoJaExisteException;
 import negocios.exceptions.ProdutoNaoEncontradoException;
 import negocios.exceptions.SenhaIncoretaException;
@@ -149,6 +150,10 @@ public class GemialidadesLoja {
 	public void atualizarEntrega(String id, Entrega entrega) throws EntregaNaoEncontradaException, EmptyListException {
 		repEntregas.atualizar(id, entrega);
 	}
+	
+	public void enviar() throws NaoHaEntregasException {
+		repEntregas.enviar();
+	}
 
 	public Iterator getIteratorEntPendentes() throws EmptyListException {
 		return repEntregas.getIteratorPendentes();
@@ -182,4 +187,5 @@ public class GemialidadesLoja {
 		repEntregas.cadastrar(entrega);
 		repProdutos.remover(idProduto);
 	}
+	
 }
