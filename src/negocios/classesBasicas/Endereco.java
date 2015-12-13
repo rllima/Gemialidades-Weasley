@@ -57,7 +57,7 @@ public class Endereco {
 		this.complemento = complemento;
 	}
 	public String toString(){
-		return "Cidade: " + this.getCidade() + "\nLogradouro: " + this.getLogradouro() + "Número: " + this.getNumero() + "CEP: " + this.getCep() + "Complemento: " + this.getComplemento();
+		return "\nCidade: " + this.getCidade() + "\nLogradouro: " + this.getLogradouro() + "\nNúmero: " + this.getNumero() + "\nCEP: " + this.getCep() + "\nComplemento: " + this.getComplemento();
 		
 	}
 	public Endereco clone(){

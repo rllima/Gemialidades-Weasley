@@ -21,6 +21,7 @@ import negocios.classesBasicas.*;
 import negocios.exceptions.ClienteJaExisteException;
 import negocios.exceptions.ClienteNaoEncontradoException;
 import negocios.exceptions.EmptyListException;
+import negocios.exceptions.ProdutoJaExisteException;
 import negocios.exceptions.SenhaIncoretaException;
 import javax.swing.ImageIcon;
 import java.awt.Rectangle;
@@ -77,6 +78,8 @@ public class TelaLogin extends JFrame {
 		setContentPane(telaLogin);
 		telaLogin.setLayout(null);
 
+		carregar();
+		
 		tf_ID = new JTextField();
 		tf_ID.setBounds(252, 174, 121, 29);
 		telaLogin.add(tf_ID);
@@ -106,7 +109,7 @@ public class TelaLogin extends JFrame {
 					TelaAdmin telaAdmin = new TelaAdmin();
 					telaAdmin.setVisible(true);
 				}else if(login(tf_ID.getText(), tf_Senha.getText())) {
-					TelaPrincipal telaPrincipal = new TelaPrincipal();
+					TelaPrincipal telaPrincipal = new TelaPrincipal(tf_ID.getText());
 					telaPrincipal.setVisible(true);
 					}
 				}
@@ -166,6 +169,30 @@ public class TelaLogin extends JFrame {
 			JOptionPane.showMessageDialog(this, e.getMessage());
 		}
 		return resposta;
+	}
+	
+	public void carregar() {
+		Cliente admin = new Cliente("Admin", "99", new Endereco("Hogsmeade", "Rua dos Alfeneiros", "666", "0000-000", "."), "admin", "bruxao");
+		Cliente teste = new Cliente("Admin", "99", new Endereco("Hogsmeade", "Rua dos Alfeneiros", "666", "0000-000", "."), "lfs", "bruxao");
+		Produto travessura1 = new Travessuras("Orelha Extensível", "666", "Ouvir conversa alheia", 2, 15, 15.2);
+		Produto guloseima1 = new Guloseimas("Sapo de chocolate", "555", "Feijoeszinhos com sabores diversos",
+				"Nunca saberás", 15.2);
+		Produto travessura2 = new Travessuras("Kit mata-aula", "777", "Kit fugir-de-ricardo", 0, 0, 6.8);
+		try {
+			GemialidadesLoja.getInstance().inserirCliente(admin);
+			GemialidadesLoja.getInstance().inserirCliente(teste);
+			GemialidadesLoja.getInstance().cadastrarProduto(travessura1);
+			GemialidadesLoja.getInstance().cadastrarProduto(guloseima1);
+			GemialidadesLoja.getInstance().cadastrarProduto(travessura2);
+		} catch (FileNotFoundException e) {
+			JOptionPane.showMessageDialog(this, e.getMessage());
+		} catch (ClienteJaExisteException e) {
+			JOptionPane.showMessageDialog(this, e.getMessage());
+		} catch (IOException e) {
+			JOptionPane.showMessageDialog(this, e.getMessage());
+		} catch (ProdutoJaExisteException e) {
+			JOptionPane.showMessageDialog(this, e.getMessage());
+		}
 	}
 	
 }

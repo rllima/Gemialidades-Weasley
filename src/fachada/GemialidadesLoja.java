@@ -59,9 +59,9 @@ public class GemialidadesLoja {
 
 		} else if (tipoRep == 'E' || tipoRep == 'e') {
 			this.excel = new File("planilha.xls");
+			excel.createNewFile();
 			if (!excel.exists()) {
 
-				excel.createNewFile();
 				FileOutputStream out = new FileOutputStream(excel);
 				workbook = new HSSFWorkbook();
 				workbook.write(out);
@@ -108,11 +108,6 @@ public class GemialidadesLoja {
 
 	public void cadastrarProduto(Produto produto) throws ProdutoJaExisteException, IOException {
 		repProdutos.cadastrar(produto);
-		/*
-		 * excel = new File("planilha.xls"); FileOutputStream saidaArquivo = new
-		 * FileOutputStream(excel); workbook.write(saidaArquivo);
-		 * saidaArquivo.close();
-		 */
 
 	}
 
@@ -122,6 +117,10 @@ public class GemialidadesLoja {
 
 	public Produto procurarProduto(String codigo) throws ProdutoNaoEncontradoException, EmptyListException {
 		return repProdutos.procurar(codigo);
+	}
+	
+	public Produto procurarProdNome(String nome) throws ProdutoNaoEncontradoException, EmptyListException {
+		return repProdutos.procurarNome(nome);
 	}
 
 	public void atualizarProduto(String codigo, Produto produto)
@@ -144,7 +143,11 @@ public class GemialidadesLoja {
 	}
 
 	public Entrega procurarEntrega(String id) throws EntregaNaoEncontradaException, EmptyListException {
-		return repEntregas.procurar(id);
+		Entrega resposta = repEntregas.procurar(id);
+		if(resposta == null) {
+			throw new EntregaNaoEncontradaException();
+		}
+		return resposta;
 	}
 
 	public void atualizarEntrega(String id, Entrega entrega) throws EntregaNaoEncontradaException, EmptyListException {
@@ -181,11 +184,16 @@ public class GemialidadesLoja {
 		workbook.close();
 	}
 
-	public void vender(String idEntrega, String idProduto, String idCliente) throws EntregaJaExisteException,
-			EmptyListException, EntregaNaoEncontradaException, ProdutoNaoEncontradoException {
+	public void vender(String idProduto, String idCliente) throws EntregaJaExisteException,
+			EmptyListException, EntregaNaoEncontradaException, ProdutoNaoEncontradoException, ClienteNaoEncontradoException {
+		String idEntrega = Integer.toString((int) Math.random());
+		while(repEntregas.procurar(idEntrega) != null) {
+			idEntrega = Integer.toString((int) Math.random());
+		}
 		Entrega entrega = new Entrega(idEntrega, idCliente, idProduto);
 		repEntregas.cadastrar(entrega);
-		repProdutos.remover(idProduto);
+		Cliente cliente = repClientes.procurar(idCliente);
+		cliente.addEntrega(idEntrega);
 	}
 	
 }

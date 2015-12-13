@@ -39,11 +39,16 @@ import negocios.classesBasicas.Guloseimas;
 import negocios.classesBasicas.Produto;
 import negocios.classesBasicas.Travessuras;
 import negocios.exceptions.ClienteJaExisteException;
+import negocios.exceptions.ClienteNaoEncontradoException;
 import negocios.exceptions.EmptyListException;
+import negocios.exceptions.EntregaJaExisteException;
+import negocios.exceptions.EntregaNaoEncontradaException;
+import negocios.exceptions.ProdutoNaoEncontradoException;
 
 public class TelaPrincipal extends JFrame {
 
 	private JPanel contentPane;
+	private static String idCliente;
 
 	/**
 	 * Launch the application.
@@ -52,9 +57,7 @@ public class TelaPrincipal extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					GemialidadesLoja.getInstance().cadastrarProduto(new Travessuras("Orelhas Extensíveis", "001","Saber de todos os Segredos",3.0, 8, 5.0));
-					GemialidadesLoja.getInstance().cadastrarProduto(new Travessuras("Orelhas Extensíveis", "002","Saber de todos os Segredos",3.0, 8, 5.0));
-					TelaPrincipal frame = new TelaPrincipal();
+					TelaPrincipal frame = new TelaPrincipal(idCliente);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -66,7 +69,9 @@ public class TelaPrincipal extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public TelaPrincipal() {
+	public TelaPrincipal(final String idCliente) {
+		this.idCliente = idCliente;
+		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 642, 482);
 		contentPane = new JPanel();
@@ -78,7 +83,7 @@ public class TelaPrincipal extends JFrame {
 		scrollPane.setBounds(10, 66, 606, 109);
 		contentPane.add(scrollPane);
 		
-		final JList list_Produtos = new JList();
+		final JList<String> list_Produtos = new JList<String>();
 		scrollPane.setViewportView(list_Produtos);
 		list_Produtos.setBorder(new EtchedBorder(EtchedBorder.RAISED, null, null));
 		
@@ -89,25 +94,27 @@ public class TelaPrincipal extends JFrame {
 		JButton btnGet = new JButton("Get");
 		btnGet.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				DefaultListModel dlm = new DefaultListModel();
+				DefaultListModel<String> dlm = new DefaultListModel<String>();
 				Iterator<Produto> itr = getIteratorProd();
 				while(itr.hasNext()) {
 					dlm.addElement(itr.next().getNome());
 				}
-			
 				list_Produtos.setModel(dlm);
 			}
 		});
 		
-		final JList list_Carrinho = new JList();
+		final JList<String> list_Carrinho = new JList<String>();
 		scrollPane_1.setViewportView(list_Carrinho);
 		list_Carrinho.setBorder(new EtchedBorder(EtchedBorder.RAISED, null, null));
 		
 		JButton btnAddCarrinho = new JButton("Adicionar ao Carrinho");
 		btnAddCarrinho.addActionListener(new ActionListener() {
-			DefaultListModel dlmCarrinho = new DefaultListModel();
+			DefaultListModel<String> dlmCarrinho = new DefaultListModel<String>();
 			public void actionPerformed(ActionEvent e) {
 				dlmCarrinho.addElement(list_Produtos.getSelectedValue());
+				DefaultListModel<String> dlm = (DefaultListModel<String>) list_Produtos.getModel();
+				dlm.removeElement(list_Produtos.getSelectedValue());
+				list_Produtos.setModel(dlm);
 				list_Carrinho.setModel(dlmCarrinho);
 			}
 		});
@@ -120,9 +127,13 @@ public class TelaPrincipal extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				int qtde = list_Carrinho.getModel().getSize();
 				for(int i = 0; i < qtde; i++) {
-					String codigo = (String) list_Carrinho.getModel().getElementAt(i);
-					//GemialidadesLoja.getInstance().pro
+					String nome = (String) list_Carrinho.getModel().getElementAt(i);
+					String idProduto = procurarProdNome(nome).getCodigo();
+					vender(idProduto, idCliente);
 				}
+				 DefaultListModel<String> listModel = (DefaultListModel<String>) list_Carrinho.getModel();
+			     listModel.removeAllElements();
+			     list_Carrinho.setModel(listModel);
 			}
 		});
 		btnFinalizarCompra.setFont(new Font("Tahoma", Font.PLAIN, 11));
@@ -144,15 +155,48 @@ public class TelaPrincipal extends JFrame {
 		try {
 			itr = GemialidadesLoja.getInstance().getIteratorProduto();
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(this, e.getMessage());
 		} catch (EmptyListException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(this, e.getMessage());
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(this, e.getMessage());
 		}
 		return itr;
+	}
+	
+	public Produto procurarProdNome(String nome) {
+		Produto produto = null;
+		try {
+			produto = GemialidadesLoja.getInstance().procurarProdNome(nome);
+		} catch (FileNotFoundException e) {
+			JOptionPane.showMessageDialog(this, e.getMessage());
+		} catch (ProdutoNaoEncontradoException e) {
+			JOptionPane.showMessageDialog(this, e.getMessage());
+		} catch (EmptyListException e) {
+			JOptionPane.showMessageDialog(this, e.getMessage());
+		} catch (IOException e) {
+			JOptionPane.showMessageDialog(this, e.getMessage());
+		}
+		return produto;
+	}
+	
+	public void vender(String idProduto, String idCliente) {
+		try {
+			GemialidadesLoja.getInstance().vender(idProduto, idCliente);
+		} catch (FileNotFoundException e) {
+			JOptionPane.showMessageDialog(this, e.getMessage());
+		} catch (EntregaJaExisteException e) {
+			JOptionPane.showMessageDialog(this, e.getMessage());
+		} catch (EmptyListException e) {
+			JOptionPane.showMessageDialog(this, e.getMessage());
+		} catch (EntregaNaoEncontradaException e) {
+			JOptionPane.showMessageDialog(this, e.getMessage());
+		} catch (ProdutoNaoEncontradoException e) {
+			JOptionPane.showMessageDialog(this, e.getMessage());
+		} catch (IOException e) {
+			JOptionPane.showMessageDialog(this, e.getMessage());
+		} catch (ClienteNaoEncontradoException e) {
+			JOptionPane.showMessageDialog(this, e.getMessage());
+		}
 	}
 }

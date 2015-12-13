@@ -33,12 +33,7 @@ public class CadastroEntregas {
 		}
 	}
 	public Entrega procurar(String id) throws EntregaNaoEncontradaException, EmptyListException {
-		Entrega resposta = repositorioEntregas.procurar(id);
-		if(resposta == null){
-			throw new EntregaNaoEncontradaException();
-		}
-		return resposta;
-
+		return repositorioEntregas.procurar(id);
 	}
 	public void atualizar(String id, Entrega entrega) throws EntregaNaoEncontradaException, EmptyListException{
 		if(repositorioEntregas.procurar(id) == null){

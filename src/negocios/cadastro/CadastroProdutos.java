@@ -39,6 +39,14 @@ public class CadastroProdutos {
 		return resposta;
 	}
 	
+	public Produto procurarNome(String nome) throws ProdutoNaoEncontradoException, EmptyListException {
+		Produto resposta = repositorioProdutos.procurarNome(nome);
+		if(resposta == null) {
+			throw new ProdutoNaoEncontradoException();
+		}
+		return resposta;
+	}
+	
 	public void atualizar(String codigo, Produto produto) throws ProdutoNaoEncontradoException, EmptyListException {
 		if(repositorioProdutos.procurar(codigo) == null) {
 			throw new ProdutoNaoEncontradoException();

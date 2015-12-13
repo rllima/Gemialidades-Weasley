@@ -46,6 +46,7 @@ public class RepositorioEntregasArray implements RepositorioEntregas, Iterator {
 				aux[i] = this.repositorioEntregas[i];
 			}
 			aux[indice] = entrega;
+			repositorioEntregas = aux;
 		} else {
 			this.repositorioEntregas[indice] = entrega;
 		}
@@ -67,6 +68,7 @@ public class RepositorioEntregasArray implements RepositorioEntregas, Iterator {
 				aux[i] = this.repositorioEnviadas[i];
 			}
 			aux[indiceEnviadas] = entrega;
+			repositorioEnviadas = aux;
 		} else {
 			this.repositorioEnviadas[indiceEnviadas] = entrega;
 		}

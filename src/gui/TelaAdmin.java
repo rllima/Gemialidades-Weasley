@@ -77,7 +77,7 @@ public class TelaAdmin extends JFrame {
 	 * Create the frame.
 	 */
 	public TelaAdmin() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 640, 466);
 		jPanel1 = new JPanel();
 		jPanel1.setBorder(new EmptyBorder(5, 5, 5, 5));

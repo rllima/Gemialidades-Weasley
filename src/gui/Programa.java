@@ -3,6 +3,7 @@ package gui;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+import dados.repositorios.Iterator;
 import fachada.GemialidadesLoja;
 import negocios.classesBasicas.Cliente;
 import negocios.classesBasicas.Endereco;
@@ -10,6 +11,7 @@ import negocios.classesBasicas.Guloseimas;
 import negocios.classesBasicas.Produto;
 import negocios.classesBasicas.Travessuras;
 import negocios.exceptions.ClienteJaExisteException;
+import negocios.exceptions.ClienteNaoEncontradoException;
 import negocios.exceptions.EmptyListException;
 import negocios.exceptions.EntregaJaExisteException;
 import negocios.exceptions.EntregaNaoEncontradaException;
@@ -47,11 +49,43 @@ public class Programa {
 			loja.cadastrarProduto(guloseima1);
 			loja.cadastrarProduto(travessura2);
 			
-			System.out.println("Sucesso! Executando método de venda...");
-			loja.vender("2255", "666", "523");
+			System.out.println("Sucesso! Executando método de venda do item 666 ao cliente 523...");
+			loja.vender("666", "523");
 			
-			System.out.println("Sucesso! Executando método de envio...");
+			System.out.println("Sucesso! Executando método de envio da entrega...");
 			loja.enviar();
+			
+			System.out.println("Sucesso! Imprimindo estoque...\n");
+			
+			Iterator prod = loja.getIteratorProduto();
+			while(prod.hasNext()) {
+				System.out.println(prod.next());
+				System.out.println("\n");
+			}
+			
+			System.out.println("Imprimindo dados de clientes...");
+			
+			Iterator clientes = loja.getIteratorCliente();
+			while(clientes.hasNext()) {
+				System.out.println(clientes.next());
+				System.out.println("\n");
+			}
+			
+			System.out.println("Imprimindo entregas pendentes...");
+			
+			Iterator pend = loja.getIteratorEntPendentes();
+			while(pend.hasNext()) {
+				System.out.println(pend.next());
+				System.out.println("\n");
+			}
+			
+			System.out.println("Imprimindo entregas enviadas...");
+			
+			Iterator env = loja.getIteratorEntEnviadas();
+			while(env.hasNext()) {
+				System.out.println(env.next());
+				System.out.println("\n");
+			}
 			
 
 		} catch (FileNotFoundException e) {
@@ -71,6 +105,8 @@ public class Programa {
 		} catch (ProdutoNaoEncontradoException e) {
 			System.out.println(e.getMessage());
 		} catch (NaoHaEntregasException e) {
+			System.out.println(e.getMessage());
+		} catch (ClienteNaoEncontradoException e) {
 			System.out.println(e.getMessage());
 		}
 	}

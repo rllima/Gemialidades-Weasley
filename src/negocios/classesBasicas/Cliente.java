@@ -5,6 +5,9 @@ public class Cliente {
 	private String nome;
 	private String idade;
 	private Endereco endereco;
+	private String[] entregas;
+	private int indice;
+
 	private String id;
 	private String senha;
 
@@ -15,8 +18,17 @@ public class Cliente {
 		this.endereco = endereco;
 		this.id = id;
 		this.senha = senha;
+		this.entregas = new String[10];
 	}
 
+	public String[] getEntregas() {
+		return entregas;
+	}
+	
+	public void setEntregas(String[] entregas) {
+		this.entregas = entregas;
+	}
+	
 	public String getNome() {
 		return nome;
 	}
@@ -56,12 +68,27 @@ public class Cliente {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
+	
 	public String toString() {
        return "Nome: " + this.nome + "\nIdade: " + this.idade + "\nEndereço: " + this.endereco + "\nId: " + this.id;
 	}
 	public Cliente clone(){
 		Cliente cliente = new Cliente(this.nome, this.idade, this.getEndereco().clone(), this.id, this.senha);
 		return cliente;
+	}
+	
+	public void addEntrega(String idEntrega) {
+		if (indice > this.entregas.length) {
+			String[] aux = new String[entregas.length * 2];
+			for (int i = 0; i < indice; i++) {
+				aux[i] = this.entregas[i];
+			}
+			aux[indice] = idEntrega;
+			entregas = aux;
+		} else {
+			this.entregas[indice] = idEntrega;
+		}
+		indice++;
 	}
 
 }
