@@ -202,7 +202,7 @@ public class TelaAdmin extends JFrame {
 		panel_Trav.add(button);
 		
 		JLabel label_13 = new JLabel("");
-		label_13.setIcon(new ImageIcon("C:\\Users\\rlo\\git\\gemialidades-weasley1\\images\\Mapa-do-Maroto1.jpg"));
+		label_13.setIcon(new ImageIcon("images\\Mapa-do-Maroto1.jpg"));
 		label_13.setBounds(0, 0, 357, 235);
 		panel_Trav.add(label_13);
 		
@@ -249,7 +249,7 @@ public class TelaAdmin extends JFrame {
 		panel_Escolha.add(btnTravessuras);
 		
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\rlo\\git\\gemialidades-weasley1\\images\\Mapa-do-Maroto1.jpg"));
+		lblNewLabel.setIcon(new ImageIcon("images\\Mapa-do-Maroto1.jpg"));
 		lblNewLabel.setBounds(0, 0, 357, 235);
 		panel_Escolha.add(lblNewLabel);
 		final TextField tf_NomeCad = new TextField();
@@ -308,13 +308,24 @@ public class TelaAdmin extends JFrame {
 				btnCadastrarG.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
 						cadastrarGuloseima(tf_NomeCad.getText(), tf_CodCad.getText(), tf_DescCad.getText(), tf_SaborCad.getText(), Double.parseDouble(tf_PrecoCad.getText()));
+					    JOptionPane.showMessageDialog(null, "Cadastro Efetuado com sucesso!");
+					 // Limpando
+						panel.removeAll();
+						panel.repaint();
+						panel.revalidate();
+						// Adicionando novo panel
+						panel.add(panel_CadastroGul);
+						panel.repaint();
+						panel.revalidate();
+					    		
 					}
+					
 				});
 				btnCadastrarG.setBounds(127, 205, 104, 23);
 				panel_CadastroGul.add(btnCadastrarG);
 				
 				JLabel label_14 = new JLabel("");
-				label_14.setIcon(new ImageIcon("C:\\Users\\rlo\\git\\gemialidades-weasley1\\images\\Mapa-do-Maroto1.jpg"));
+				label_14.setIcon(new ImageIcon("images\\Mapa-do-Maroto1.jpg"));
 				label_14.setBounds(0, 0, 357, 235);
 				panel_CadastroGul.add(label_14);
 		
@@ -351,7 +362,7 @@ public class TelaAdmin extends JFrame {
 		panel_AttProduto.add(btnAttProd);
 		
 		JLabel label_15 = new JLabel("");
-		label_15.setIcon(new ImageIcon("C:\\Users\\rlo\\git\\gemialidades-weasley1\\images\\Mapa-do-Maroto1.jpg"));
+		label_15.setIcon(new ImageIcon("images\\Mapa-do-Maroto1.jpg"));
 		label_15.setBounds(0, 0, 357, 235);
 		panel_AttProduto.add(label_15);
 		final Panel panel_AttCliente = new Panel();
@@ -412,7 +423,7 @@ public class TelaAdmin extends JFrame {
 		panel_AttCliente.add(btnAttClien);
 		
 		JLabel label_16 = new JLabel("");
-		label_16.setIcon(new ImageIcon("C:\\Users\\rlo\\git\\gemialidades-weasley1\\images\\Mapa-do-Maroto1.jpg"));
+		label_16.setIcon(new ImageIcon("images\\Mapa-do-Maroto1.jpg"));
 		label_16.setBounds(0, 0, 357, 235);
 		panel_AttCliente.add(label_16);
 		

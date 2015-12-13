@@ -143,14 +143,18 @@ public class RepositorioProdutosArray implements RepositorioProdutos, Iterator {
 		Produto[] aux = new Produto[repositorioProdutos.length];
 		for(int i = 0; i < this.indice; i++) {
 			if(this.repositorioProdutos[i] instanceof Guloseimas){
-				aux[i] = ((Guloseimas) this.repositorioProdutos[i]).clone();
+			aux[i] = ((Guloseimas) this.repositorioProdutos[i]).clone();
 			}else{
-				aux[i] = ((Travessuras) this.repositorioProdutos[i]).clone();
+			aux[i] = ((Travessuras) this.repositorioProdutos[i]).clone();
 			}
 			
 			
 		}
 		RepositorioProdutosArray iterator = new RepositorioProdutosArray(aux);
 		return iterator;
-	}
+		}
+		
+	
 }
+
+
