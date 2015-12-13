@@ -209,7 +209,7 @@ public class RepositorioEntregasFila implements RepositorioEntregas, Iterator {
 	}
 
 	public boolean hasNext() {
-		return this.iterator[this.indiceIterator + 1] != null;
+		return this.iterator[this.indiceIterator] != null;
 	}
 	public Iterator<Entrega> getIteratorPendentes() throws EmptyListException {
 		if (isEmpty()) {

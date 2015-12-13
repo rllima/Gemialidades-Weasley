@@ -205,7 +205,7 @@ public class RepositorioProdutosExcel implements RepositorioProdutos, Iterator {
 	}
 
 	public boolean hasNext() {
-		return this.iterator[this.indiceIterator+1] != null;
+		return this.iterator[this.indiceIterator] != null;
 	}
 
 	public Iterator<Produto> getIterator() throws EmptyListException {

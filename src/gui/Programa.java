@@ -13,6 +13,7 @@ import negocios.exceptions.ClienteJaExisteException;
 import negocios.exceptions.EmptyListException;
 import negocios.exceptions.EntregaJaExisteException;
 import negocios.exceptions.EntregaNaoEncontradaException;
+import negocios.exceptions.NaoHaEntregasException;
 import negocios.exceptions.ProdutoJaExisteException;
 import negocios.exceptions.ProdutoNaoEncontradoException;
 
@@ -37,22 +38,20 @@ public class Programa {
 			Produto travessura2 = new Travessuras("Kit mata-aula", "777", "Kit fugir-de-ricardo", 0, 0, 6.8);
 		
 			System.out.println("Clientes e produtos instanciados com sucesso!\nCadastrando clientes...");
-			
 			loja.inserirCliente(cliente1);
 			loja.inserirCliente(cliente2);
 			loja.inserirCliente(cliente3);
 			
 			System.out.println("Sucesso! Cadastrando travessuras...");
-			
 			loja.cadastrarProduto(travessura1);
 			loja.cadastrarProduto(guloseima1);
 			loja.cadastrarProduto(travessura2);
 			
 			System.out.println("Sucesso! Executando método de venda...");
-			
 			loja.vender("2255", "666", "523");
 			
-			System.out.println("Sucesso! Executando método de entrega...");
+			System.out.println("Sucesso! Executando método de envio...");
+			loja.enviar();
 			
 
 		} catch (FileNotFoundException e) {
@@ -70,6 +69,8 @@ public class Programa {
 		} catch (EntregaNaoEncontradaException e) {
 			System.out.println(e.getMessage());
 		} catch (ProdutoNaoEncontradoException e) {
+			System.out.println(e.getMessage());
+		} catch (NaoHaEntregasException e) {
 			System.out.println(e.getMessage());
 		}
 	}
