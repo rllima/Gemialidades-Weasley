@@ -85,7 +85,7 @@ public class RepositorioClientesExcel implements RepositoriosClientes, Iterator 
 		Row linha = null;
 		Cliente resposta = null;
 		Endereco endereco = null;
-		for(int i = 0; i <= this.indice; i++){
+		for(int i = 0; i < this.indice; i++){
 			linha = planilha.getRow(i);
 			celula = linha.getCell(3).toString();
 			if(id.equalsIgnoreCase(celula)){

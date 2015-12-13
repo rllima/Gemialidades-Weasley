@@ -51,6 +51,8 @@ public class Programa {
 			System.out.println("Sucesso! Executando método de venda...");
 			
 			loja.vender("2255", "666", "523");
+			
+			System.out.println("Sucesso! Executando método de venda...");
 
 		} catch (FileNotFoundException e) {
 			System.out.println(e.getMessage());

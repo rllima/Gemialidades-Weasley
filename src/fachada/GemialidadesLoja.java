@@ -32,21 +32,21 @@ public class GemialidadesLoja {
 	private char tipoRep;
 	private HSSFWorkbook workbook;
 	private static GemialidadesLoja instance;
-	
-	public static GemialidadesLoja getInstance() throws FileNotFoundException, IOException{
-		if(instance == null){
+
+	public static GemialidadesLoja getInstance() throws FileNotFoundException, IOException {
+		if (instance == null) {
 			instance = new GemialidadesLoja();
 		}
 		return instance;
 	}
-	
-	public GemialidadesLoja () throws IOException, FileNotFoundException{
+
+	public GemialidadesLoja() throws IOException, FileNotFoundException {
 		this.config = new File("config\\config.txt");
 		FileInputStream in = new FileInputStream(config);
 		this.tipoRep = (char) in.read();
 		in.close();
 
-		if(tipoRep == 'A' || tipoRep == 'a') {
+		if (tipoRep == 'A' || tipoRep == 'a') {
 			this.repClientes = new CadastroClientes(new RepositorioClientesArray());
 			this.repProdutos = new CadastroProdutos(new RepositorioProdutosArray());
 			this.repEntregas = new CadastroEntregas(new RepositorioEntregasArray());
@@ -55,11 +55,11 @@ public class GemialidadesLoja {
 			this.repClientes = new CadastroClientes(new RepositorioClientesLista());
 			this.repProdutos = new CadastroProdutos(new RepositorioProdutosLista());
 			this.repEntregas = new CadastroEntregas(new RepositorioEntregasFila());
-			
+
 		} else if (tipoRep == 'E' || tipoRep == 'e') {
 			this.excel = new File("planilha.xls");
-			if(!excel.exists()) {
-				
+			if (!excel.exists()) {
+
 				excel.createNewFile();
 				FileOutputStream out = new FileOutputStream(excel);
 				workbook = new HSSFWorkbook();
@@ -69,14 +69,17 @@ public class GemialidadesLoja {
 				FileInputStream entradaArquivo = new FileInputStream(excel);
 				workbook = new HSSFWorkbook(entradaArquivo);
 				entradaArquivo.close();
-				
+
 			}
 			this.repClientes = new CadastroClientes(new RepositorioClientesExcel(workbook));
 			this.repProdutos = new CadastroProdutos(new RepositorioProdutosExcel(workbook));
 			this.repEntregas = new CadastroEntregas(new RepositorioEntregasExcel(workbook));
 		}
-		
-		/* Lembrar de colocar IF's nos repositorios pra conferir se ja existe a planilha(aba) */
+
+		/*
+		 * Lembrar de colocar IF's nos repositorios pra conferir se ja existe a
+		 * planilha(aba)
+		 */
 
 	}
 
@@ -96,20 +99,20 @@ public class GemialidadesLoja {
 	public void removerCliente(String id) throws ClienteNaoEncontradoException, IOException, EmptyListException {
 		repClientes.remover(id);
 	}
-	
+
 	public Iterator getIteratorCliente() throws EmptyListException {
 		return repClientes.getIterator();
 	}
-	//Produtos
-
+	// Produtos
 
 	public void cadastrarProduto(Produto produto) throws ProdutoJaExisteException, IOException {
 		repProdutos.cadastrar(produto);
-		/*excel = new File("planilha.xls");
-		FileOutputStream saidaArquivo = new FileOutputStream(excel);
-		workbook.write(saidaArquivo);
-		saidaArquivo.close();*/
-		
+		/*
+		 * excel = new File("planilha.xls"); FileOutputStream saidaArquivo = new
+		 * FileOutputStream(excel); workbook.write(saidaArquivo);
+		 * saidaArquivo.close();
+		 */
+
 	}
 
 	public void removerProduto(String codigo) throws ProdutoNaoEncontradoException, EmptyListException {
@@ -124,13 +127,12 @@ public class GemialidadesLoja {
 			throws ProdutoNaoEncontradoException, EmptyListException {
 		repProdutos.atualizar(codigo, produto);
 	}
-	
+
 	public Iterator getIteratorProduto() throws EmptyListException {
 		return repProdutos.getIterator();
 	}
 
-
-	//Entregas
+	// Entregas
 
 	public void cadastrarEntrega(Entrega entrega) throws EntregaJaExisteException {
 		repEntregas.cadastrar(entrega);
@@ -144,46 +146,40 @@ public class GemialidadesLoja {
 		return repEntregas.procurar(id);
 	}
 
-	public void atualizarEntrega(String id, Entrega entrega)
-			throws EntregaNaoEncontradaException, EmptyListException {
+	public void atualizarEntrega(String id, Entrega entrega) throws EntregaNaoEncontradaException, EmptyListException {
 		repEntregas.atualizar(id, entrega);
 	}
-	
+
 	public Iterator getIteratorEntPendentes() throws EmptyListException {
 		return repEntregas.getIteratorPendentes();
 	}
-	
+
 	public Iterator getIteratorEntEnviadas() throws EmptyListException {
 		return repEntregas.getIteratorEnviadas();
 	}
-	
-	//Login
-	
-	public boolean login(String id, String senha) throws ClienteNaoEncontradoException, SenhaIncoretaException, EmptyListException {
+
+	// Login
+
+	public boolean login(String id, String senha)
+			throws ClienteNaoEncontradoException, SenhaIncoretaException, EmptyListException {
 		boolean resposta = false;
 		Cliente cliente = this.procurarCliente(id);
-		if((cliente.getSenha().equals(senha))) {
+		if ((cliente.getSenha().equals(senha))) {
 			resposta = true;
 		} else {
 			throw new SenhaIncoretaException();
 		}
 		return resposta;
 	}
-	
+
 	public void closeWorkbook() throws IOException {
 		workbook.close();
 	}
-	
-	public void vender(String idEntrega, String idProduto, String idCliente) throws EntregaJaExisteException, EmptyListException, EntregaNaoEncontradaException, ProdutoNaoEncontradoException {
-		if (repEntregas.procurar(idEntrega) != null) {
-			throw new EntregaJaExisteException();
-		} else {
-			Entrega entrega = new Entrega(idEntrega, idCliente, idProduto);
-			repEntregas.cadastrar(entrega);
-			repProdutos.remover(idProduto);
-		}
+
+	public void vender(String idEntrega, String idProduto, String idCliente) throws EntregaJaExisteException,
+			EmptyListException, EntregaNaoEncontradaException, ProdutoNaoEncontradoException {
+		Entrega entrega = new Entrega(idEntrega, idCliente, idProduto);
+		repEntregas.cadastrar(entrega);
+		repProdutos.remover(idProduto);
 	}
-   
-
-
 }

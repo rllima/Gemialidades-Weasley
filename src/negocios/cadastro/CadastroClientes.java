@@ -23,7 +23,6 @@ public class CadastroClientes {
 	public void inserir(Cliente clientes) throws ClienteJaExisteException, IOException {
 		if(cliente.procurar(clientes.getId()) == null) {
 			cliente.inserir(clientes);
-			
 		}else {
 			throw new ClienteJaExisteException();
 		}

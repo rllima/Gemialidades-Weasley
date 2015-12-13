@@ -94,7 +94,7 @@ public class RepositorioProdutosArray implements RepositorioProdutos, Iterator {
 				this.repositorioProdutos[i] = this.repositorioProdutos[i + 1];
 			}
 		}
-
+		indice--;
 	}
 
 	/**
