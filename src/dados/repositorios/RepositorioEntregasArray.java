@@ -16,7 +16,7 @@ public class RepositorioEntregasArray implements RepositorioEntregas, Iterator {
 	private Entrega[] repositorioEntregas;
 	private Entrega[] repositorioEnviadas;
 	private int indice;
-	private int indiceEntregue;
+	private int indiceEnviadas;
 	private int indiceIterator;
 	
 
@@ -24,7 +24,7 @@ public class RepositorioEntregasArray implements RepositorioEntregas, Iterator {
 		this.repositorioEntregas = new Entrega[100];
 		this.indice = 0;
 		this.repositorioEnviadas = new Entrega[100];
-		this.indiceEntregue = 0;
+		this.indiceEnviadas = 0;
 	}
 	private RepositorioEntregasArray(Entrega[] itr) {
 		this.repositorioEntregas = itr;
@@ -61,16 +61,16 @@ public class RepositorioEntregasArray implements RepositorioEntregas, Iterator {
 	 *            enviadas.
 	 */
 	public void inserirEntregues(Entrega entrega) {
-		if (indiceEntregue > this.repositorioEnviadas.length) {
+		if (indiceEnviadas > this.repositorioEnviadas.length) {
 			Entrega[] aux = new Entrega[repositorioEnviadas.length * 2];
-			for (int i = 0; i < indiceEntregue; i++) {
+			for (int i = 0; i < indiceEnviadas; i++) {
 				aux[i] = this.repositorioEnviadas[i];
 			}
-			aux[indiceEntregue] = entrega;
+			aux[indiceEnviadas] = entrega;
 		} else {
-			this.repositorioEnviadas[indiceEntregue] = entrega;
+			this.repositorioEnviadas[indiceEnviadas] = entrega;
 		}
-		indiceEntregue++;
+		indiceEnviadas++;
 	}
 
 	/**
@@ -145,7 +145,7 @@ public class RepositorioEntregasArray implements RepositorioEntregas, Iterator {
 	}
 	
 	public boolean isEmpty() {
-		return this.repositorioEntregas[0] != null; 
+		return this.repositorioEntregas[0] == null; 
 	}
 
 	public Entrega next() {
