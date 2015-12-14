@@ -12,6 +12,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.DefaultListModel;
 import javax.swing.JScrollPane;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -98,13 +99,11 @@ public class Estoque extends JFrame {
 					rl.close();
 					
 				} catch (FileNotFoundException e1) {
-					e1.printStackTrace();
+					JOptionPane.showMessageDialog(null, e1.getMessage());
 				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+					JOptionPane.showMessageDialog(null, e1.getMessage());
 				} catch (EmptyListException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+					JOptionPane.showMessageDialog(null, e1.getMessage());
 				}
 				
 			}
@@ -123,14 +122,11 @@ public class Estoque extends JFrame {
 		try {
 			itr = GemialidadesLoja.getInstance().getIteratorProduto();
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(this, e.getMessage());
 		} catch (EmptyListException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(this, e.getMessage());
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(this, e.getMessage());
 		}
 		return itr;
 	}

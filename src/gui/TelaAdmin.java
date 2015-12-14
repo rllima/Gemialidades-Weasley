@@ -579,6 +579,13 @@ public class TelaAdmin extends JFrame {
 		jPanel1.add(btnEstoque);
 		
 		JButton btnGerarRelatorios = new JButton("Gerar Relatorios");
+		btnGerarRelatorios.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Relatorios rel = new Relatorios();
+				rel.setVisible(true);
+				
+			}
+		});
 		btnGerarRelatorios.setBounds(10, 321, 180, 23);
 		jPanel1.add(btnGerarRelatorios);
 		

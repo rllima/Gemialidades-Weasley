@@ -25,12 +25,15 @@ import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JScrollPane;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JButton;
+
 
 public class Relatorios extends JFrame {
 
 	private JPanel contentPane;
 	private final JLabel label = new JLabel("");
+	private static GemialidadesLoja loja;
 
 	/**
 	 * Launch the application.
@@ -52,7 +55,7 @@ public class Relatorios extends JFrame {
 	 * Create the frame.
 	 */
 	public Relatorios() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 556, 393);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -87,14 +90,11 @@ public class Relatorios extends JFrame {
 					rel.close();
 					rl.close();
 				} catch (FileNotFoundException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					JOptionPane.showMessageDialog(null, e.getMessage());
 				} catch (EmptyListException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					JOptionPane.showMessageDialog(null, e.getMessage());
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					JOptionPane.showMessageDialog(null, e.getMessage());
 				}
 			
 				list.setModel(dlm);
@@ -123,14 +123,11 @@ public class Relatorios extends JFrame {
 					rel.close();
 					rl.close();
 				} catch (FileNotFoundException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					JOptionPane.showMessageDialog(null, e.getMessage());
 				} catch (EmptyListException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					JOptionPane.showMessageDialog(null, e.getMessage());
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					JOptionPane.showMessageDialog(null, e.getMessage());
 				}
 			
 				list.setModel(dlm);

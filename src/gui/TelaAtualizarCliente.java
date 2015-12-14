@@ -76,7 +76,6 @@ public class TelaAtualizarCliente extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				String id = cliente.getId();
 				Endereco endereco = new Endereco(tf_CidadeA.getText(), tf_LogradouroA.getText(), tf_NumeroA.getText(), tf_CEPA.getText(), tf_ComplementoA.getText());
-				
 					atualizar(tf_NomeA.getText(), tf_IDADEA.getText(), endereco, id, passwordFieldA.getText());
 					JOptionPane.showMessageDialog(null, "Atualização efetuada com sucesso");       
 					setVisible(false);
@@ -237,6 +236,7 @@ public class TelaAtualizarCliente extends JFrame {
 	}
 	public boolean atualizar(String nome, String idade, Endereco endereco, String id, String senha) {
 		Cliente cliente = new Cliente( nome, idade, endereco, id, senha);
+		
 		try {
 			GemialidadesLoja.getInstance().atualizarCliente(id,cliente);
 		} catch (FileNotFoundException e) {
