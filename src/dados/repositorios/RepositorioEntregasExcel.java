@@ -92,18 +92,18 @@ public class RepositorioEntregasExcel implements RepositorioEntregas, Iterator {
 		String celula = "";
 		Row linha = null;
 		Entrega resposta = null;
-		
-		if(!isEmpty()) {
-		for (int i = 0; i <= this.indicePendentes; i++) {
-			linha = planilhaPendentes.getRow(i);
-			celula = linha.getCell(1).getStringCellValue();
-			if (id.equalsIgnoreCase(celula)) {
-				String idCliente = linha.getCell(2).getStringCellValue();
-				String idProduto = linha.getCell(3).getStringCellValue();
-				resposta = new Entrega(id, idCliente, idProduto);
 
+		if(!isEmpty()) {
+			for (int i = 0; i <= this.indicePendentes; i++) {
+				linha = planilhaPendentes.getRow(i);
+				celula = linha.getCell(1).getStringCellValue();
+				if (id.equalsIgnoreCase(celula)) {
+					String idCliente = linha.getCell(2).getStringCellValue();
+					String idProduto = linha.getCell(3).getStringCellValue();
+					resposta = new Entrega(id, idCliente, idProduto);
+
+				}
 			}
-		}
 		}
 
 		return resposta;
@@ -126,7 +126,9 @@ public class RepositorioEntregasExcel implements RepositorioEntregas, Iterator {
 		int posicao = this.procurarLinha(id);
 		Row aux = planilhaPendentes.getRow(posicao);
 		planilhaPendentes.removeRow(aux);
+		if(this.indicePendentes > 1) {
 		planilhaPendentes.shiftRows((posicao + 1), (indicePendentes - 1), -1);
+		}
 		indicePendentes--;
 	}
 
@@ -140,8 +142,8 @@ public class RepositorioEntregasExcel implements RepositorioEntregas, Iterator {
 		String idCliente = planilhaPendentes.getRow(0).getCell(2).toString();
 		String idProduto = planilhaPendentes.getRow(0).getCell(3).toString();
 		Entrega temp = new Entrega(id, idCliente, idProduto);
-		this.remover(id);
 		this.inserirEnviadas(temp);
+		this.remover(id);
 
 	}
 
@@ -157,9 +159,9 @@ public class RepositorioEntregasExcel implements RepositorioEntregas, Iterator {
 		Row linha = null;
 		Produto resposta = null;
 
-		for (int i = 0; i <= this.indicePendentes; i++) {
+		for (int i = 0; i < this.indicePendentes; i++) {
 			linha = planilhaPendentes.getRow(i);
-			celula = linha.getCell(2).toString();
+			celula = linha.getCell(1).toString();
 			if (codigo.equalsIgnoreCase(celula)) {
 				posicao = i;
 			}
@@ -177,12 +179,15 @@ public class RepositorioEntregasExcel implements RepositorioEntregas, Iterator {
 	}
 
 	public boolean hasNext() {
+		if(indiceIterator >= iterator.length) {
+			return false;
+		}
 		return this.iterator[this.indiceIterator] != null;
 	}
 	public int size(Sheet planilha) {
 		return planilha.getPhysicalNumberOfRows();
 	}
-	
+
 	public Iterator<Entrega> getIteratorPendentes() {
 		Entrega[] itr = new Entrega[this.size(planilhaPendentes)];
 		for(int i = 0; i < size(planilhaPendentes); i++) {
@@ -191,7 +196,7 @@ public class RepositorioEntregasExcel implements RepositorioEntregas, Iterator {
 		RepositorioEntregasExcel iterator = new RepositorioEntregasExcel(itr);
 		return iterator;
 	}
-	
+
 	public Iterator<Entrega> getIteratorEnviadas() {
 		Entrega[] itr = new Entrega[this.size(planilhaEnviadas)];
 		for(int i = 0; i < size(planilhaEnviadas); i++) {
@@ -200,8 +205,8 @@ public class RepositorioEntregasExcel implements RepositorioEntregas, Iterator {
 		RepositorioEntregasExcel iterator = new RepositorioEntregasExcel(itr);
 		return iterator;
 	}
-	
-	
+
+
 	private Entrega clone(Row linha, Sheet planilha) {
 		String id = planilha.getRow(0).getCell(1).toString();
 		String idCliente = planilha.getRow(0).getCell(2).toString();
@@ -212,6 +217,6 @@ public class RepositorioEntregasExcel implements RepositorioEntregas, Iterator {
 	public boolean isEmpty() {
 		return planilhaPendentes.getPhysicalNumberOfRows() == 0;
 	}
-	
+
 
 }

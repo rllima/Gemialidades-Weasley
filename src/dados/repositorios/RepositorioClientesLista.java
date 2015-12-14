@@ -220,6 +220,9 @@ public class RepositorioClientesLista implements RepositoriosClientes, Iterator 
 	}
 
 	public boolean hasNext() {
+		if(indiceIterator >= iterator.length) {
+			return false;
+		}
 		return this.iterator[this.indiceIterator] != null;
 	}
 

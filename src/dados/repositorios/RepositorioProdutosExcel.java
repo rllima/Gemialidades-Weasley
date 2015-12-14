@@ -140,7 +140,9 @@ public class RepositorioProdutosExcel implements RepositorioProdutos, Iterator {
 		int posicao = this.procurarLinha(id);
 		Row aux = planilha.getRow(posicao);
 		planilha.removeRow(aux);
+		if(this.indice > 1) {
 		planilha.shiftRows((posicao + 1), (indice - 1), -1);
+		}
 		indice--;
 
 	}
@@ -185,7 +187,7 @@ public class RepositorioProdutosExcel implements RepositorioProdutos, Iterator {
 		Row linha = null;
 		Produto resposta = null;
 
-		for (int i = 0; i <= this.indice; i++) {
+		for (int i = 0; i < this.indice; i++) {
 			linha = planilha.getRow(i);
 			celula = linha.getCell(2).toString();
 			if (codigo.equalsIgnoreCase(celula)) {
@@ -205,11 +207,10 @@ public class RepositorioProdutosExcel implements RepositorioProdutos, Iterator {
 	}
 
 	public boolean hasNext() {
-		if(this.indiceIterator != 0) {
-		return this.iterator[this.indiceIterator] != null;
-		} else {
+		if(indiceIterator >= iterator.length) {
 			return false;
 		}
+		return this.iterator[this.indiceIterator] != null;
 	}
 
 	public Iterator<Produto> getIterator() throws EmptyListException {

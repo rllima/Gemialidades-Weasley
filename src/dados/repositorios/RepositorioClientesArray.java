@@ -118,6 +118,9 @@ public class RepositorioClientesArray implements RepositoriosClientes, Iterator 
 	}
 
 	public boolean hasNext() {
+		if(indiceIterator >= clientes.length) {
+			return false;
+		}
 		return this.clientes[this.indiceIterator] != null; // LEMBRA DE TIRAR O +1
 	}
 

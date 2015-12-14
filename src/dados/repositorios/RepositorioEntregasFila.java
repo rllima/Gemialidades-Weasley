@@ -209,6 +209,9 @@ public class RepositorioEntregasFila implements RepositorioEntregas, Iterator {
 	}
 
 	public boolean hasNext() {
+		if(indiceIterator >= iterator.length) {
+			return false;
+		}
 		return this.iterator[this.indiceIterator] != null;
 	}
 	public Iterator<Entrega> getIteratorPendentes() throws EmptyListException {

@@ -159,6 +159,9 @@ public class RepositorioEntregasArray implements RepositorioEntregas, Iterator {
 	}
 
 	public boolean hasNext() {
+		if(indiceIterator >= repositorioEntregas.length) {
+			return false;
+		}
 		return this.repositorioEntregas[this.indiceIterator] != null;
 		
 	}

@@ -195,6 +195,9 @@ public class RepositorioProdutosLista implements RepositorioProdutos, Iterator{
 	}
 
 	public boolean hasNext() {
+		if(indiceIterator >= iterator.length) {
+			return false;
+		}
 		return this.iterator[this.indiceIterator] != null;
 	}
 	public Iterator<Produto> getIterator() throws EmptyListException {
