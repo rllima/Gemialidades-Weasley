@@ -91,7 +91,7 @@ public class Estoque extends JFrame {
 					ObjectOutputStream rl = new ObjectOutputStream(rel);
 					Iterator produto = GemialidadesLoja.getInstance().getIteratorProduto();      //Ainda não funciona
 	            while ( produto.hasNext()){
-	                	rl.writeUTF(produto.next().toString());
+	                	rl.writeObject(produto.next().toString() + "\n");
 	                }
 					
 					

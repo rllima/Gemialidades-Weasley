@@ -1,6 +1,8 @@
 package negocios.classesBasicas;
 
-public abstract class Produto {
+import java.io.Serializable;
+
+public abstract class Produto implements Serializable {
 	
 	private String nome;
 	private String codigo;

@@ -1,5 +1,6 @@
 package dados.repositorios;
 
+import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -19,11 +20,12 @@ import negocios.classesBasicas.*;
 public class RepositorioClientesExcel implements RepositoriosClientes, Iterator {
 
 	private HSSFWorkbook workbook;
-	private Sheet planilha;
+	private HSSFSheet planilha;
 	private File excel;
 	private int indice;
 	private int indiceIterator;
 	private Cliente[] iterator;
+	
 
 	public RepositorioClientesExcel (HSSFWorkbook workbook) throws FileNotFoundException{
 		if(workbook.getSheet("Clientes") != null) {
@@ -68,7 +70,7 @@ public class RepositorioClientesExcel implements RepositoriosClientes, Iterator 
 		celula.setCellValue(clientes.getSenha());
 
 		indice++;
-		this.write();
+		//this.write();
 	}
 
 	/** 
@@ -175,8 +177,9 @@ public class RepositorioClientesExcel implements RepositoriosClientes, Iterator 
 	 */
 	
 	private void write() throws IOException {
-		FileOutputStream saidaArquivo = new FileOutputStream(excel);
-		this.workbook.write(saidaArquivo);
+		
+		FileOutputStream saidaArquivo = new FileOutputStream("planilha.xls");
+		workbook.write(saidaArquivo);
 		saidaArquivo.close();
 	}
 	

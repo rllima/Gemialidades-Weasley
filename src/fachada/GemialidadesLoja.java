@@ -59,9 +59,8 @@ public class GemialidadesLoja {
 
 		} else if (tipoRep == 'E' || tipoRep == 'e') {
 			this.excel = new File("planilha.xls");
-			excel.createNewFile();
 			if (!excel.exists()) {
-
+				excel.createNewFile();
 				FileOutputStream out = new FileOutputStream(excel);
 				workbook = new HSSFWorkbook();
 				workbook.write(out);
@@ -91,6 +90,7 @@ public class GemialidadesLoja {
 
 	public void inserirCliente(Cliente clientes) throws ClienteJaExisteException, IOException {
 		repClientes.inserir(clientes);
+		workbook.write(new FileOutputStream(new File("planilha.xls")));
 	}
 
 	public Cliente procurarCliente(String id) throws ClienteNaoEncontradoException, EmptyListException {
