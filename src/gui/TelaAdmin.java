@@ -569,6 +569,12 @@ public class TelaAdmin extends JFrame {
 		jPanel1.add(btnAtualizarProduto);
 		
 		JButton btnEstoque = new JButton("Estoque");
+		btnEstoque.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Estoque tela = new Estoque(loja);
+				tela.setVisible(true);
+			}
+		});
 		btnEstoque.setBounds(10, 289, 180, 23);
 		jPanel1.add(btnEstoque);
 		

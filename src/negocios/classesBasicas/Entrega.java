@@ -1,6 +1,8 @@
 package negocios.classesBasicas;
 
-public class Entrega {
+import java.io.Serializable;
+
+public class Entrega implements Serializable {
 	
 	
 	private String idCliente;
@@ -40,6 +42,9 @@ public class Entrega {
 	public Entrega clone(){
 		Entrega entrega = new Entrega(this.idCliente, this.idProduto, this.id);
 		return entrega;
+	}
+	public String toString(){
+		return "ID da Entrega: " + this.id + "\nID do Cliente: " + this.idCliente + "\nID do produto: " + this.idProduto;
 	}
 
 	

@@ -73,19 +73,13 @@ public class Programa {
 			
 			System.out.println("Imprimindo entregas pendentes...");
 			
-			Iterator pend = loja.getIteratorEntPendentes();
-			while(pend.hasNext()) {
-				System.out.println(pend.next());
-				System.out.println("\n");
-			}
+			System.out.println(GemialidadesLoja.getInstance().relatorioEntregasPendentes().toString());
 			
 			System.out.println("Imprimindo entregas enviadas...");
 			
-			Iterator env = loja.getIteratorEntEnviadas();
-			while(env.hasNext()) {
-				System.out.println(env.next());
-				System.out.println("\n");
-			}
+			System.out.println(GemialidadesLoja.getInstance().relatorioEntregasEnviadas().toString());
+			System.out.println("\n");
+			
 			
 
 		} catch (FileNotFoundException e) {

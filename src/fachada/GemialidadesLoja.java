@@ -205,5 +205,23 @@ public class GemialidadesLoja {
 		Cliente cliente = repClientes.procurar(idCliente);
 		cliente.addEntrega(idEntrega);
 	}
+	public Entrega relatorioEntregasEnviadas() throws FileNotFoundException, EmptyListException, IOException{
+		Iterator<Entrega> itr = GemialidadesLoja.getInstance().getIteratorEntEnviadas();
+		Entrega entrega = null;
+			while(itr.hasNext()){
+				entrega = itr.next();
+			}
+			return entrega;
+		
+		
+	}
+	public Entrega relatorioEntregasPendentes() throws FileNotFoundException, EmptyListException, IOException{
+		Iterator<Entrega> itr = GemialidadesLoja.getInstance().getIteratorEntPendentes();
+		Entrega entrega = null;
+		while(itr.hasNext()){
+			entrega = itr.next();
+		}
+	return entrega;			
+	}
 	
 }
