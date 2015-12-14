@@ -68,6 +68,8 @@ public class RepositorioClientesExcel implements RepositoriosClientes, Iterator 
 		celula.setCellValue(clientes.getEndereco().getComplemento());
 		celula = linha.createCell(9);
 		celula.setCellValue(clientes.getSenha());
+		celula = linha.createCell(10);
+		celula.setCellValue(clientes.getStringEntregas());
 
 		indice++;
 		
@@ -100,6 +102,8 @@ public class RepositorioClientesExcel implements RepositoriosClientes, Iterator 
 				String cep = linha.getCell(7).toString();
 				String cpmt = linha.getCell(8).toString();
 				String senha = linha.getCell(9).toString();
+				String entregasaux = linha.getCell(10).toString();
+				String[] entregas = entregasaux.split(" ");
 				endereco = new Endereco(cidade, logradouro, numero, cep, cpmt);
 				resposta = new Cliente(nome,idade, endereco, id1, senha);
 
@@ -121,13 +125,10 @@ public class RepositorioClientesExcel implements RepositoriosClientes, Iterator 
 		planilha.getRow(aux).getCell(2).setCellValue(clientes.getIdade());
 		planilha.getRow(aux).getCell(4).setCellValue(clientes.getEndereco().getCidade());
 		planilha.getRow(aux).getCell(5).setCellValue(clientes.getEndereco().getLogradouro());
-		planilha.getRow(aux).getCell(5).setCellValue(clientes.getEndereco().getNumero());
-		planilha.getRow(aux).getCell(6).setCellValue(clientes.getEndereco().getCep());
-		planilha.getRow(aux).getCell(7).setCellValue(clientes.getEndereco().getComplemento());
-
-
-
-
+		planilha.getRow(aux).getCell(6).setCellValue(clientes.getEndereco().getNumero());
+		planilha.getRow(aux).getCell(7).setCellValue(clientes.getEndereco().getCep());
+		planilha.getRow(aux).getCell(8).setCellValue(clientes.getEndereco().getComplemento());
+		planilha.getRow(aux).getCell(10).setCellValue(clientes.getStringEntregas());
 	}
 
 	/**
@@ -218,6 +219,8 @@ public class RepositorioClientesExcel implements RepositoriosClientes, Iterator 
 		String cpmt = linha.getCell(8).toString();
 		String senha = linha.getCell(9).toString();
 		Endereco endereco = new Endereco(cidade, logradouro, numero, cep, cpmt);
+		String entregasaux = linha.getCell(10).toString();
+		String[] entregas = entregasaux.split(" ");
 		return new Cliente(nome, idade, endereco, id1, senha);
 	}
 

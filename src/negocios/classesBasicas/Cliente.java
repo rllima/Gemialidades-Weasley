@@ -20,6 +20,15 @@ public class Cliente {
 		this.senha = senha;
 		this.entregas = new String[10];
 	}
+	
+	public Cliente(String nome, String idade, Endereco endereco, String id, String senha, String[] entregas) {
+		this.nome = nome;
+		this.idade = idade;
+		this.endereco = endereco;
+		this.id = id;
+		this.senha = senha;
+		this.entregas = entregas;
+	}
 
 	public String[] getEntregas() {
 		return entregas;
@@ -89,6 +98,14 @@ public class Cliente {
 			this.entregas[indice] = idEntrega;
 		}
 		indice++;
+	}
+	
+	public String getStringEntregas() {
+		String resposta = "";
+		for(int i = 0; i < indice; i++) {
+			resposta += entregas[i] + " ";
+		}
+		return resposta;
 	}
 
 }
