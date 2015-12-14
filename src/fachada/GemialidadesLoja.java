@@ -223,5 +223,13 @@ public class GemialidadesLoja {
 		}
 	return entrega;			
 	}
+	public Produto relatorioProdutos() throws FileNotFoundException, EmptyListException, IOException{
+		Iterator<Produto> itr = GemialidadesLoja.getInstance().getIteratorProduto();
+		Produto produtos = null;
+		while(itr.hasNext()){
+			produtos = itr.next();
+		}
+		return produtos;
+	}
 	
 }

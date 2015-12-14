@@ -5,7 +5,9 @@ import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -13,8 +15,10 @@ import javax.swing.border.EmptyBorder;
 
 import dados.repositorios.Iterator;
 import fachada.GemialidadesLoja;
+import negocios.classesBasicas.Entrega;
 import negocios.classesBasicas.Produto;
 import negocios.exceptions.EmptyListException;
+import sun.security.action.GetIntegerAction;
 
 import javax.swing.JLabel;
 import javax.swing.DefaultListModel;
@@ -67,21 +71,31 @@ public class Relatorios extends JFrame {
 		btnEntregasPendentes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				DefaultListModel dlm = new DefaultListModel();
-				//Iterator<Produto> itr = getIteratorProd();
-			//	while(itr.hasNext()) {
-					try {
-						dlm.addElement(GemialidadesLoja.getInstance().relatorioEntregasEnviadas());
-					} catch (FileNotFoundException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					} catch (EmptyListException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
+				Iterator<Entrega> itr;
+				try {
+					itr = GemialidadesLoja.getInstance().getIteratorEntPendentes();
+					while(itr.hasNext()) {
+						dlm.addElement(itr.next());
 					}
-			//	}
+					FileOutputStream rel = new FileOutputStream("RelatorioProdutosPendetes.txt");
+					ObjectOutputStream rl = new ObjectOutputStream(rel);
+					   
+	            while ( itr.hasNext()){
+	                	rl.writeObject(itr.next().toString() + "\n");
+	                }
+	            
+					rel.close();
+					rl.close();
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (EmptyListException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			
 				list.setModel(dlm);
 			}
@@ -90,9 +104,41 @@ public class Relatorios extends JFrame {
 		contentPane.add(btnEntregasPendentes);
 		
 		JButton btnEntregasEnviadas = new JButton("Entregas Enviadas");
+		btnEntregasEnviadas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				DefaultListModel dlm = new DefaultListModel();
+				Iterator<Entrega> itr;
+				try {
+					itr = GemialidadesLoja.getInstance().getIteratorEntEnviadas();
+					while(itr.hasNext()) {
+						dlm.addElement(itr.next());
+					}
+					FileOutputStream rel = new FileOutputStream("RelatorioProdutosEnviadas.txt");
+					ObjectOutputStream rl = new ObjectOutputStream(rel);
+					   
+	            while ( itr.hasNext()){
+	                	rl.writeObject(itr.next().toString() + "\n");
+	                }
+	            
+					rel.close();
+					rl.close();
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (EmptyListException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			
+				list.setModel(dlm);
+			}
+		});
 		btnEntregasEnviadas.setBounds(273, 272, 257, 23);
 		contentPane.add(btnEntregasEnviadas);
-		label.setIcon(new ImageIcon("C:\\Users\\Joel\\git\\gemialidades-weasley1\\images\\Fundo.jpg"));
+		label.setIcon(new ImageIcon("images\\Fundo.jpg"));
 		label.setBounds(0, 0, 540, 354);
 		contentPane.add(label);
 	}
