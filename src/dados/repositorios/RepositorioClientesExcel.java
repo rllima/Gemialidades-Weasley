@@ -105,7 +105,7 @@ public class RepositorioClientesExcel implements RepositoriosClientes, Iterator 
 				String entregasaux = linha.getCell(10).toString();
 				String[] entregas = entregasaux.split(" ");
 				endereco = new Endereco(cidade, logradouro, numero, cep, cpmt);
-				resposta = new Cliente(nome,idade, endereco, id1, senha);
+				resposta = new Cliente(nome,idade, endereco, id1, senha, entregas);
 
 			}
 		}
@@ -221,7 +221,7 @@ public class RepositorioClientesExcel implements RepositoriosClientes, Iterator 
 		Endereco endereco = new Endereco(cidade, logradouro, numero, cep, cpmt);
 		String entregasaux = linha.getCell(10).toString();
 		String[] entregas = entregasaux.split(" ");
-		return new Cliente(nome, idade, endereco, id1, senha);
+		return new Cliente(nome, idade, endereco, id1, senha, entregas);
 	}
 
 }
