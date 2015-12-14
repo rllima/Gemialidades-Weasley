@@ -92,7 +92,8 @@ public class RepositorioEntregasExcel implements RepositorioEntregas, Iterator {
 		String celula = "";
 		Row linha = null;
 		Entrega resposta = null;
-
+		
+		if(!isEmpty()) {
 		for (int i = 0; i <= this.indicePendentes; i++) {
 			linha = planilhaPendentes.getRow(i);
 			celula = linha.getCell(1).getStringCellValue();
@@ -102,6 +103,7 @@ public class RepositorioEntregasExcel implements RepositorioEntregas, Iterator {
 				resposta = new Entrega(id, idCliente, idProduto);
 
 			}
+		}
 		}
 
 		return resposta;
