@@ -36,15 +36,17 @@ public class Programa {
 			GemialidadesLoja loja = new GemialidadesLoja();
 			System.out.println("Loja instanciada com sucesso");
 			Endereco endereco = new Endereco("Recife", "Rua do crack", "90", "52041030", "Do lado da rua mizeravi");
-
+			String[] entregas = "51651 5656165 5615656 654654".split(" ");
+			
 			Cliente cliente1 = new Cliente("Alohea", "55", endereco, "alohea", "552");
-			Cliente cliente2 = new Cliente("Rodrigo", "15", endereco, "523", "rodelicia");
+			Cliente cliente2 = new Cliente("Rodrigo", "15", endereco, "523", "rodelicia", entregas);
 			Cliente cliente3 = new Cliente("dougie", "3", endereco, "como", "salsicha");
 
-			Produto travessura1 = new Travessuras("Orelha Extensível", "666", "Ouvir conversa alheia", 2, 15, 15.2);
-			Produto guloseima1 = new Guloseimas("Sapo de chocolate", "555", "Feijoeszinhos com sabores diversos",
+			
+			Produto travessura1 = new Travessuras("Orelha Extensível", "66aaa", "Ouvir conversa alheia", 2, 15, 15.2);
+			Produto guloseima1 = new Guloseimas("Sapo de chocolate", "5a5a5", "Feijoeszinhos com sabores diversos",
 					"Nunca saberás", 15.2);
-			Produto travessura2 = new Travessuras("Kit mata-aula", "777", "Kit fugir-de-ricardo", 0, 0, 6.8);
+			Produto travessura2 = new Travessuras("Kit mata-aula", "7a7a7", "Kit fugir-de-ricardo", 0, 0, 6.8);
 
 			System.out.println("Clientes e produtos instanciados com sucesso!\nCadastrando clientes...");
 			loja.inserirCliente(cliente1);

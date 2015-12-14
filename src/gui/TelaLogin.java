@@ -47,7 +47,7 @@ public class TelaLogin extends JFrame {
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				TelaLogin frame = new TelaLogin();
+				TelaLogin frame = new TelaLogin(); 
 				frame.setVisible(true);
 			}
 		});
@@ -162,8 +162,9 @@ public class TelaLogin extends JFrame {
 	}
 	
 	public void carregar() {
+		String[] entregas = "51651 5656165 5615656 654654".split(" ");
 		Cliente admin = new Cliente("Admin", "99", new Endereco("Hogsmeade", "Rua dos Alfeneiros", "666", "0000-000", "."), "admin", "bruxao");
-		Cliente teste = new Cliente("Admin", "99", new Endereco("Hogsmeade", "Rua dos Alfeneiros", "666", "0000-000", "."), "lfs", "bruxao");
+		Cliente teste = new Cliente("Admin", "99", new Endereco("Hogsmeade", "Rua dos Alfeneiros", "666", "0000-000", "."), "lfs", "bruxao", entregas);
 		Produto travessura1 = new Travessuras("Orelha Extensível", "666", "Ouvir conversa alheia", 2, 15, 15.2);
 		Produto guloseima1 = new Guloseimas("Sapo de chocolate", "555", "Feijoeszinhos com sabores diversos",
 				"Nunca saberás", 15.2);

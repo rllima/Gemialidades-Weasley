@@ -18,6 +18,7 @@ public class Cliente {
 		this.endereco = endereco;
 		this.id = id;
 		this.senha = senha;
+		this.indice = 0;
 		this.entregas = new String[10];
 	}
 	
@@ -27,6 +28,7 @@ public class Cliente {
 		this.endereco = endereco;
 		this.id = id;
 		this.senha = senha;
+		this.indice = entregas.length;
 		this.entregas = entregas;
 	}
 

@@ -35,6 +35,7 @@ import javax.swing.JScrollPane;
 import dados.repositorios.Iterator;
 import negocios.classesBasicas.Cliente;
 import negocios.classesBasicas.Endereco;
+import negocios.classesBasicas.Entrega;
 import negocios.classesBasicas.Guloseimas;
 import negocios.classesBasicas.Produto;
 import negocios.classesBasicas.Travessuras;
@@ -49,6 +50,8 @@ import java.awt.CardLayout;
 import javax.swing.DropMode;
 import javax.swing.ListSelectionModel;
 import javax.swing.JTextPane;
+import java.awt.Label;
+import javax.swing.UIManager;
 
 public class TelaPrincipal extends JFrame {
 
@@ -99,7 +102,7 @@ public class TelaPrincipal extends JFrame {
 		final JList<String> listMeusPedidos = new JList<String>();
 		listMeusPedidos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listMeusPedidos.setBorder(new EtchedBorder(EtchedBorder.RAISED, null, null));
-		listMeusPedidos.setBounds(80, 29, 465, 119);
+		listMeusPedidos.setBounds(80, 98, 465, 119);
 		panel_Pedidos.add(listMeusPedidos);
 		
 		final Cliente cliente = procurarCliente(idCliente);
@@ -129,16 +132,16 @@ public class TelaPrincipal extends JFrame {
 		btnMeusPedidos.setBounds(36, 234, 129, 44);
 		panel_Inicio.add(btnMeusPedidos);
 		
+		Label lblDetalhes = new Label("");
+		lblDetalhes.setBounds(150, 299, 325, 126);
+		panel_Pedidos.add(lblDetalhes);
 		
 		
-		JButton btnVerPedido = new JButton("Exibir Detalhes");
-		btnVerPedido.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnVerPedido.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		btnVerPedido.setBounds(246, 171, 133, 34);
-		panel_Pedidos.add(btnVerPedido);
+		
+		Label label = new Label("Escolha um item abaixo e clique em \r\n\"Exibir Detalhes\" para ver os detalhes \r\nde sua entrega.");
+		label.setBackground(Color.ORANGE);
+		label.setBounds(80, 70, 465, 22);
+		panel_Pedidos.add(label);
 		
 		JLabel bg_Pedidos = new JLabel("");
 		bg_Pedidos.setIcon(new ImageIcon("C:\\Users\\lfs\\Documents\\Projeto IP\\gemialidades-weasley3\\images\\Fundo.jpg"));
@@ -153,6 +156,20 @@ public class TelaPrincipal extends JFrame {
 		JButton btnAcessarLoja = new JButton("Acessar Loja");
 		btnAcessarLoja.setBounds(36, 158, 129, 44);
 		panel_Inicio.add(btnAcessarLoja);
+		
+		JButton btnVerPedido = new JButton("Exibir Detalhes");
+		btnVerPedido.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String entrega = listMeusPedidos.getSelectedValue();
+				Entrega aux = procurarEntrega(entrega);
+				String idProd = aux.getIdProduto();
+				Produto prod = procurarProduto(idProd);
+				String detalhes = prod.toString() + "\n\n Status da entrega: " + ;
+			}
+		});
+		btnVerPedido.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		btnVerPedido.setBounds(246, 240, 133, 34);
+		panel_Pedidos.add(btnVerPedido);
 		
 		JLabel gb = new JLabel("");
 		gb.setIcon(new ImageIcon("C:\\Users\\lfs\\Documents\\Projeto IP\\gemialidades-weasley3\\images\\Fundo.jpg"));
@@ -309,6 +326,38 @@ public class TelaPrincipal extends JFrame {
 		} catch (ClienteNaoEncontradoException e) {
 			JOptionPane.showMessageDialog(this, e.getMessage());
 		} catch (EmptyListException e) {
+			JOptionPane.showMessageDialog(this, e.getMessage());
+		}
+		return resposta;
+	}
+	
+	public Produto procurarProduto(String id) {
+		Produto resposta = null;
+		try {
+			resposta = GemialidadesLoja.getInstance().procurarProduto(id);
+		} catch (FileNotFoundException e) {
+			JOptionPane.showMessageDialog(this, e.getMessage());
+		} catch (ProdutoNaoEncontradoException e) {
+			JOptionPane.showMessageDialog(this, e.getMessage());
+		} catch (EmptyListException e) {
+			JOptionPane.showMessageDialog(this, e.getMessage());
+		} catch (IOException e) {
+			JOptionPane.showMessageDialog(this, e.getMessage());
+		}
+		return resposta;
+	}
+	
+	public Entrega procurarEntrega(String id) {
+		Entrega resposta = null;
+		try {
+			resposta = GemialidadesLoja.getInstance().procurarEntrega(id);
+		} catch (FileNotFoundException e) {
+			JOptionPane.showMessageDialog(this, e.getMessage());
+		} catch (EntregaNaoEncontradaException e) {
+			JOptionPane.showMessageDialog(this, e.getMessage());
+		} catch (EmptyListException e) {
+			JOptionPane.showMessageDialog(this, e.getMessage());
+		} catch (IOException e) {
 			JOptionPane.showMessageDialog(this, e.getMessage());
 		}
 		return resposta;
