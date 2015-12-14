@@ -94,13 +94,13 @@ public class Programa {
 				System.out.println("\n");
 			}
 
-            System.out.println("Gerando relatorios de Enviadas...");
+            System.out.println("Gerando relatorios de Estoque...");
 
-			FileOutputStream rel = new FileOutputStream("RelatorioProdutosPendetes.txt");
+			FileOutputStream rel = new FileOutputStream("RelatorioProdutosEstoque.txt");
 			ObjectOutputStream rl = new ObjectOutputStream(rel);
-
-			while ( env.hasNext()){
-				rl.writeObject(env.next().toString() + "\n");
+            Iterator rela = GemialidadesLoja.getInstance().getIteratorProduto();
+			while ( rela.hasNext()){
+				rl.writeObject(rela.next().toString() + "\n");
 			}
 
 			rel.close();
