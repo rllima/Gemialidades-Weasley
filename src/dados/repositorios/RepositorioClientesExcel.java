@@ -70,7 +70,7 @@ public class RepositorioClientesExcel implements RepositoriosClientes, Iterator 
 		celula.setCellValue(clientes.getSenha());
 
 		indice++;
-		//this.write();
+		
 	}
 
 	/** 
@@ -125,7 +125,7 @@ public class RepositorioClientesExcel implements RepositoriosClientes, Iterator 
 		planilha.getRow(aux).getCell(6).setCellValue(clientes.getEndereco().getCep());
 		planilha.getRow(aux).getCell(7).setCellValue(clientes.getEndereco().getComplemento());
 
-		this.write();
+
 
 
 	}
@@ -142,7 +142,7 @@ public class RepositorioClientesExcel implements RepositoriosClientes, Iterator 
 		planilha.removeRow(aux);
 		planilha.shiftRows((posicao+1), (indice-1), -1);
 		indice--;
-		this.write();
+	
 
 	}
 	
@@ -176,12 +176,7 @@ public class RepositorioClientesExcel implements RepositoriosClientes, Iterator 
 	 * @throws IOException
 	 */
 	
-	private void write() throws IOException {
-		
-		FileOutputStream saidaArquivo = new FileOutputStream("planilha.xls");
-		workbook.write(saidaArquivo);
-		saidaArquivo.close();
-	}
+	
 	
 	public int size() {
 		return planilha.getPhysicalNumberOfRows();

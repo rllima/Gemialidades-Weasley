@@ -89,12 +89,11 @@ public class Estoque extends JFrame {
 				try {
 					FileOutputStream rel = new FileOutputStream("RelatorioEstoque.txt");
 					ObjectOutputStream rl = new ObjectOutputStream(rel);
-					Iterator produto = GemialidadesLoja.getInstance().getIteratorProduto();      //Ainda não funciona
+					Iterator produto = GemialidadesLoja.getInstance().getIteratorProduto();     
 	            while ( produto.hasNext()){
 	                	rl.writeObject(produto.next().toString() + "\n");
 	                }
-					
-					
+	            
 					rel.close();
 					rl.close();
 					
