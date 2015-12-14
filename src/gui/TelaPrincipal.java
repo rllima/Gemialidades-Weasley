@@ -43,7 +43,12 @@ import negocios.exceptions.ClienteNaoEncontradoException;
 import negocios.exceptions.EmptyListException;
 import negocios.exceptions.EntregaJaExisteException;
 import negocios.exceptions.EntregaNaoEncontradaException;
+import negocios.exceptions.ProdutoJaExisteException;
 import negocios.exceptions.ProdutoNaoEncontradoException;
+import java.awt.CardLayout;
+import javax.swing.DropMode;
+import javax.swing.ListSelectionModel;
+import javax.swing.JTextPane;
 
 public class TelaPrincipal extends JFrame {
 
@@ -71,7 +76,6 @@ public class TelaPrincipal extends JFrame {
 	 */
 	public TelaPrincipal(final String idCliente) {
 		this.idCliente = idCliente;
-		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 642, 482);
 		contentPane = new JPanel();
@@ -79,35 +83,115 @@ public class TelaPrincipal extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+		final JPanel panel_Principal = new JPanel();
+		panel_Principal.setBounds(0, 0, 626, 444);
+		contentPane.add(panel_Principal);
+		panel_Principal.setLayout(new CardLayout(0, 0));
+		
+		JPanel panel_Inicio = new JPanel();
+		panel_Principal.add(panel_Inicio, "name_8389093730324");
+		panel_Inicio.setLayout(null);
+		
+		final JPanel panel_Pedidos = new JPanel();
+		panel_Principal.add(panel_Pedidos, "name_8874782706953");
+		panel_Pedidos.setLayout(null);
+		
+		final JList<String> listMeusPedidos = new JList<String>();
+		listMeusPedidos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		listMeusPedidos.setBorder(new EtchedBorder(EtchedBorder.RAISED, null, null));
+		listMeusPedidos.setBounds(80, 29, 465, 119);
+		panel_Pedidos.add(listMeusPedidos);
+		
+		final Cliente cliente = procurarCliente(idCliente);
+		
+		JButton btnMeusPedidos = new JButton("Meus Pedidos");
+		btnMeusPedidos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				panel_Principal.setVisible(true);
+				// Limpando
+				panel_Principal.removeAll();
+				panel_Principal.repaint();
+				panel_Principal.revalidate();
+				// Adicionando novo panel
+				panel_Principal.add(panel_Pedidos);
+				panel_Principal.repaint();
+				panel_Principal.revalidate();
+				
+				DefaultListModel<String> dlm = new DefaultListModel<String>();
+				String[] entregas = cliente.getEntregas();
+				for(int i = 0; i < entregas.length; i++) {
+					dlm.addElement(entregas[i]);
+				}
+				listMeusPedidos.setModel(dlm);
+				
+			}
+		});
+		btnMeusPedidos.setBounds(36, 234, 129, 44);
+		panel_Inicio.add(btnMeusPedidos);
+		
+		
+		
+		JButton btnVerPedido = new JButton("Exibir Detalhes");
+		btnVerPedido.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnVerPedido.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		btnVerPedido.setBounds(246, 171, 133, 34);
+		panel_Pedidos.add(btnVerPedido);
+		
+		JLabel bg_Pedidos = new JLabel("");
+		bg_Pedidos.setIcon(new ImageIcon("C:\\Users\\lfs\\Documents\\Projeto IP\\gemialidades-weasley3\\images\\Fundo.jpg"));
+		bg_Pedidos.setBorder(new LineBorder(new Color(0, 0, 0)));
+		bg_Pedidos.setBounds(0, 0, 626, 444);
+		panel_Pedidos.add(bg_Pedidos);
+		
+		final JPanel panel_Compras = new JPanel();
+		panel_Principal.add(panel_Compras, "name_8363944213279");
+		panel_Compras.setLayout(null);
+		
+		JButton btnAcessarLoja = new JButton("Acessar Loja");
+		btnAcessarLoja.setBounds(36, 158, 129, 44);
+		panel_Inicio.add(btnAcessarLoja);
+		
+		JLabel gb = new JLabel("");
+		gb.setIcon(new ImageIcon("C:\\Users\\lfs\\Documents\\Projeto IP\\gemialidades-weasley3\\images\\Fundo.jpg"));
+		gb.setBorder(new LineBorder(new Color(0, 0, 0)));
+		gb.setBounds(0, 0, 626, 444);
+		panel_Inicio.add(gb);
+		btnAcessarLoja.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				panel_Principal.setVisible(true);
+				// Limpando
+				panel_Principal.removeAll();
+				panel_Principal.repaint();
+				panel_Principal.revalidate();
+				// Adicionando novo panel
+				panel_Principal.add(panel_Compras);
+				panel_Principal.repaint();
+				panel_Principal.revalidate();
+			}
+		});
+		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 66, 606, 109);
-		contentPane.add(scrollPane);
+		scrollPane.setBounds(10, 286, 604, 107);
+		panel_Compras.add(scrollPane);	
 		
 		final JList<String> list_Produtos = new JList<String>();
 		scrollPane.setViewportView(list_Produtos);
 		list_Produtos.setBorder(new EtchedBorder(EtchedBorder.RAISED, null, null));
 		
 		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(10, 277, 606, 109);
-		contentPane.add(scrollPane_1);
-
-		JButton btnGet = new JButton("Get");
-		btnGet.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				DefaultListModel<String> dlm = new DefaultListModel<String>();
-				Iterator<Produto> itr = getIteratorProd();
-				while(itr.hasNext()) {
-					dlm.addElement(itr.next().getNome());
-				}
-				list_Produtos.setModel(dlm);
-			}
-		});
+		scrollPane_1.setBounds(10, 130, 604, 107);
+		panel_Compras.add(scrollPane_1);
 		
 		final JList<String> list_Carrinho = new JList<String>();
 		scrollPane_1.setViewportView(list_Carrinho);
 		list_Carrinho.setBorder(new EtchedBorder(EtchedBorder.RAISED, null, null));
 		
 		JButton btnAddCarrinho = new JButton("Adicionar ao Carrinho");
+		btnAddCarrinho.setBounds(239, 241, 148, 23);
+		panel_Compras.add(btnAddCarrinho);
 		btnAddCarrinho.addActionListener(new ActionListener() {
 			DefaultListModel<String> dlmCarrinho = new DefaultListModel<String>();
 			public void actionPerformed(ActionEvent e) {
@@ -119,10 +203,10 @@ public class TelaPrincipal extends JFrame {
 			}
 		});
 		btnAddCarrinho.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		btnAddCarrinho.setBounds(239, 186, 148, 23);
-		contentPane.add(btnAddCarrinho);
 		
 		JButton btnFinalizarCompra = new JButton("Finalizar Compra");
+		btnFinalizarCompra.setBounds(246, 399, 133, 34);
+		panel_Compras.add(btnFinalizarCompra);
 		btnFinalizarCompra.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				int qtde = list_Carrinho.getModel().getSize();
@@ -137,17 +221,31 @@ public class TelaPrincipal extends JFrame {
 			}
 		});
 		btnFinalizarCompra.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		btnFinalizarCompra.setBounds(247, 399, 133, 34);
-		contentPane.add(btnFinalizarCompra);
 		
-		btnGet.setBounds(10, 405, 89, 23);
-		contentPane.add(btnGet);
-		
-		JLabel background = new JLabel("");
-		background.setBorder(new LineBorder(new Color(0, 0, 0)));
-		background.setIcon(new ImageIcon("C:\\Users\\lfs\\git\\gemialidades-weasley\\images\\Fundo.jpg"));
-		background.setBounds(0, 0, 626, 444);
-		contentPane.add(background);
+				JButton btnGet = new JButton("Get");
+				btnGet.setBounds(33, 63, 89, 23);
+				panel_Compras.add(btnGet);
+				
+				JLabel bg_Compras = new JLabel("");
+				bg_Compras.setIcon(new ImageIcon("C:\\Users\\lfs\\Documents\\Projeto IP\\gemialidades-weasley3\\images\\Fundo.jpg"));
+				bg_Compras.setBorder(new LineBorder(new Color(0, 0, 0)));
+				bg_Compras.setBounds(0, 0, 626, 444);
+				panel_Compras.add(bg_Compras);
+				
+				JLabel background = new JLabel("");
+				panel_Principal.add(background, "name_9518700264771");
+				background.setBorder(new LineBorder(new Color(0, 0, 0)));
+				background.setIcon(new ImageIcon("C:\\Users\\lfs\\Documents\\Projeto IP\\gemialidades-weasley3\\images\\Fundo.jpg"));
+				btnGet.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						DefaultListModel<String> dlm = new DefaultListModel<String>();
+						Iterator<Produto> itr = getIteratorProd();
+						while(itr.hasNext()) {
+							dlm.addElement(itr.next().getNome());
+						}
+						list_Produtos.setModel(dlm);
+					}
+				});
 	}
 	
 	public Iterator<Produto> getIteratorProd() {
@@ -198,5 +296,21 @@ public class TelaPrincipal extends JFrame {
 		} catch (ClienteNaoEncontradoException e) {
 			JOptionPane.showMessageDialog(this, e.getMessage());
 		}
+	}
+	
+	public Cliente procurarCliente(String id) {
+		Cliente resposta = null;
+		try {
+			resposta = GemialidadesLoja.getInstance().procurarCliente(id);
+		} catch (FileNotFoundException e) {
+			JOptionPane.showMessageDialog(this, e.getMessage());
+		} catch (IOException e) {
+			JOptionPane.showMessageDialog(this, e.getMessage());
+		} catch (ClienteNaoEncontradoException e) {
+			JOptionPane.showMessageDialog(this, e.getMessage());
+		} catch (EmptyListException e) {
+			JOptionPane.showMessageDialog(this, e.getMessage());
+		}
+		return resposta;
 	}
 }
