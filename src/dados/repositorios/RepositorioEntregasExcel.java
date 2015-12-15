@@ -94,12 +94,12 @@ public class RepositorioEntregasExcel implements RepositorioEntregas, Iterator {
 		Entrega resposta = null;
 
 		if(!isEmpty()) {
-			for (int i = 0; i <= this.indicePendentes; i++) {
+			for (int i = 0; i < this.indicePendentes; i++) {
 				linha = planilhaPendentes.getRow(i);
-				celula = linha.getCell(1).getStringCellValue();
+				celula = linha.getCell(1).toString();
 				if (id.equalsIgnoreCase(celula)) {
-					String idCliente = linha.getCell(2).getStringCellValue();
-					String idProduto = linha.getCell(3).getStringCellValue();
+					String idCliente = linha.getCell(2).toString();
+					String idProduto = linha.getCell(3).toString();
 					resposta = new Entrega(id, idCliente, idProduto);
 
 				}
