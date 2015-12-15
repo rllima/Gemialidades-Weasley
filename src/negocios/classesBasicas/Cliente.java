@@ -93,7 +93,7 @@ public class Cliente {
 	}
 
 	public void addEntrega(String idEntrega) {
-		if (indice > this.entregas.length) {
+		if (indice >= this.entregas.length) {
 			String[] aux = new String[entregas.length * 2];
 			for (int i = 0; i < indice; i++) {
 				aux[i] = this.entregas[i];

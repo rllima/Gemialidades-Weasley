@@ -97,6 +97,7 @@ public class Estoque extends JFrame {
 	            
 					rel.close();
 					rl.close();
+					JOptionPane.showMessageDialog(null, "Relatorio gerado com sucesso!");
 					
 				} catch (FileNotFoundException e1) {
 					JOptionPane.showMessageDialog(null, e1.getMessage());
