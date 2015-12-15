@@ -165,8 +165,6 @@ public class TelaLogin extends JFrame {
 	}
 	
 	public void carregar() {
-		String[] entregas = "51651 5656165 5615656 654654".split(" ");
-		Entrega entrega1 = new Entrega("51651", "lfs", "555");
 		Cliente admin = new Cliente("Admin", "99", new Endereco("Hogsmeade", "Rua dos Alfeneiros", "666", "0000-000", "."), "Admin", "admin");
 		Cliente teste = new Cliente("Admin", "99", new Endereco("Hogsmeade", "Rua dos Alfeneiros", "666", "0000-000", "."), "lfs", "bruxao");
 		Produto travessura1 = new Travessuras("Orelha Extensível", "666", "Ouvir conversa alheia", 2, 15, 15.2);

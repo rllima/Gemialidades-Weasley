@@ -52,6 +52,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.JTextPane;
 import java.awt.Label;
 import javax.swing.UIManager;
+import java.awt.ComponentOrientation;
 
 public class TelaPrincipal extends JFrame {
 
@@ -91,7 +92,7 @@ public class TelaPrincipal extends JFrame {
 		contentPane.add(panel_Principal);
 		panel_Principal.setLayout(new CardLayout(0, 0));
 		
-		JPanel panel_Inicio = new JPanel();
+		final JPanel panel_Inicio = new JPanel();
 		panel_Principal.add(panel_Inicio, "name_8389093730324");
 		panel_Inicio.setLayout(null);
 		
@@ -132,11 +133,28 @@ public class TelaPrincipal extends JFrame {
 		btnMeusPedidos.setBounds(36, 234, 129, 44);
 		panel_Inicio.add(btnMeusPedidos);
 		
+		JButton btnNewButton = new JButton("Voltar");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				panel_Principal.setVisible(true);
+				// Limpando
+				panel_Principal.removeAll();
+				panel_Principal.repaint();
+				panel_Principal.revalidate();
+				// Adicionando novo panel
+				panel_Principal.add(panel_Inicio);
+				panel_Principal.repaint();
+				panel_Principal.revalidate();
+			}
+		});
+		btnNewButton.setBounds(10, 405, 73, 28);
+		panel_Pedidos.add(btnNewButton);
+		
 		final Label lblDetalhes = new Label("");
+		lblDetalhes.setAlignment(Label.CENTER);
+		lblDetalhes.setBackground(Color.WHITE);
 		lblDetalhes.setBounds(150, 299, 325, 126);
 		panel_Pedidos.add(lblDetalhes);
-		
-		
 		
 		Label label = new Label("Escolha um item abaixo e clique em \r\n\"Exibir Detalhes\" para ver os detalhes \r\nde sua entrega.");
 		label.setBackground(Color.ORANGE);
@@ -144,7 +162,7 @@ public class TelaPrincipal extends JFrame {
 		panel_Pedidos.add(label);
 		
 		JLabel bg_Pedidos = new JLabel("");
-		bg_Pedidos.setIcon(new ImageIcon("C:\\Users\\lfs\\Documents\\Projeto IP\\gemialidades-weasley3\\images\\Fundo.jpg"));
+		bg_Pedidos.setIcon(new ImageIcon("images\\Fundo.jpg"));
 		bg_Pedidos.setBorder(new LineBorder(new Color(0, 0, 0)));
 		bg_Pedidos.setBounds(0, 0, 626, 444);
 		panel_Pedidos.add(bg_Pedidos);
@@ -181,7 +199,7 @@ public class TelaPrincipal extends JFrame {
 		panel_Pedidos.add(btnVerPedido);
 		
 		JLabel gb = new JLabel("");
-		gb.setIcon(new ImageIcon("C:\\Users\\lfs\\Documents\\Projeto IP\\gemialidades-weasley3\\images\\Fundo.jpg"));
+		gb.setIcon(new ImageIcon("images\\Fundo.jpg"));
 		gb.setBorder(new LineBorder(new Color(0, 0, 0)));
 		gb.setBounds(0, 0, 626, 444);
 		panel_Inicio.add(gb);
@@ -216,7 +234,7 @@ public class TelaPrincipal extends JFrame {
 		list_Carrinho.setBorder(new EtchedBorder(EtchedBorder.RAISED, null, null));
 		
 		JButton btnAddCarrinho = new JButton("Adicionar ao Carrinho");
-		btnAddCarrinho.setBounds(239, 241, 148, 23);
+		btnAddCarrinho.setBounds(239, 241, 148, 34);
 		panel_Compras.add(btnAddCarrinho);
 		btnAddCarrinho.addActionListener(new ActionListener() {
 			DefaultListModel<String> dlmCarrinho = new DefaultListModel<String>();
@@ -231,7 +249,7 @@ public class TelaPrincipal extends JFrame {
 		btnAddCarrinho.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		
 		JButton btnFinalizarCompra = new JButton("Finalizar Compra");
-		btnFinalizarCompra.setBounds(246, 399, 133, 34);
+		btnFinalizarCompra.setBounds(246, 399, 148, 34);
 		panel_Compras.add(btnFinalizarCompra);
 		btnFinalizarCompra.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -253,7 +271,7 @@ public class TelaPrincipal extends JFrame {
 				panel_Compras.add(btnGet);
 				
 				JLabel bg_Compras = new JLabel("");
-				bg_Compras.setIcon(new ImageIcon("C:\\Users\\lfs\\Documents\\Projeto IP\\gemialidades-weasley3\\images\\Fundo.jpg"));
+				bg_Compras.setIcon(new ImageIcon("images\\Fundo.jpg"));
 				bg_Compras.setBorder(new LineBorder(new Color(0, 0, 0)));
 				bg_Compras.setBounds(0, 0, 626, 444);
 				panel_Compras.add(bg_Compras);
@@ -261,7 +279,7 @@ public class TelaPrincipal extends JFrame {
 				JLabel background = new JLabel("");
 				panel_Principal.add(background, "name_9518700264771");
 				background.setBorder(new LineBorder(new Color(0, 0, 0)));
-				background.setIcon(new ImageIcon("C:\\Users\\lfs\\Documents\\Projeto IP\\gemialidades-weasley3\\images\\Fundo.jpg"));
+				background.setIcon(new ImageIcon("images\\Fundo.jpg"));
 				btnGet.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
 						DefaultListModel<String> dlm = new DefaultListModel<String>();
