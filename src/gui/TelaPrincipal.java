@@ -132,7 +132,7 @@ public class TelaPrincipal extends JFrame {
 		btnMeusPedidos.setBounds(36, 234, 129, 44);
 		panel_Inicio.add(btnMeusPedidos);
 		
-		Label lblDetalhes = new Label("");
+		final Label lblDetalhes = new Label("");
 		lblDetalhes.setBounds(150, 299, 325, 126);
 		panel_Pedidos.add(lblDetalhes);
 		
@@ -161,10 +161,19 @@ public class TelaPrincipal extends JFrame {
 		btnVerPedido.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String entrega = listMeusPedidos.getSelectedValue();
+				String isEnviada;
+				if(isEnviada(entrega)) {
+					isEnviada = "Enviada";
+				} else {
+					isEnviada = "Ainda não enviada";
+				}
 				Entrega aux = procurarEntrega(entrega);
 				String idProd = aux.getIdProduto();
 				Produto prod = procurarProduto(idProd);
-				String detalhes = prod.toString() + "\n\n Status da entrega: " + ;
+				
+				String detalhes = prod.toString() + "\n\n Status da entrega: " + isEnviada;
+				
+				lblDetalhes.setText(detalhes);
 			}
 		});
 		btnVerPedido.setFont(new Font("Tahoma", Font.PLAIN, 11));
@@ -279,6 +288,34 @@ public class TelaPrincipal extends JFrame {
 		return itr;
 	}
 	
+	public Iterator<Entrega> getIteratorEntPendentes() {
+		Iterator<Entrega> itr = null;
+		try {
+			itr = GemialidadesLoja.getInstance().getIteratorEntPendentes();
+		} catch (FileNotFoundException e) {
+			JOptionPane.showMessageDialog(this, e.getMessage());
+		} catch (EmptyListException e) {
+			JOptionPane.showMessageDialog(this, e.getMessage());
+		} catch (IOException e) {
+			JOptionPane.showMessageDialog(this, e.getMessage());
+		}
+		return itr;
+	}
+	
+	public Iterator<Entrega> getIteratorEntEnviadas() {
+		Iterator<Entrega> itr = null;
+		try {
+			itr = GemialidadesLoja.getInstance().getIteratorEntEnviadas();
+		} catch (FileNotFoundException e) {
+			JOptionPane.showMessageDialog(this, e.getMessage());
+		} catch (EmptyListException e) {
+			JOptionPane.showMessageDialog(this, e.getMessage());
+		} catch (IOException e) {
+			JOptionPane.showMessageDialog(this, e.getMessage());
+		}
+		return itr;
+	}
+	
 	public Produto procurarProdNome(String nome) {
 		Produto produto = null;
 		try {
@@ -361,5 +398,15 @@ public class TelaPrincipal extends JFrame {
 			JOptionPane.showMessageDialog(this, e.getMessage());
 		}
 		return resposta;
+	}
+	
+	public boolean isEnviada(String entregaId) {
+		Iterator<Entrega> itr = this.getIteratorEntEnviadas();
+		while(itr.hasNext()) {
+			if(itr.next().getId().equals(entregaId)) {
+				return true;
+			}
+		}
+		return false;
 	}
 }

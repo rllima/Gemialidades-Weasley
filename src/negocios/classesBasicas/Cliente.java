@@ -1,7 +1,7 @@
 package negocios.classesBasicas;
 
 public class Cliente {
-	
+
 	private String nome;
 	private String idade;
 	private Endereco endereco;
@@ -21,25 +21,29 @@ public class Cliente {
 		this.indice = 0;
 		this.entregas = new String[10];
 	}
-	
+
 	public Cliente(String nome, String idade, Endereco endereco, String id, String senha, String[] entregas) {
 		this.nome = nome;
 		this.idade = idade;
 		this.endereco = endereco;
 		this.id = id;
 		this.senha = senha;
-		this.indice = entregas.length;
+		if(entregas[0] == "") {
+			this.indice = 0;
+		} else {
+			this.indice = entregas.length;
+		}
 		this.entregas = entregas;
 	}
 
 	public String[] getEntregas() {
 		return entregas;
 	}
-	
+
 	public void setEntregas(String[] entregas) {
 		this.entregas = entregas;
 	}
-	
+
 	public String getNome() {
 		return nome;
 	}
@@ -71,23 +75,23 @@ public class Cliente {
 	public void setId(String id) {
 		this.id = id;
 	}
-	
+
 	public String getSenha() {
 		return senha;
 	}
-	
+
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-	
+
 	public String toString() {
-       return "Nome: " + this.nome + "\nIdade: " + this.idade + "\nEndereço: " + this.endereco + "\nId: " + this.id;
+		return "Nome: " + this.nome + "\nIdade: " + this.idade + "\nEndereço: " + this.endereco + "\nId: " + this.id;
 	}
 	public Cliente clone(){
 		Cliente cliente = new Cliente(this.nome, this.idade, this.getEndereco().clone(), this.id, this.senha);
 		return cliente;
 	}
-	
+
 	public void addEntrega(String idEntrega) {
 		if (indice > this.entregas.length) {
 			String[] aux = new String[entregas.length * 2];
@@ -101,7 +105,7 @@ public class Cliente {
 		}
 		indice++;
 	}
-	
+
 	public String getStringEntregas() {
 		String resposta = "";
 		for(int i = 0; i < indice; i++) {

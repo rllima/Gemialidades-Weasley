@@ -195,7 +195,7 @@ public class GemialidadesLoja {
 	}
 
 	public void vender(String idProduto, String idCliente) throws EntregaJaExisteException,
-			EmptyListException, EntregaNaoEncontradaException, ProdutoNaoEncontradoException, ClienteNaoEncontradoException {
+			EmptyListException, EntregaNaoEncontradaException, ProdutoNaoEncontradoException, ClienteNaoEncontradoException, IOException {
 		String idEntrega = Integer.toString((int) Math.random());
 		while(repEntregas.procurar(idEntrega) != null) {
 			idEntrega = Integer.toString((int) Math.random());
@@ -204,6 +204,7 @@ public class GemialidadesLoja {
 		repEntregas.cadastrar(entrega);
 		Cliente cliente = repClientes.procurar(idCliente);
 		cliente.addEntrega(idEntrega);
+		this.atualizarCliente(idCliente, cliente);
 	}
 	
 }

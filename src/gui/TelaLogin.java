@@ -21,7 +21,10 @@ import negocios.classesBasicas.*;
 import negocios.exceptions.ClienteJaExisteException;
 import negocios.exceptions.ClienteNaoEncontradoException;
 import negocios.exceptions.EmptyListException;
+import negocios.exceptions.EntregaJaExisteException;
+import negocios.exceptions.EntregaNaoEncontradaException;
 import negocios.exceptions.ProdutoJaExisteException;
+import negocios.exceptions.ProdutoNaoEncontradoException;
 import negocios.exceptions.SenhaIncoretaException;
 import javax.swing.ImageIcon;
 import java.awt.Rectangle;
@@ -163,8 +166,9 @@ public class TelaLogin extends JFrame {
 	
 	public void carregar() {
 		String[] entregas = "51651 5656165 5615656 654654".split(" ");
-		Cliente admin = new Cliente("Admin", "99", new Endereco("Hogsmeade", "Rua dos Alfeneiros", "666", "0000-000", "."), "admin", "bruxao");
-		Cliente teste = new Cliente("Admin", "99", new Endereco("Hogsmeade", "Rua dos Alfeneiros", "666", "0000-000", "."), "lfs", "bruxao", entregas);
+		Entrega entrega1 = new Entrega("51651", "lfs", "555");
+		Cliente admin = new Cliente("Admin", "99", new Endereco("Hogsmeade", "Rua dos Alfeneiros", "666", "0000-000", "."), "Admin", "admin");
+		Cliente teste = new Cliente("Admin", "99", new Endereco("Hogsmeade", "Rua dos Alfeneiros", "666", "0000-000", "."), "lfs", "bruxao");
 		Produto travessura1 = new Travessuras("Orelha Extensível", "666", "Ouvir conversa alheia", 2, 15, 15.2);
 		Produto guloseima1 = new Guloseimas("Sapo de chocolate", "555", "Feijoeszinhos com sabores diversos",
 				"Nunca saberás", 15.2);
@@ -175,6 +179,7 @@ public class TelaLogin extends JFrame {
 			GemialidadesLoja.getInstance().cadastrarProduto(travessura1);
 			GemialidadesLoja.getInstance().cadastrarProduto(guloseima1);
 			GemialidadesLoja.getInstance().cadastrarProduto(travessura2);
+			GemialidadesLoja.getInstance().vender("777", "lfs");
 		} catch (FileNotFoundException e) {
 			JOptionPane.showMessageDialog(this, e.getMessage());
 		} catch (ClienteJaExisteException e) {
@@ -182,6 +187,16 @@ public class TelaLogin extends JFrame {
 		} catch (IOException e) {
 			JOptionPane.showMessageDialog(this, e.getMessage());
 		} catch (ProdutoJaExisteException e) {
+			JOptionPane.showMessageDialog(this, e.getMessage());
+		} catch (EntregaJaExisteException e) {
+			JOptionPane.showMessageDialog(this, e.getMessage());
+		} catch (EmptyListException e) {
+			JOptionPane.showMessageDialog(this, e.getMessage());
+		} catch (EntregaNaoEncontradaException e) {
+			JOptionPane.showMessageDialog(this, e.getMessage());
+		} catch (ProdutoNaoEncontradoException e) {
+			JOptionPane.showMessageDialog(this, e.getMessage());
+		} catch (ClienteNaoEncontradoException e) {
 			JOptionPane.showMessageDialog(this, e.getMessage());
 		}
 	}
