@@ -39,9 +39,9 @@ public class Estoque extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					Estoque frame = new Estoque(loja);
 					GemialidadesLoja.getInstance().cadastrarProduto(new Travessuras("Orelhas Extensíveis", "001","Saber de todos os Segredos",3.0, 8, 5.0));
 					GemialidadesLoja.getInstance().cadastrarProduto(new Travessuras("Orelhas Extensíveis", "002","Saber de todos os Segredos",3.0, 8, 5.0));
-					Estoque frame = new Estoque(loja);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();

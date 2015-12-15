@@ -85,7 +85,7 @@ public class RepositorioProdutosExcel implements RepositorioProdutos, Iterator {
 		Row linha = null;
 		Produto resposta = null;
 
-		for (int i = 0; i <= this.indice; i++) {
+		for (int i = 0; i < this.indice; i++) {
 			if (planilha.getRow(i) != null) {
 				linha = planilha.getRow(i);
 				celula = linha.getCell(2).toString();

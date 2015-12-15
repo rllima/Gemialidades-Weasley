@@ -99,7 +99,7 @@ public class TelaLogin extends JFrame {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(tf_ID.getText().equalsIgnoreCase("Admin") && tf_Senha.getText().equalsIgnoreCase("Admin")){
-					TelaAdmin telaAdmin = new TelaAdmin();
+					TelaAdmin telaAdmin = new TelaAdmin(loja);
 					telaAdmin.setVisible(true);
 				}else if(login(tf_ID.getText(), tf_Senha.getText())) {
 					TelaPrincipal telaPrincipal = new TelaPrincipal(tf_ID.getText());

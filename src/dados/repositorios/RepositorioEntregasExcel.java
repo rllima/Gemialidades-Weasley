@@ -94,7 +94,7 @@ public class RepositorioEntregasExcel implements RepositorioEntregas, Iterator {
 		Entrega resposta = null;
 
 		if(!isEmpty()) {
-			for (int i = 0; i <= this.indicePendentes; i++) {
+			for (int i = 0; i < this.indicePendentes; i++) {
 				linha = planilhaPendentes.getRow(i);
 				celula = linha.getCell(1).getStringCellValue();
 				if (id.equalsIgnoreCase(celula)) {
