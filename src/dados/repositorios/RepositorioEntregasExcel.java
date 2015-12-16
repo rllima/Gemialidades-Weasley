@@ -243,7 +243,8 @@ public class RepositorioEntregasExcel implements RepositorioEntregas, Iterator {
 		return temp;
 	}
 	public boolean isEmpty() {
-		return planilhaPendentes.getPhysicalNumberOfRows() == 0;
+		
+		return this.getIndicePend() == 0;
 	}
 
 
