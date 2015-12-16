@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Random;
 
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
@@ -216,10 +217,7 @@ public class GemialidadesLoja {
 
 	public void vender(String idProduto, String idCliente) throws EntregaJaExisteException,
 			EmptyListException, EntregaNaoEncontradaException, ProdutoNaoEncontradoException, ClienteNaoEncontradoException, IOException {
-		String idEntrega = Integer.toString((int) Math.random());
-		while(GemialidadesLoja.getInstance().getIteratorEntPendentes().hasNext()) {
-			idEntrega = Integer.toString((int) Math.random());
-		}
+		String idEntrega = idCliente + idProduto;
 		Entrega entrega = new Entrega(idEntrega, idCliente, idProduto);
 		GemialidadesLoja.getInstance().cadastrarEntrega(entrega);
 		Cliente cliente = GemialidadesLoja.getInstance().procurarCliente(idCliente);

@@ -11,6 +11,7 @@ import java.io.IOException;
 
 import dados.repositorios.Iterator;
 import dados.repositorios.RepositorioEntregas;
+import dados.repositorios.RepositorioEntregasExcel;
 import dados.repositorios.RepositorioEntregasFila;
 
 public class CadastroEntregas {
