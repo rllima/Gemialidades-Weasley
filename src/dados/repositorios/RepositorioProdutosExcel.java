@@ -25,7 +25,7 @@ public class RepositorioProdutosExcel implements RepositorioProdutos, Iterator {
 		} else {
 			this.planilha = workbook.createSheet("Produtos");
 		}
-		this.indice = workbook.getSheet("Produtos").getPhysicalNumberOfRows();
+		this.indice = this.planilha.getPhysicalNumberOfRows();
 	}
 	private RepositorioProdutosExcel(Produto[] itr) {
 		this.indiceIterator = 0;
@@ -84,8 +84,9 @@ public class RepositorioProdutosExcel implements RepositorioProdutos, Iterator {
 		String celula = "";
 		Row linha = null;
 		Produto resposta = null;
+		boolean achou = false;
 
-		for (int i = 0; i <= this.indice; i++) {
+		for (int i = 0; i < this.indice && !achou; i++) {
 			if (planilha.getRow(i) != null) {
 				linha = planilha.getRow(i);
 				celula = linha.getCell(2).toString();
@@ -105,6 +106,7 @@ public class RepositorioProdutosExcel implements RepositorioProdutos, Iterator {
 						resposta = new Travessuras(nome, codigo, descricao, nivel, censura, preco);
 					}
 
+					achou = true;
 				}
 			}
 		}
@@ -123,10 +125,12 @@ public class RepositorioProdutosExcel implements RepositorioProdutos, Iterator {
 		planilha.getRow(aux).getCell(3).setCellValue(produtos.getDescricao());
 		if (planilha.getRow(aux).getCell(0).toString().equalsIgnoreCase("Guloseima")) {
 			planilha.getRow(aux).getCell(4).setCellValue(((Guloseimas) produtos).getSabor());
+			planilha.getRow(aux).getCell(5).setCellValue(produtos.getPreco());
+
 		} else {
 			planilha.getRow(aux).getCell(4).setCellValue(((Travessuras) produtos).getNivelPericulosidade());
 			planilha.getRow(aux).getCell(5).setCellValue(((Travessuras) produtos).getCensura());
-
+			planilha.getRow(aux).getCell(6).setCellValue(produtos.getPreco());
 		}
 
 	}
@@ -141,7 +145,7 @@ public class RepositorioProdutosExcel implements RepositorioProdutos, Iterator {
 		Row aux = planilha.getRow(posicao);
 		planilha.removeRow(aux);
 		if(this.indice > 1) {
-		planilha.shiftRows((posicao + 1), (indice - 1), -1);
+			planilha.shiftRows((posicao + 1), (indice - 1), -1);
 		}
 		indice--;
 
@@ -186,12 +190,14 @@ public class RepositorioProdutosExcel implements RepositorioProdutos, Iterator {
 		int posicao = -1;
 		Row linha = null;
 		Produto resposta = null;
+		boolean achou = false;
 
-		for (int i = 0; i < this.indice; i++) {
+		for (int i = 0; i < this.indice && !achou; i++) {
 			linha = planilha.getRow(i);
 			celula = linha.getCell(2).toString();
 			if (codigo.equalsIgnoreCase(celula)) {
 				posicao = i;
+				achou = true;
 			}
 
 		}
@@ -222,7 +228,19 @@ public class RepositorioProdutosExcel implements RepositorioProdutos, Iterator {
 		return iterator;
 	}
 	public int size() {
-		return planilha.getPhysicalNumberOfRows();
+		int cont = 0;
+		Row linha = null;
+		boolean achou = false;
+
+		for (int i = 0; !achou; i++) {
+			linha = planilha.getRow(i);
+			if (linha.getCell(2) == null) {
+				achou = true;
+			} else {
+				cont++;
+			}
+		}
+		return cont;
 	}
 	private Produto clone(Row linha) {
 		Produto resposta = null;
@@ -236,7 +254,7 @@ public class RepositorioProdutosExcel implements RepositorioProdutos, Iterator {
 		} else {
 			String nome = linha.getCell(1).toString();
 			String codigo = linha.getCell(2).toString();
-            String descricao = linha.getCell(3).toString();
+			String descricao = linha.getCell(3).toString();
 			double nivel = linha.getCell(4).getNumericCellValue();
 			int censura = (int) Math.round(linha.getCell(5).getNumericCellValue());
 			double preco = linha.getCell(6).getNumericCellValue();

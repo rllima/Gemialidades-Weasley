@@ -33,7 +33,7 @@ public class RepositorioClientesExcel implements RepositoriosClientes, Iterator 
 		} else {
 			this.planilha = workbook.createSheet("Clientes");
 		}
-		this.indice = workbook.getSheet("Clientes").getPhysicalNumberOfRows();
+		this.indice = this.planilha.getPhysicalNumberOfRows();
 	}
 	
 	private RepositorioClientesExcel(Cliente[] itr) {
@@ -182,7 +182,19 @@ public class RepositorioClientesExcel implements RepositoriosClientes, Iterator 
 	
 	
 	public int size() {
-		return planilha.getPhysicalNumberOfRows();
+		int cont = 0;
+		Row linha = null;
+		boolean achou = false;
+
+		for (int i = 0; !achou; i++) {
+			linha = planilha.getRow(i);
+			if (linha.getCell(2) == null) {
+				achou = true;
+			} else {
+				cont++;
+			}
+		}
+		return cont;
 	}
 	
 	public Iterator<Cliente> getIterator() {

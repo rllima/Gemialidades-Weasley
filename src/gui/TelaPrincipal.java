@@ -52,6 +52,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.JTextPane;
 import java.awt.Label;
 import javax.swing.UIManager;
+import java.awt.ComponentOrientation;
 
 public class TelaPrincipal extends JFrame {
 
@@ -80,7 +81,7 @@ public class TelaPrincipal extends JFrame {
 	public TelaPrincipal(final String idCliente) {
 		this.idCliente = idCliente;
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 642, 482);
+		setBounds(100, 100, 622, 482);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -91,7 +92,7 @@ public class TelaPrincipal extends JFrame {
 		contentPane.add(panel_Principal);
 		panel_Principal.setLayout(new CardLayout(0, 0));
 		
-		JPanel panel_Inicio = new JPanel();
+		final JPanel panel_Inicio = new JPanel();
 		panel_Principal.add(panel_Inicio, "name_8389093730324");
 		panel_Inicio.setLayout(null);
 		
@@ -108,6 +109,7 @@ public class TelaPrincipal extends JFrame {
 		final Cliente cliente = procurarCliente(idCliente);
 		
 		JButton btnMeusPedidos = new JButton("Meus Pedidos");
+		btnMeusPedidos.setBorder(UIManager.getBorder("ToggleButton.border"));
 		btnMeusPedidos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				panel_Principal.setVisible(true);
@@ -132,28 +134,40 @@ public class TelaPrincipal extends JFrame {
 		btnMeusPedidos.setBounds(36, 234, 129, 44);
 		panel_Inicio.add(btnMeusPedidos);
 		
+		JButton btnNewButton = new JButton("Voltar");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				panel_Principal.setVisible(true);
+				// Limpando
+				panel_Principal.removeAll();
+				panel_Principal.repaint();
+				panel_Principal.revalidate();
+				// Adicionando novo panel
+				panel_Principal.add(panel_Inicio);
+				panel_Principal.repaint();
+				panel_Principal.revalidate();
+			}
+		});
+		btnNewButton.setBounds(10, 405, 73, 28);
+		panel_Pedidos.add(btnNewButton);
+		
 		final Label lblDetalhes = new Label("");
+		lblDetalhes.setAlignment(Label.CENTER);
+		lblDetalhes.setBackground(Color.WHITE);
 		lblDetalhes.setBounds(150, 299, 325, 126);
 		panel_Pedidos.add(lblDetalhes);
-		
-		
 		
 		Label label = new Label("Escolha um item abaixo e clique em \r\n\"Exibir Detalhes\" para ver os detalhes \r\nde sua entrega.");
 		label.setBackground(Color.ORANGE);
 		label.setBounds(80, 70, 465, 22);
 		panel_Pedidos.add(label);
 		
-		JLabel bg_Pedidos = new JLabel("");
-		bg_Pedidos.setIcon(new ImageIcon("C:\\Users\\lfs\\Documents\\Projeto IP\\gemialidades-weasley3\\images\\Fundo.jpg"));
-		bg_Pedidos.setBorder(new LineBorder(new Color(0, 0, 0)));
-		bg_Pedidos.setBounds(0, 0, 626, 444);
-		panel_Pedidos.add(bg_Pedidos);
-		
 		final JPanel panel_Compras = new JPanel();
 		panel_Principal.add(panel_Compras, "name_8363944213279");
 		panel_Compras.setLayout(null);
 		
 		JButton btnAcessarLoja = new JButton("Acessar Loja");
+		btnAcessarLoja.setBorder(UIManager.getBorder("ToggleButton.border"));
 		btnAcessarLoja.setBounds(36, 158, 129, 44);
 		panel_Inicio.add(btnAcessarLoja);
 		
@@ -180,10 +194,36 @@ public class TelaPrincipal extends JFrame {
 		btnVerPedido.setBounds(246, 240, 133, 34);
 		panel_Pedidos.add(btnVerPedido);
 		
+		JLabel label_1 = new JLabel("");
+		label_1.setIcon(new ImageIcon("images\\topo.png"));
+		label_1.setBounds(203, 11, 220, 53);
+		panel_Pedidos.add(label_1);
+		
+		JLabel label_2 = new JLabel("");
+		label_2.setIcon(new ImageIcon("images\\equerda.png"));
+		label_2.setBounds(108, 250, 133, 14);
+		panel_Pedidos.add(label_2);
+		
+		JLabel label_3 = new JLabel("");
+		label_3.setIcon(new ImageIcon("images\\direita.png"));
+		label_3.setBounds(425, 250, 145, 14);
+		panel_Pedidos.add(label_3);
+		
+		JLabel bg_Pedidos = new JLabel("");
+		bg_Pedidos.setIcon(new ImageIcon("images\\Fundo.jpg"));
+		bg_Pedidos.setBorder(new LineBorder(new Color(0, 0, 0)));
+		bg_Pedidos.setBounds(0, 0, 626, 444);
+		panel_Pedidos.add(bg_Pedidos);
+		
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon("images\\logo.png"));
+		lblNewLabel.setBounds(181, 103, 382, 262);
+		panel_Inicio.add(lblNewLabel);
+		
 		JLabel gb = new JLabel("");
-		gb.setIcon(new ImageIcon("C:\\Users\\lfs\\Documents\\Projeto IP\\gemialidades-weasley3\\images\\Fundo.jpg"));
-		gb.setBorder(new LineBorder(new Color(0, 0, 0)));
-		gb.setBounds(0, 0, 626, 444);
+		gb.setIcon(new ImageIcon("images\\juro.gif"));
+		gb.setBorder(null);
+		gb.setBounds(0, 0, 605, 444);
 		panel_Inicio.add(gb);
 		btnAcessarLoja.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -216,7 +256,7 @@ public class TelaPrincipal extends JFrame {
 		list_Carrinho.setBorder(new EtchedBorder(EtchedBorder.RAISED, null, null));
 		
 		JButton btnAddCarrinho = new JButton("Adicionar ao Carrinho");
-		btnAddCarrinho.setBounds(239, 241, 148, 23);
+		btnAddCarrinho.setBounds(239, 241, 148, 34);
 		panel_Compras.add(btnAddCarrinho);
 		btnAddCarrinho.addActionListener(new ActionListener() {
 			DefaultListModel<String> dlmCarrinho = new DefaultListModel<String>();
@@ -231,7 +271,7 @@ public class TelaPrincipal extends JFrame {
 		btnAddCarrinho.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		
 		JButton btnFinalizarCompra = new JButton("Finalizar Compra");
-		btnFinalizarCompra.setBounds(246, 399, 133, 34);
+		btnFinalizarCompra.setBounds(246, 399, 148, 34);
 		panel_Compras.add(btnFinalizarCompra);
 		btnFinalizarCompra.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -253,7 +293,7 @@ public class TelaPrincipal extends JFrame {
 				panel_Compras.add(btnGet);
 				
 				JLabel bg_Compras = new JLabel("");
-				bg_Compras.setIcon(new ImageIcon("C:\\Users\\lfs\\Documents\\Projeto IP\\gemialidades-weasley3\\images\\Fundo.jpg"));
+				bg_Compras.setIcon(new ImageIcon("images\\Fundo.jpg"));
 				bg_Compras.setBorder(new LineBorder(new Color(0, 0, 0)));
 				bg_Compras.setBounds(0, 0, 626, 444);
 				panel_Compras.add(bg_Compras);
@@ -261,7 +301,7 @@ public class TelaPrincipal extends JFrame {
 				JLabel background = new JLabel("");
 				panel_Principal.add(background, "name_9518700264771");
 				background.setBorder(new LineBorder(new Color(0, 0, 0)));
-				background.setIcon(new ImageIcon("C:\\Users\\lfs\\Documents\\Projeto IP\\gemialidades-weasley3\\images\\Fundo.jpg"));
+				background.setIcon(new ImageIcon("images\\Fundo.jpg"));
 				btnGet.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
 						DefaultListModel<String> dlm = new DefaultListModel<String>();

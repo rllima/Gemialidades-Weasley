@@ -35,8 +35,8 @@ public class RepositorioEntregasExcel implements RepositorioEntregas, Iterator {
 		} else {
 			this.planilhaEnviadas = workbook.createSheet("Entregas - Enviadas");
 		}
-		this.indicePendentes = workbook.getSheet("Entregas - Pendentes").getPhysicalNumberOfRows();
-		this.indiceEnviadas =  workbook.getSheet("Entregas - Enviadas").getPhysicalNumberOfRows();
+		this.indicePendentes = this.planilhaPendentes.getPhysicalNumberOfRows();
+		this.indiceEnviadas =  this.planilhaEnviadas.getPhysicalNumberOfRows();
 	}
 	private RepositorioEntregasExcel(Entrega[] itr) {
 		this.indiceIterator = 0;
@@ -170,6 +170,22 @@ public class RepositorioEntregasExcel implements RepositorioEntregas, Iterator {
 		return posicao;
 
 	}
+	
+	public int size(Sheet planilha) {
+		int cont = 0;
+		Row linha = null;
+		boolean achou = false;
+
+		for (int i = 0; !achou; i++) {
+			linha = planilha.getRow(i);
+			if (linha.getCell(2) == null) {
+				achou = true;
+			} else {
+				cont++;
+			}
+		}
+		return cont;
+	}
 
 	public Entrega next() {
 		Entrega resposta = null;
@@ -183,9 +199,6 @@ public class RepositorioEntregasExcel implements RepositorioEntregas, Iterator {
 			return false;
 		}
 		return this.iterator[this.indiceIterator] != null;
-	}
-	public int size(Sheet planilha) {
-		return planilha.getPhysicalNumberOfRows();
 	}
 
 	public Iterator<Entrega> getIteratorPendentes() {

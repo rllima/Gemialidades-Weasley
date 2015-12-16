@@ -57,6 +57,7 @@ public class TelaAdmin extends JFrame {
 	private JTextField tf_AttClienteID;
 	private JTextField tf_AttProdID;
 
+
 	/**
 	 * Launch the application.
 	 */
@@ -64,7 +65,7 @@ public class TelaAdmin extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					TelaAdmin frame = new TelaAdmin();
+					TelaAdmin frame = new TelaAdmin(loja);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -76,7 +77,7 @@ public class TelaAdmin extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public TelaAdmin() {
+	public TelaAdmin(final GemialidadesLoja loja) {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 640, 466);
 		jPanel1 = new JPanel();
@@ -351,10 +352,20 @@ public class TelaAdmin extends JFrame {
 		lblDigiteAbaixoO_3.setBounds(31, 29, 301, 20);
 		panel_AttProduto.add(lblDigiteAbaixoO_3);
 		
-		JButton btnAttProd = new JButton("Atualizar");
+		JButton btnAttProd = new JButton("Atualizar");                                     //aaaaaaa
 		btnAttProd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				//jfgjhfhfd
+				Produto att = procurarProduto(tf_AttProdID.getText());
+				if(att instanceof Guloseimas){
+					AttGuloseima gu = new AttGuloseima(loja, att);
+					gu.setVisible(true);
+					
+				}else{
+				   AttTravessuras tra = new AttTravessuras(loja, (Travessuras) att);	
+				   tra.setVisible(true);
+					
+				}
+				
 				
 			}
 		});
@@ -460,7 +471,7 @@ public class TelaAdmin extends JFrame {
 		panel_RmvCliente.add(btnRemoverClien);
 		
 		JLabel label_17 = new JLabel("");
-		label_17.setIcon(new ImageIcon("C:\\Users\\rlo\\git\\gemialidades-weasley1\\images\\Mapa-do-Maroto1.jpg"));
+		label_17.setIcon(new ImageIcon("images\\Mapa-do-Maroto1.jpg"));
 		label_17.setBounds(0, 0, 357, 235);
 		panel_RmvCliente.add(label_17);
 		
@@ -496,7 +507,7 @@ public class TelaAdmin extends JFrame {
 		panel_RmvProd.add(btnRemoverProd);
 		
 		JLabel label_18 = new JLabel("");
-		label_18.setIcon(new ImageIcon("C:\\Users\\rlo\\git\\gemialidades-weasley1\\images\\Mapa-do-Maroto1.jpg"));
+		label_18.setIcon(new ImageIcon("images\\Mapa-do-Maroto1.jpg"));
 		label_18.setBounds(0, 0, 357, 235);
 		panel_RmvProd.add(label_18);
 		
@@ -663,5 +674,20 @@ public class TelaAdmin extends JFrame {
 		} catch (EmptyListException e) {
 			JOptionPane.showMessageDialog(this, e.getMessage());
 		}
+	}
+	public Produto procurarProduto(String id){
+		Produto aux = null;
+				try {
+					aux = GemialidadesLoja.getInstance().procurarProduto(id);
+				} catch (FileNotFoundException e) {
+					JOptionPane.showMessageDialog(this, e.getMessage());
+				} catch (ProdutoNaoEncontradoException e) {
+					JOptionPane.showMessageDialog(this, e.getMessage());
+				} catch (EmptyListException e) {
+					JOptionPane.showMessageDialog(this, e.getMessage());
+				} catch (IOException e) {
+					JOptionPane.showMessageDialog(this, e.getMessage());
+				}
+				return aux;
 	}
 }
