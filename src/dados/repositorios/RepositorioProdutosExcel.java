@@ -154,7 +154,7 @@ public class RepositorioProdutosExcel implements RepositorioProdutos, Iterator {
 		int posicao = this.procurarLinha(id);
 		Row aux = planilha.getRow(posicao);
 		planilha.removeRow(aux);
-		if(getIndice() >= 1 && (!((posicao + 1) == this.getIndice()))) {
+		if(getIndice() >= 1 && (!((posicao+1) == this.getIndice()))) {
 			planilha.shiftRows((posicao + 1), (this.getIndice() - 1), -1);
 		}
 		this.setIndice(getIndice() - 1);

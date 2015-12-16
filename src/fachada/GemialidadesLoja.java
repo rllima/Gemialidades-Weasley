@@ -221,12 +221,12 @@ public class GemialidadesLoja {
 			idEntrega = Integer.toString((int) Math.random());
 		}
 		Entrega entrega = new Entrega(idEntrega, idCliente, idProduto);
-		repEntregas.cadastrar(entrega);
-		Cliente cliente = repClientes.procurar(idCliente);
+		GemialidadesLoja.getInstance().cadastrarEntrega(entrega);
+		Cliente cliente = GemialidadesLoja.getInstance().procurarCliente(idCliente);
 		cliente.addEntrega(idEntrega);
-		this.atualizarCliente(idCliente, cliente);
-		repProdutos.remover(idProduto);
-		workbook.write(new FileOutputStream(new File("planilha.xls")));
+		GemialidadesLoja.getInstance().atualizarCliente(idCliente, cliente);
+		GemialidadesLoja.getInstance().removerProduto(idProduto);
+		
 	}
 	
 }

@@ -61,6 +61,8 @@ public class Programa {
 			System.out.println("Sucesso! Executando método de envio da entrega...");
 			System.out.println("Sucesso! Executando método de venda do item 666 ao cliente 523...");
 			loja.vender("66aaa", "523");
+			loja.vender("5a5a5", "523");
+			loja.vender("7a7a7","523");
 
 			loja.enviar();
 
