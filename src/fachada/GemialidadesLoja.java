@@ -217,7 +217,7 @@ public class GemialidadesLoja {
 	public void vender(String idProduto, String idCliente) throws EntregaJaExisteException,
 			EmptyListException, EntregaNaoEncontradaException, ProdutoNaoEncontradoException, ClienteNaoEncontradoException, IOException {
 		String idEntrega = Integer.toString((int) Math.random());
-		while(repEntregas.procurar(idEntrega) != null) {
+		while(GemialidadesLoja.getInstance().getIteratorEntPendentes().hasNext()) {
 			idEntrega = Integer.toString((int) Math.random());
 		}
 		Entrega entrega = new Entrega(idEntrega, idCliente, idProduto);
