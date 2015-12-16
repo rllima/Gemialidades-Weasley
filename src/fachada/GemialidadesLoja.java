@@ -107,6 +107,7 @@ public class GemialidadesLoja {
 	public void atualizarCliente(String id, Cliente clientes)
 			throws ClienteNaoEncontradoException, IOException, EmptyListException {
 		repClientes.atualizar(id, clientes);
+		if ( repClientes.getRepositorio() instanceof RepositorioClientesExcel){
 		FileInputStream entradaArquivo = new FileInputStream(excel);
 		workbook = new HSSFWorkbook(entradaArquivo);
 		entradaArquivo.close();
@@ -114,18 +115,21 @@ public class GemialidadesLoja {
 		workbook.write(file);
 		workbook.close();
 		file.close();
+		}
 		
 	}
 
 	public void inserirCliente(Cliente clientes) throws ClienteJaExisteException, IOException {
 		repClientes.inserir(clientes);
-		FileInputStream entradaArquivo = new FileInputStream(excel);
-		workbook = new HSSFWorkbook(entradaArquivo);
-		entradaArquivo.close();
-		FileOutputStream file =new FileOutputStream(new File("planilha.xls"));
-		workbook.write(file);
-		workbook.close();
-		file.close();
+		if ( repClientes.getRepositorio() instanceof RepositorioClientesExcel){
+			FileInputStream entradaArquivo = new FileInputStream(excel);
+			workbook = new HSSFWorkbook(entradaArquivo);
+			entradaArquivo.close();
+			FileOutputStream file =new FileOutputStream(new File("planilha.xls"));
+			workbook.write(file);
+			workbook.close();
+			file.close();
+			}
 	}
 
 	public Cliente procurarCliente(String id) throws ClienteNaoEncontradoException, EmptyListException {
@@ -150,25 +154,30 @@ public class GemialidadesLoja {
 
 	public void cadastrarProduto(Produto produto) throws ProdutoJaExisteException, IOException {
 		repProdutos.cadastrar(produto);
-		FileInputStream entradaArquivo = new FileInputStream(excel);
-		workbook = new HSSFWorkbook(entradaArquivo);
-		entradaArquivo.close();
-		FileOutputStream file =new FileOutputStream(new File("planilha.xls"));
-		workbook.write(file);
-		workbook.close();
-		file.close();
+		if ( repProdutos.getRepositorio() instanceof RepositorioProdutosExcel){
+			FileInputStream entradaArquivo = new FileInputStream(excel);
+			workbook = new HSSFWorkbook(entradaArquivo);
+			entradaArquivo.close();
+			FileOutputStream file =new FileOutputStream(new File("planilha.xls"));
+			workbook.write(file);
+			workbook.close();
+			file.close();
+			}
 
 	}
 
 	public void removerProduto(String codigo) throws ProdutoNaoEncontradoException, EmptyListException, FileNotFoundException, IOException {
 		repProdutos.remover(codigo);
-		FileInputStream entradaArquivo = new FileInputStream(excel);
-		workbook = new HSSFWorkbook(entradaArquivo);
-		entradaArquivo.close();
-		FileOutputStream file =new FileOutputStream(new File("planilha.xls"));
-		workbook.write(file);
-		workbook.close();
-		file.close();
+		if ( repProdutos.getRepositorio() instanceof RepositorioProdutosExcel){
+			FileInputStream entradaArquivo = new FileInputStream(excel);
+			workbook = new HSSFWorkbook(entradaArquivo);
+			entradaArquivo.close();
+			FileOutputStream file =new FileOutputStream(new File("planilha.xls"));
+			workbook.write(file);
+			workbook.close();
+			file.close();
+			}
+
 	}
 
 	public Produto procurarProduto(String codigo) throws ProdutoNaoEncontradoException, EmptyListException {
@@ -182,13 +191,16 @@ public class GemialidadesLoja {
 	public void atualizarProduto(String codigo, Produto produto)
 			throws ProdutoNaoEncontradoException, EmptyListException, FileNotFoundException, IOException {
 		repProdutos.atualizar(codigo, produto);
-		FileInputStream entradaArquivo = new FileInputStream(excel);
-		workbook = new HSSFWorkbook(entradaArquivo);
-		entradaArquivo.close();
-		FileOutputStream file =new FileOutputStream(new File("planilha.xls"));
-		workbook.write(file);
-		workbook.close();
-		file.close();
+		if ( repProdutos.getRepositorio() instanceof RepositorioProdutosExcel){
+			FileInputStream entradaArquivo = new FileInputStream(excel);
+			workbook = new HSSFWorkbook(entradaArquivo);
+			entradaArquivo.close();
+			FileOutputStream file =new FileOutputStream(new File("planilha.xls"));
+			workbook.write(file);
+			workbook.close();
+			file.close();
+			}
+
 	}
 
 	public Iterator getIteratorProduto() throws EmptyListException {
@@ -199,24 +211,28 @@ public class GemialidadesLoja {
 
 	public void cadastrarEntrega(Entrega entrega) throws EntregaJaExisteException, FileNotFoundException, IOException {
 		repEntregas.cadastrar(entrega);
-		FileInputStream entradaArquivo = new FileInputStream(excel);
-		workbook = new HSSFWorkbook(entradaArquivo);
-		entradaArquivo.close();
-		FileOutputStream file =new FileOutputStream(new File("planilha.xls"));
-		workbook.write(file);
-		workbook.close();
-		file.close();
+		if ( repEntregas.getRepositorio() instanceof RepositorioEntregasExcel){
+			FileInputStream entradaArquivo = new FileInputStream(excel);
+			workbook = new HSSFWorkbook(entradaArquivo);
+			entradaArquivo.close();
+			FileOutputStream file =new FileOutputStream(new File("planilha.xls"));
+			workbook.write(file);
+			workbook.close();
+			file.close();
+			}
 	}
 
 	public void removerEntrega(String id) throws EntregaNaoEncontradaException, EmptyListException, FileNotFoundException, IOException {
 		repEntregas.remover(id);
-		FileInputStream entradaArquivo = new FileInputStream(excel);
-		workbook = new HSSFWorkbook(entradaArquivo);
-		entradaArquivo.close();
-		FileOutputStream file =new FileOutputStream(new File("planilha.xls"));
-		workbook.write(file);
-		workbook.close();
-		file.close();
+		if ( repEntregas.getRepositorio() instanceof RepositorioEntregasExcel){
+			FileInputStream entradaArquivo = new FileInputStream(excel);
+			workbook = new HSSFWorkbook(entradaArquivo);
+			entradaArquivo.close();
+			FileOutputStream file =new FileOutputStream(new File("planilha.xls"));
+			workbook.write(file);
+			workbook.close();
+			file.close();
+			}
 	}
 
 	public Entrega procurarEntrega(String id) throws EntregaNaoEncontradaException, EmptyListException {
@@ -229,24 +245,28 @@ public class GemialidadesLoja {
 
 	public void atualizarEntrega(String id, Entrega entrega) throws EntregaNaoEncontradaException, EmptyListException, FileNotFoundException, IOException {
 		repEntregas.atualizar(id, entrega);
-		FileInputStream entradaArquivo = new FileInputStream(excel);
-		workbook = new HSSFWorkbook(entradaArquivo);
-		entradaArquivo.close();
-		FileOutputStream file =new FileOutputStream(new File("planilha.xls"));
-		workbook.write(file);
-		workbook.close();
-		file.close();
+		if ( repEntregas.getRepositorio() instanceof RepositorioEntregasExcel){
+			FileInputStream entradaArquivo = new FileInputStream(excel);
+			workbook = new HSSFWorkbook(entradaArquivo);
+			entradaArquivo.close();
+			FileOutputStream file =new FileOutputStream(new File("planilha.xls"));
+			workbook.write(file);
+			workbook.close();
+			file.close();
+			}
 	}
 	
 	public void enviar() throws NaoHaEntregasException, FileNotFoundException, IOException {
 		repEntregas.enviar();
-		FileInputStream entradaArquivo = new FileInputStream(excel);
-		workbook = new HSSFWorkbook(entradaArquivo);
-		entradaArquivo.close();
-		FileOutputStream file =new FileOutputStream(new File("planilha.xls"));
-		workbook.write(file);
-		workbook.close();
-		file.close();
+		if ( repEntregas.getRepositorio() instanceof RepositorioEntregasExcel){
+			FileInputStream entradaArquivo = new FileInputStream(excel);
+			workbook = new HSSFWorkbook(entradaArquivo);
+			entradaArquivo.close();
+			FileOutputStream file =new FileOutputStream(new File("planilha.xls"));
+			workbook.write(file);
+			workbook.close();
+			file.close();
+			}
 	}
 
 	public Iterator getIteratorEntPendentes() throws EmptyListException {

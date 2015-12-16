@@ -57,6 +57,9 @@ public class CadastroClientes {
 	public Iterator getIterator() throws EmptyListException {
 		return cliente.getIterator();
 	}
+	public RepositoriosClientes getRepositorio(){
+		return this.cliente;
+	}
 
 
 }

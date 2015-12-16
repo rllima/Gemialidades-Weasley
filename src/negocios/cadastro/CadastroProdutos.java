@@ -62,5 +62,8 @@ public class CadastroProdutos {
 	public Iterator getIterator() throws EmptyListException {
 		return repositorioProdutos.getIterator();
 	}
+	public RepositorioProdutos getRepositorio(){
+		 return this.repositorioProdutos;
+	}
 
 }

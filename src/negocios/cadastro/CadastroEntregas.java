@@ -83,5 +83,8 @@ public class CadastroEntregas {
 		}
 		return itr;
 	}
+	public RepositorioEntregas getRepositorio(){
+		return this.repositorioEntregas;
+	}
 
 }

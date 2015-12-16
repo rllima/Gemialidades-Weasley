@@ -45,8 +45,12 @@ import java.awt.Rectangle;
 import java.awt.CardLayout;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+
 import javax.swing.JFormattedTextField;
 import javax.swing.JTextField;
+
+import dados.repositorios.Iterator;
+
 import java.awt.Choice;
 
 public class TelaAdmin extends JFrame {
@@ -609,7 +613,21 @@ public class TelaAdmin extends JFrame {
 		JButton btnEnviarEntrega = new JButton("Enviar Entrega");
 		btnEnviarEntrega.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				try {
+					Iterator itr = GemialidadesLoja.getInstance().getIteratorEntPendentes();
+				} catch (FileNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (EmptyListException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				enviar();
+				
+				
 			}
 		});
 		btnEnviarEntrega.setBounds(11, 353, 180, 23);
