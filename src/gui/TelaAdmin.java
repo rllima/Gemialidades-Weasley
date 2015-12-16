@@ -32,6 +32,7 @@ import negocios.classesBasicas.Travessuras;
 import negocios.exceptions.ClienteJaExisteException;
 import negocios.exceptions.ClienteNaoEncontradoException;
 import negocios.exceptions.EmptyListException;
+import negocios.exceptions.NaoHaEntregasException;
 import negocios.exceptions.ProdutoJaExisteException;
 import negocios.exceptions.ProdutoNaoEncontradoException;
 
@@ -605,6 +606,15 @@ public class TelaAdmin extends JFrame {
 		btnCadastrarProdutos.setBounds(10, 123, 180, 23);
 		jPanel1.add(btnCadastrarProdutos);
 		
+		JButton btnEnviarEntrega = new JButton("Enviar Entrega");
+		btnEnviarEntrega.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				enviar();
+			}
+		});
+		btnEnviarEntrega.setBounds(11, 353, 180, 23);
+		jPanel1.add(btnEnviarEntrega);
+		
 		
 		JLabel lblBackground = new JLabel("");
 		lblBackground.setBounds(0, 0, 624, 428);
@@ -677,5 +687,16 @@ public class TelaAdmin extends JFrame {
 					JOptionPane.showMessageDialog(this, e.getMessage());
 				}
 				return aux;
+	}
+	public void enviar() {
+		try {
+			GemialidadesLoja.getInstance().enviar();
+		} catch (FileNotFoundException e) {
+			JOptionPane.showMessageDialog(this, e.getMessage());
+		} catch (NaoHaEntregasException e) {
+			JOptionPane.showMessageDialog(this, e.getMessage());
+		} catch (IOException e) {
+			JOptionPane.showMessageDialog(this, e.getMessage());
+		}
 	}
 }

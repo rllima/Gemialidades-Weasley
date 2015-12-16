@@ -288,9 +288,26 @@ public class TelaPrincipal extends JFrame {
 		});
 		btnFinalizarCompra.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		
-				JButton btnGet = new JButton("Get");
-				btnGet.setBounds(10, 96, 89, 23);
+				JButton btnGet = new JButton("Carregar Produtos");
+				btnGet.setBounds(10, 96, 148, 23);
 				panel_Compras.add(btnGet);
+				
+				JButton btnVoltar = new JButton("Voltar");
+				btnVoltar.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						panel_Principal.setVisible(true);
+						// Limpando
+						panel_Principal.removeAll();
+						panel_Principal.repaint();
+						panel_Principal.revalidate();
+						// Adicionando novo panel
+						panel_Principal.add(panel_Inicio);
+						panel_Principal.repaint();
+						panel_Principal.revalidate();
+					}
+				});
+				btnVoltar.setBounds(10, 11, 89, 23);
+				panel_Compras.add(btnVoltar);
 				
 				JLabel label_4 = new JLabel("");
 				label_4.setIcon(new ImageIcon("images\\topo.png"));
