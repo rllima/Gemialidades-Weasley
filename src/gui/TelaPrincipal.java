@@ -182,10 +182,8 @@ public class TelaPrincipal extends JFrame {
 					isEnviada = "Ainda não enviada";
 				}
 				Entrega aux = procurarEntrega(entrega);
-				String idProd = aux.getIdProduto();
-				Produto prod = procurarProduto(idProd);
 				
-				String detalhes = prod.toString() + "\n\n Status da entrega: " + isEnviada;
+				String detalhes = "\n\n Status da entrega: " + isEnviada;
 				
 				lblDetalhes.setText(detalhes);
 			}
