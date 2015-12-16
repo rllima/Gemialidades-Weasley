@@ -35,8 +35,8 @@ public class RepositorioEntregasExcel implements RepositorioEntregas, Iterator {
 		} else {
 			this.planilhaEnviadas = workbook.createSheet("Entregas - Enviadas");
 		}
-		this.indicePendentes = size(planilhaPendentes);
-		this.indiceEnviadas =  size(planilhaEnviadas);
+		this.indicePendentes = this.planilhaPendentes.getPhysicalNumberOfRows();
+		this.indiceEnviadas =  this.planilhaEnviadas.getPhysicalNumberOfRows();
 	}
 	private RepositorioEntregasExcel(Entrega[] itr) {
 		this.indiceIterator = 0;

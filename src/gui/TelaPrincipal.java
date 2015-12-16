@@ -161,12 +161,6 @@ public class TelaPrincipal extends JFrame {
 		label.setBounds(80, 70, 465, 22);
 		panel_Pedidos.add(label);
 		
-		JLabel bg_Pedidos = new JLabel("");
-		bg_Pedidos.setIcon(new ImageIcon("images\\Fundo.jpg"));
-		bg_Pedidos.setBorder(new LineBorder(new Color(0, 0, 0)));
-		bg_Pedidos.setBounds(0, 0, 626, 444);
-		panel_Pedidos.add(bg_Pedidos);
-		
 		final JPanel panel_Compras = new JPanel();
 		panel_Principal.add(panel_Compras, "name_8363944213279");
 		panel_Compras.setLayout(null);
@@ -198,11 +192,37 @@ public class TelaPrincipal extends JFrame {
 		btnVerPedido.setBounds(246, 240, 133, 34);
 		panel_Pedidos.add(btnVerPedido);
 		
+		JLabel label_1 = new JLabel("");
+		label_1.setIcon(new ImageIcon("C:\\Users\\Joel\\git\\gemialidades-weasley1\\images\\topo.png"));
+		label_1.setBounds(203, 11, 220, 53);
+		panel_Pedidos.add(label_1);
+		
+		JLabel label_2 = new JLabel("");
+		label_2.setIcon(new ImageIcon("C:\\Users\\Joel\\git\\gemialidades-weasley1\\images\\equerda.png"));
+		label_2.setBounds(108, 250, 133, 14);
+		panel_Pedidos.add(label_2);
+		
+		JLabel label_3 = new JLabel("");
+		label_3.setIcon(new ImageIcon("C:\\Users\\Joel\\git\\gemialidades-weasley1\\images\\direita.png"));
+		label_3.setBounds(425, 250, 145, 14);
+		panel_Pedidos.add(label_3);
+		
+		JLabel bg_Pedidos = new JLabel("");
+		bg_Pedidos.setIcon(new ImageIcon("images\\Fundo.jpg"));
+		bg_Pedidos.setBorder(new LineBorder(new Color(0, 0, 0)));
+		bg_Pedidos.setBounds(0, 0, 626, 444);
+		panel_Pedidos.add(bg_Pedidos);
+		
 		JLabel gb = new JLabel("");
 		gb.setIcon(new ImageIcon("images\\Fundo.jpg"));
 		gb.setBorder(new LineBorder(new Color(0, 0, 0)));
 		gb.setBounds(0, 0, 626, 444);
 		panel_Inicio.add(gb);
+		
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Joel\\git\\gemialidades-weasley1\\images\\logo.png"));
+		lblNewLabel.setBounds(204, 99, 382, 262);
+		panel_Inicio.add(lblNewLabel);
 		btnAcessarLoja.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				panel_Principal.setVisible(true);

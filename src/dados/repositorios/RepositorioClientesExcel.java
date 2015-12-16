@@ -33,7 +33,7 @@ public class RepositorioClientesExcel implements RepositoriosClientes, Iterator 
 		} else {
 			this.planilha = workbook.createSheet("Clientes");
 		}
-		this.indice = size();
+		this.indice = this.planilha.getPhysicalNumberOfRows();
 	}
 	
 	private RepositorioClientesExcel(Cliente[] itr) {

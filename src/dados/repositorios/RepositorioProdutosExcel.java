@@ -25,7 +25,7 @@ public class RepositorioProdutosExcel implements RepositorioProdutos, Iterator {
 		} else {
 			this.planilha = workbook.createSheet("Produtos");
 		}
-		this.indice = size();
+		this.indice = this.planilha.getPhysicalNumberOfRows();
 	}
 	private RepositorioProdutosExcel(Produto[] itr) {
 		this.indiceIterator = 0;
