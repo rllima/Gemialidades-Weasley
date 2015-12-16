@@ -26,6 +26,7 @@ import javax.swing.JInternalFrame;
 
 import negocios.classesBasicas.Cliente;
 import negocios.classesBasicas.Endereco;
+import negocios.classesBasicas.Entrega;
 import negocios.classesBasicas.Guloseimas;
 import negocios.classesBasicas.Produto;
 import negocios.classesBasicas.Travessuras;
@@ -613,21 +614,7 @@ public class TelaAdmin extends JFrame {
 		JButton btnEnviarEntrega = new JButton("Enviar Entrega");
 		btnEnviarEntrega.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				try {
-					Iterator itr = GemialidadesLoja.getInstance().getIteratorEntPendentes();
-				} catch (FileNotFoundException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (EmptyListException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				enviar();
-				
-				
+				enviar();				
 			}
 		});
 		btnEnviarEntrega.setBounds(11, 353, 180, 23);
@@ -708,7 +695,9 @@ public class TelaAdmin extends JFrame {
 	}
 	public void enviar() {
 		try {
+			String id = getIdEntrega();
 			GemialidadesLoja.getInstance().enviar();
+			JOptionPane.showMessageDialog(null, "Entrega " + id + " enviada com sucesso!");
 		} catch (FileNotFoundException e) {
 			JOptionPane.showMessageDialog(this, e.getMessage());
 		} catch (NaoHaEntregasException e) {
@@ -716,5 +705,21 @@ public class TelaAdmin extends JFrame {
 		} catch (IOException e) {
 			JOptionPane.showMessageDialog(this, e.getMessage());
 		}
+	}
+	public String getIdEntrega() {
+		String id = "";
+		try {
+			Iterator<Entrega> itr = GemialidadesLoja.getInstance().getIteratorEntPendentes();
+			if(itr.hasNext()) {
+				id = itr.next().getId();
+			}
+		} catch (FileNotFoundException e1) {
+			JOptionPane.showMessageDialog(this, e1.getMessage());
+		} catch (EmptyListException e1) {
+			JOptionPane.showMessageDialog(this, e1.getMessage());
+		} catch (IOException e1) {
+			JOptionPane.showMessageDialog(this, e1.getMessage());
+		}
+		return id;
 	}
 }
