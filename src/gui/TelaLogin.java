@@ -177,7 +177,6 @@ public class TelaLogin extends JFrame {
 			GemialidadesLoja.getInstance().cadastrarProduto(travessura1);
 			GemialidadesLoja.getInstance().cadastrarProduto(guloseima1);
 			GemialidadesLoja.getInstance().cadastrarProduto(travessura2);
-			GemialidadesLoja.getInstance().vender("777", "lfs");
 		} catch (FileNotFoundException e) {
 			JOptionPane.showMessageDialog(this, e.getMessage());
 		} catch (ClienteJaExisteException e) {
@@ -185,16 +184,6 @@ public class TelaLogin extends JFrame {
 		} catch (IOException e) {
 			JOptionPane.showMessageDialog(this, e.getMessage());
 		} catch (ProdutoJaExisteException e) {
-			JOptionPane.showMessageDialog(this, e.getMessage());
-		} catch (EntregaJaExisteException e) {
-			JOptionPane.showMessageDialog(this, e.getMessage());
-		} catch (EmptyListException e) {
-			JOptionPane.showMessageDialog(this, e.getMessage());
-		} catch (EntregaNaoEncontradaException e) {
-			JOptionPane.showMessageDialog(this, e.getMessage());
-		} catch (ProdutoNaoEncontradoException e) {
-			JOptionPane.showMessageDialog(this, e.getMessage());
-		} catch (ClienteNaoEncontradoException e) {
 			JOptionPane.showMessageDialog(this, e.getMessage());
 		}
 	}
