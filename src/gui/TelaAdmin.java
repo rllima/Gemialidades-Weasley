@@ -397,19 +397,6 @@ public class TelaAdmin extends JFrame {
 		lblDigiteAbaixoO_2.setForeground(new Color(255, 255, 255));
 		lblDigiteAbaixoO_2.setBounds(31, 32, 301, 20);
 		panel_AttCliente.add(lblDigiteAbaixoO_2);
-		Endereco endereco = new Endereco("Hogsmeade", "Rua dos Alfeneiros","4","00000000", "Onde o vento faz a curva");
-		try {
-			GemialidadesLoja.getInstance().inserirCliente(new Cliente("Rodrigo", "15", endereco, "552", "552"));
-		} catch (FileNotFoundException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (ClienteJaExisteException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
 		
 		JButton btnAttClien = new JButton("Atualizar");
 		btnAttClien.addActionListener(new ActionListener() {
@@ -464,6 +451,7 @@ public class TelaAdmin extends JFrame {
 		btnRemoverClien.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				removerCli(tf_RmvClienteID.getText());
+				JOptionPane.showMessageDialog(null, "Cliente removido com sucesso!");
 				
 			}
 		});
