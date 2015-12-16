@@ -256,7 +256,7 @@ public class TelaPrincipal extends JFrame {
 		list_Carrinho.setBorder(new EtchedBorder(EtchedBorder.RAISED, null, null));
 		
 		JButton btnAddCarrinho = new JButton("Adicionar ao Carrinho");
-		btnAddCarrinho.setBounds(239, 241, 148, 34);
+		btnAddCarrinho.setBounds(237, 241, 148, 34);
 		panel_Compras.add(btnAddCarrinho);
 		btnAddCarrinho.addActionListener(new ActionListener() {
 			DefaultListModel<String> dlmCarrinho = new DefaultListModel<String>();
@@ -271,7 +271,7 @@ public class TelaPrincipal extends JFrame {
 		btnAddCarrinho.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		
 		JButton btnFinalizarCompra = new JButton("Finalizar Compra");
-		btnFinalizarCompra.setBounds(246, 399, 148, 34);
+		btnFinalizarCompra.setBounds(237, 399, 148, 34);
 		panel_Compras.add(btnFinalizarCompra);
 		btnFinalizarCompra.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -289,13 +289,38 @@ public class TelaPrincipal extends JFrame {
 		btnFinalizarCompra.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		
 				JButton btnGet = new JButton("Get");
-				btnGet.setBounds(33, 63, 89, 23);
+				btnGet.setBounds(10, 96, 89, 23);
 				panel_Compras.add(btnGet);
+				
+				JLabel label_4 = new JLabel("");
+				label_4.setIcon(new ImageIcon("images\\topo.png"));
+				label_4.setBounds(208, 11, 207, 74);
+				panel_Compras.add(label_4);
+				
+				JLabel label_5 = new JLabel("");
+				label_5.setIcon(new ImageIcon("images\\equerda.png"));
+				label_5.setBounds(129, 248, 99, 14);
+				panel_Compras.add(label_5);
+				
+				JLabel label_6 = new JLabel("");
+				label_6.setIcon(new ImageIcon("images\\direita.png"));
+				label_6.setBounds(395, 248, 99, 14);
+				panel_Compras.add(label_6);
+				
+				JLabel label_7 = new JLabel("");
+				label_7.setIcon(new ImageIcon("images\\equerda.png"));
+				label_7.setBounds(128, 409, 99, 14);
+				panel_Compras.add(label_7);
+				
+				JLabel label_8 = new JLabel("");
+				label_8.setIcon(new ImageIcon("images\\direita.png"));
+				label_8.setBounds(395, 409, 99, 14);
+				panel_Compras.add(label_8);
 				
 				JLabel bg_Compras = new JLabel("");
 				bg_Compras.setIcon(new ImageIcon("images\\Fundo.jpg"));
 				bg_Compras.setBorder(new LineBorder(new Color(0, 0, 0)));
-				bg_Compras.setBounds(0, 0, 626, 444);
+				bg_Compras.setBounds(0, 0, 604, 444);
 				panel_Compras.add(bg_Compras);
 				
 				JLabel background = new JLabel("");
