@@ -31,7 +31,7 @@ public class RepositorioClientesExcel implements RepositoriosClientes, Iterator 
 			this.planilha = workbook.createSheet("Clientes");
 		}
 		this.workbook = workbook;
-		//this.workbook.close();
+		
 	}
 	
 	private RepositorioClientesExcel(Cliente[] itr) {
@@ -47,7 +47,6 @@ public class RepositorioClientesExcel implements RepositoriosClientes, Iterator 
 	 */
 	public void inserir(Cliente clientes) throws IOException {
 		Cell celula;
-		this.planilha = this.workbook.getSheet("Clientes");
 		Row linha = planilha.createRow(getIndice());
 		celula = linha.createCell(1);
 		celula.setCellValue(clientes.getNome());
