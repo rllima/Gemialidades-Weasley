@@ -22,7 +22,6 @@ public class RepositorioProdutosExcel implements RepositorioProdutos, Iterator {
 
 	private HSSFWorkbook workbook;
 	private Sheet planilha;
-	private int indice;
 	private int indiceIterator;
 	private Produto[] iterator;
 
@@ -33,7 +32,6 @@ public class RepositorioProdutosExcel implements RepositorioProdutos, Iterator {
 			this.planilha = workbook.createSheet("Produtos");
 		}
 		this.workbook = workbook;
-		this.indice = this.getIndice();
 	}
 	private RepositorioProdutosExcel(Produto[] itr) {
 		this.indiceIterator = 0;
@@ -96,7 +94,7 @@ public class RepositorioProdutosExcel implements RepositorioProdutos, Iterator {
 		Produto resposta = null;
 		boolean achou = false;
 
-		for (int i = 0; i < this.indice && !achou; i++) {
+		for (int i = 0; i < this.getIndice() && !achou; i++) {
 			if (planilha.getRow(i) != null) {
 				linha = planilha.getRow(i);
 				celula = linha.getCell(2).toString();
@@ -156,7 +154,7 @@ public class RepositorioProdutosExcel implements RepositorioProdutos, Iterator {
 		int posicao = this.procurarLinha(id);
 		Row aux = planilha.getRow(posicao);
 		planilha.removeRow(aux);
-		if(this.indice > 1) {
+		if(getIndice() > 1) {
 			planilha.shiftRows((posicao + 1), (this.getIndice() - 1), -1);
 		}
 		this.setIndice(getIndice() - 1);
@@ -167,7 +165,7 @@ public class RepositorioProdutosExcel implements RepositorioProdutos, Iterator {
 		Row linha = null;
 		Produto resposta = null;
 
-		for (int i = 0; i < this.indice; i++) {
+		for (int i = 0; i < this.getIndice(); i++) {
 			linha = planilha.getRow(i);
 			celula = linha.getCell(1).toString();
 			if (nome.equalsIgnoreCase(celula)) {
