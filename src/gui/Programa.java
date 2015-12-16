@@ -58,10 +58,10 @@ public class Programa {
 			loja.cadastrarProduto(guloseima1);
 			loja.cadastrarProduto(travessura2);
 
-			System.out.println("Sucesso! Executando método de venda do item 666 ao cliente 523...");
-			loja.vender("666", "523");
-
 			System.out.println("Sucesso! Executando método de envio da entrega...");
+			System.out.println("Sucesso! Executando método de venda do item 666 ao cliente 523...");
+			loja.vender("66aaa", "523");
+
 			loja.enviar();
 
 			System.out.println("Sucesso! Imprimindo estoque...\n");
@@ -103,14 +103,10 @@ public class Programa {
             Iterator rela = GemialidadesLoja.getInstance().getIteratorProduto();
 			while ( rela.hasNext()){
 				rl.writeObject(rela.next().toString() + "\n");
-			}
 
 			rel.close();
 			rl.close();
-
-
-
-
+			}
 
 		} catch (FileNotFoundException e) {
 			System.out.println(e.getMessage());

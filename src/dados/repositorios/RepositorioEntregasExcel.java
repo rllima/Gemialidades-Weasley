@@ -4,6 +4,9 @@ import negocios.classesBasicas.Entrega;
 import negocios.classesBasicas.Produto;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.*;
@@ -17,14 +20,14 @@ import org.apache.poi.ss.usermodel.*;
  */
 public class RepositorioEntregasExcel implements RepositorioEntregas, Iterator {
 
+	private HSSFWorkbook workbook;
 	private Sheet planilhaPendentes;
 	private Sheet planilhaEnviadas;
-	private int indicePendentes;
-	private int indiceEnviadas;
 	private int indiceIterator;
 	private Entrega[] iterator;
 
 	public RepositorioEntregasExcel(HSSFWorkbook workbook) {
+		this.workbook = workbook;
 		if (workbook.getSheet("Entregas - Pendentes") != null) {
 			this.planilhaPendentes = workbook.getSheet("Entregas - Pendentes");
 		} else {
@@ -35,8 +38,6 @@ public class RepositorioEntregasExcel implements RepositorioEntregas, Iterator {
 		} else {
 			this.planilhaEnviadas = workbook.createSheet("Entregas - Enviadas");
 		}
-		this.indicePendentes = this.planilhaPendentes.getPhysicalNumberOfRows();
-		this.indiceEnviadas =  this.planilhaEnviadas.getPhysicalNumberOfRows();
 	}
 	private RepositorioEntregasExcel(Entrega[] itr) {
 		this.indiceIterator = 0;
@@ -48,35 +49,40 @@ public class RepositorioEntregasExcel implements RepositorioEntregas, Iterator {
 	 * Cada celula da linha corresponde a um dado(atributo) de Entrega.
 	 * Dessa forma, dentro do repositorio, cada linha armazena os dados de uma unico objeto Entrega.
 	 * @param entrega Entrega - Objeto a ser inserido
+	 * @throws IOException 
+	 * @throws FileNotFoundException 
 	 */
-	public void inserir(Entrega entrega) {
+	public void inserir(Entrega entrega) throws FileNotFoundException, IOException {
 		Cell celula;
-		Row linha = planilhaPendentes.createRow(indicePendentes);
+		Row linha = planilhaPendentes.createRow(getIndicePend());
 		celula = linha.createCell(1);
 		celula.setCellValue(entrega.getId());
 		celula = linha.createCell(2);
 		celula.setCellValue(entrega.getIdCliente());
 		celula = linha.createCell(3);
 		celula.setCellValue(entrega.getIdProduto());
-		indicePendentes++;
+		
+		setIndicePend(getIndicePend() + 1);
 	}
 
 	/**
 	 * Recebe um objeto Entrega e o insere na planilha de enviadas.
 	 * Utilizado no método enviar().
 	 * @param entrega Entrega
+	 * @throws IOException 
+	 * @throws FileNotFoundException 
 	 */
-	public void inserirEnviadas(Entrega entrega) {
+	public void inserirEnviadas(Entrega entrega) throws FileNotFoundException, IOException {
 		Cell celula;
-		Row linha = planilhaEnviadas.createRow(indiceEnviadas);
+		Row linha = planilhaEnviadas.createRow(getIndiceEnv());
 		celula = linha.createCell(1);
 		celula.setCellValue(entrega.getId());
 		celula = linha.createCell(2);
 		celula.setCellValue(entrega.getIdCliente());
 		celula = linha.createCell(3);
 		celula.setCellValue(entrega.getIdProduto());
-		indiceEnviadas++;
-
+		
+		setIndiceEnv(getIndiceEnv() + 1);
 	}
 
 	/** 
@@ -94,7 +100,7 @@ public class RepositorioEntregasExcel implements RepositorioEntregas, Iterator {
 		Entrega resposta = null;
 
 		if(!isEmpty()) {
-			for (int i = 0; i < this.indicePendentes; i++) {
+			for (int i = 0; i < this.getIndicePend(); i++) {
 				linha = planilhaPendentes.getRow(i);
 				celula = linha.getCell(1).toString();
 				if (id.equalsIgnoreCase(celula)) {
@@ -122,21 +128,23 @@ public class RepositorioEntregasExcel implements RepositorioEntregas, Iterator {
 
 	}
 
-	public void remover(String id) {
+	public void remover(String id) throws FileNotFoundException, IOException {
 		int posicao = this.procurarLinha(id);
 		Row aux = planilhaPendentes.getRow(posicao);
 		planilhaPendentes.removeRow(aux);
-		if(this.indicePendentes > 1) {
-		planilhaPendentes.shiftRows((posicao + 1), (indicePendentes - 1), -1);
+		if(getIndicePend() > 1) {
+		planilhaPendentes.shiftRows((posicao + 1), (getIndicePend() - 1), -1);
 		}
-		indicePendentes--;
+		setIndicePend(getIndicePend() - 1);
 	}
 
 	/**
 	 * Remove uma entrega do comeco da lista de pendentes e a coloca na lista de enviadas,
 	 * a partir do metodo inserirEnviadas()
+	 * @throws IOException 
+	 * @throws FileNotFoundException 
 	 */
-	public void enviar() {
+	public void enviar() throws FileNotFoundException, IOException {
 		Row aux = planilhaPendentes.getRow(0);
 		String id = planilhaPendentes.getRow(0).getCell(1).toString();
 		String idCliente = planilhaPendentes.getRow(0).getCell(2).toString();
@@ -159,7 +167,7 @@ public class RepositorioEntregasExcel implements RepositorioEntregas, Iterator {
 		Row linha = null;
 		Produto resposta = null;
 
-		for (int i = 0; i < this.indicePendentes; i++) {
+		for (int i = 0; i < getIndicePend(); i++) {
 			linha = planilhaPendentes.getRow(i);
 			celula = linha.getCell(1).toString();
 			if (codigo.equalsIgnoreCase(celula)) {
@@ -168,23 +176,30 @@ public class RepositorioEntregasExcel implements RepositorioEntregas, Iterator {
 
 		}
 		return posicao;
-
 	}
 	
-	public int size(Sheet planilha) {
-		int cont = 0;
-		Row linha = null;
-		boolean achou = false;
-
-		for (int i = 0; !achou; i++) {
-			linha = planilha.getRow(i);
-			if (linha.getCell(2) == null) {
-				achou = true;
-			} else {
-				cont++;
-			}
-		}
-		return cont;
+	public int getIndicePend() {
+		Sheet indices = workbook.getSheet("Indices");
+		int size = (int)indices.getRow(2).getCell(1).getNumericCellValue();
+		return size;
+	}
+	
+	public int getIndiceEnv() {
+		Sheet indices = workbook.getSheet("Indices");
+		int size = (int)indices.getRow(3).getCell(1).getNumericCellValue();
+		return size;
+	}
+	
+	public void setIndicePend(int indice) throws FileNotFoundException, IOException {
+		Sheet indices = workbook.getSheet("Indices");
+		indices.getRow(2).getCell(1).setCellValue(indice);
+		workbook.write(new FileOutputStream(new File("planilha.xls")));
+	}
+	
+	public void setIndiceEnv(int indice) throws FileNotFoundException, IOException {
+		Sheet indices = workbook.getSheet("Indices");
+		indices.getRow(3).getCell(1).setCellValue(indice);
+		workbook.write(new FileOutputStream(new File("planilha.xls")));
 	}
 
 	public Entrega next() {
@@ -202,8 +217,8 @@ public class RepositorioEntregasExcel implements RepositorioEntregas, Iterator {
 	}
 
 	public Iterator<Entrega> getIteratorPendentes() {
-		Entrega[] itr = new Entrega[this.size(planilhaPendentes)];
-		for(int i = 0; i < size(planilhaPendentes); i++) {
+		Entrega[] itr = new Entrega[this.getIndicePend()];
+		for(int i = 0; i < getIndicePend(); i++) {
 			itr[i] = this.clone(planilhaPendentes.getRow(i), planilhaPendentes);
 		}
 		RepositorioEntregasExcel iterator = new RepositorioEntregasExcel(itr);
@@ -211,8 +226,8 @@ public class RepositorioEntregasExcel implements RepositorioEntregas, Iterator {
 	}
 
 	public Iterator<Entrega> getIteratorEnviadas() {
-		Entrega[] itr = new Entrega[this.size(planilhaEnviadas)];
-		for(int i = 0; i < size(planilhaEnviadas); i++) {
+		Entrega[] itr = new Entrega[this.getIndiceEnv()];
+		for(int i = 0; i < getIndiceEnv(); i++) {
 			itr[i] = this.clone(planilhaEnviadas.getRow(i), planilhaEnviadas);
 		}
 		RepositorioEntregasExcel iterator = new RepositorioEntregasExcel(itr);

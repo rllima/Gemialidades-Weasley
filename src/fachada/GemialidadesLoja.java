@@ -7,6 +7,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 
 import dados.repositorios.*;
@@ -70,6 +73,23 @@ public class GemialidadesLoja {
 				workbook = new HSSFWorkbook(entradaArquivo);
 				entradaArquivo.close();
 
+			}
+			if(workbook.getSheet("Indices") == null) {
+				Sheet indices = workbook.createSheet("Indices");
+				Row linha = indices.createRow(0);
+				Cell celula = linha.createCell(0);
+				celula.setCellValue("Indice Clientes");
+				linha.createCell(1).setCellValue(0);
+				linha = indices.createRow(1);
+				linha.createCell(0).setCellValue("Indice Produtos");
+				linha.createCell(1).setCellValue(0);
+				linha = indices.createRow(2);
+				linha.createCell(0).setCellValue("Indice Entregas Pendentes");
+				linha.createCell(1).setCellValue(0);
+				linha = indices.createRow(3);
+				linha.createCell(0).setCellValue("Indice Entregas Enviadas");
+				linha.createCell(1).setCellValue(0);
+				workbook.write(new FileOutputStream(new File("planilha.xls")));
 			}
 			this.repClientes = new CadastroClientes(new RepositorioClientesExcel(workbook));
 			this.repProdutos = new CadastroProdutos(new RepositorioProdutosExcel(workbook));
@@ -205,6 +225,8 @@ public class GemialidadesLoja {
 		Cliente cliente = repClientes.procurar(idCliente);
 		cliente.addEntrega(idEntrega);
 		this.atualizarCliente(idCliente, cliente);
+		repProdutos.remover(idProduto);
+		workbook.write(new FileOutputStream(new File("planilha.xls")));
 	}
 	
 }

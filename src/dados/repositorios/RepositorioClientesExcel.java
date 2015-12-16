@@ -21,11 +21,8 @@ public class RepositorioClientesExcel implements RepositoriosClientes, Iterator 
 
 	private HSSFWorkbook workbook;
 	private HSSFSheet planilha;
-	private File excel;
-	private int indice;
 	private int indiceIterator;
 	private Cliente[] iterator;
-	
 
 	public RepositorioClientesExcel (HSSFWorkbook workbook) throws FileNotFoundException{
 		if(workbook.getSheet("Clientes") != null) {
@@ -33,7 +30,7 @@ public class RepositorioClientesExcel implements RepositoriosClientes, Iterator 
 		} else {
 			this.planilha = workbook.createSheet("Clientes");
 		}
-		this.indice = this.planilha.getPhysicalNumberOfRows();
+		this.workbook = workbook;
 	}
 	
 	private RepositorioClientesExcel(Cliente[] itr) {
@@ -49,7 +46,7 @@ public class RepositorioClientesExcel implements RepositoriosClientes, Iterator 
 	 */
 	public void inserir(Cliente clientes) throws IOException {
 		Cell celula;
-		Row linha = planilha.createRow(indice);
+		Row linha = planilha.createRow(getIndice());
 		celula = linha.createCell(1);
 		celula.setCellValue(clientes.getNome());
 		celula = linha.createCell(2);
@@ -71,7 +68,7 @@ public class RepositorioClientesExcel implements RepositoriosClientes, Iterator 
 		celula = linha.createCell(10);
 		celula.setCellValue(clientes.getStringEntregas());
 
-		indice++;
+		this.setIndice(getIndice() + 1);
 		
 	}
 
@@ -89,7 +86,7 @@ public class RepositorioClientesExcel implements RepositoriosClientes, Iterator 
 		Row linha = null;
 		Cliente resposta = null;
 		Endereco endereco = null;
-		for(int i = 0; i < this.indice; i++){
+		for(int i = 0; i < this.getIndice(); i++){
 			linha = planilha.getRow(i);
 			celula = linha.getCell(3).toString();
 			if(id.equalsIgnoreCase(celula)){
@@ -141,12 +138,10 @@ public class RepositorioClientesExcel implements RepositoriosClientes, Iterator 
 		int posicao = this.procurarLinha(id);
 		Row aux = planilha.getRow(posicao);
 		planilha.removeRow(aux);
-		if(this.indice > 1) {
-		planilha.shiftRows((posicao+1), (indice-1), -1);
+		if(this.getIndice() > 1) {
+		planilha.shiftRows((posicao+1), (getIndice()-1), -1);
 		}
-		indice--;
-	
-
+		this.setIndice(getIndice() - 1);
 	}
 	
 	/**
@@ -159,9 +154,8 @@ public class RepositorioClientesExcel implements RepositoriosClientes, Iterator 
 		String celula = "";
 		int posicao = -1;
 		Row linha = null;
-		Cliente resposta = null;
 
-		for(int i = 0; i < this.indice; i++) {
+		for(int i = 0; i < getIndice(); i++) {
 			linha = planilha.getRow(i);
 			celula = linha.getCell(3).toString();
 			if (id.equalsIgnoreCase(celula)){
@@ -177,29 +171,23 @@ public class RepositorioClientesExcel implements RepositoriosClientes, Iterator 
 	 * Metodo que escreve as informacoes adicionadas ao workbook no arquivo planilha.
 	 * Basicamente, ele salva as novas informações após as mesmas serem incluidas no repositorio.
 	 * @throws IOException
-	 */
+	 * */
 	
+	public int getIndice() {
+		Sheet indices = workbook.getSheet("Indices");
+		int size = (int)indices.getRow(0).getCell(1).getNumericCellValue();
+		return size;
+	}
 	
-	
-	public int size() {
-		int cont = 0;
-		Row linha = null;
-		boolean achou = false;
-
-		for (int i = 0; !achou; i++) {
-			linha = planilha.getRow(i);
-			if (linha.getCell(2) == null) {
-				achou = true;
-			} else {
-				cont++;
-			}
-		}
-		return cont;
+	public void setIndice(int indice) throws FileNotFoundException, IOException {
+		Sheet indices = workbook.getSheet("Indices");
+		indices.getRow(0).getCell(1).setCellValue(indice);
+		workbook.write(new FileOutputStream(new File("planilha.xls")));
 	}
 	
 	public Iterator<Cliente> getIterator() {
-		Cliente[] itr = new Cliente[this.size()];
-		for(int i = 0; i < size(); i++) {
+		Cliente[] itr = new Cliente[this.getIndice()];
+		for(int i = 0; i < getIndice(); i++) {
 			itr[i] = this.clone(planilha.getRow(i));
 		}
 		RepositorioClientesExcel iterator = new RepositorioClientesExcel(itr);
@@ -235,6 +223,8 @@ public class RepositorioClientesExcel implements RepositoriosClientes, Iterator 
 		String[] entregas = entregasaux.split(" ");
 		return new Cliente(nome, idade, endereco, id1, senha, entregas);
 	}
+	
+	
 
 }
 

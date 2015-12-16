@@ -4,6 +4,10 @@ import negocios.classesBasicas.Produto;
 import negocios.exceptions.EmptyListException;
 import negocios.exceptions.ProdutoJaExisteException;
 import negocios.exceptions.ProdutoNaoEncontradoException;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 import dados.repositorios.Iterator;
 import dados.repositorios.RepositorioProdutos;
 
@@ -15,7 +19,7 @@ public class CadastroProdutos {
 		this.repositorioProdutos = repositorioProdutos;
 	}
 	
-	public void cadastrar(Produto produto) throws ProdutoJaExisteException {
+	public void cadastrar(Produto produto) throws ProdutoJaExisteException, FileNotFoundException, IOException {
 		if(repositorioProdutos.procurar(produto.getCodigo()) == null) {
 			repositorioProdutos.inserir(produto);
 		} else {
@@ -23,7 +27,7 @@ public class CadastroProdutos {
 		}
 	}
 	
-	public void remover(String codigo) throws ProdutoNaoEncontradoException, EmptyListException {
+	public void remover(String codigo) throws ProdutoNaoEncontradoException, EmptyListException, IOException {
 		if(repositorioProdutos.procurar(codigo) != null) {
 			repositorioProdutos.remover(codigo);
 		} else {

@@ -3,6 +3,12 @@ package dados.repositorios;
 import negocios.classesBasicas.*;
 import negocios.exceptions.EmptyListException;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.*;
 
 /**
@@ -14,18 +20,20 @@ import org.apache.poi.ss.usermodel.*;
  */
 public class RepositorioProdutosExcel implements RepositorioProdutos, Iterator {
 
+	private HSSFWorkbook workbook;
 	private Sheet planilha;
 	private int indice;
 	private int indiceIterator;
 	private Produto[] iterator;
 
-	public RepositorioProdutosExcel(Workbook workbook) {
+	public RepositorioProdutosExcel(HSSFWorkbook workbook) {
 		if (workbook.getSheet("Produtos") != null) {
 			this.planilha = workbook.getSheet("Produtos");
 		} else {
 			this.planilha = workbook.createSheet("Produtos");
 		}
-		this.indice = this.planilha.getPhysicalNumberOfRows();
+		this.workbook = workbook;
+		this.indice = this.getIndice();
 	}
 	private RepositorioProdutosExcel(Produto[] itr) {
 		this.indiceIterator = 0;
@@ -40,10 +48,12 @@ public class RepositorioProdutosExcel implements RepositorioProdutos, Iterator {
 	 * 
 	 * @param produto
 	 *            Produto - Objeto Produto a ser inserido
+	 * @throws IOException 
+	 * @throws FileNotFoundException 
 	 */
-	public void inserir(Produto produto) {
+	public void inserir(Produto produto) throws FileNotFoundException, IOException {
 		Cell celula;
-		Row linha = planilha.createRow(indice);
+		Row linha = planilha.createRow(this.getIndice());
 		celula = linha.createCell(1);
 		celula.setCellValue(produto.getNome());
 		celula = linha.createCell(2);
@@ -68,7 +78,7 @@ public class RepositorioProdutosExcel implements RepositorioProdutos, Iterator {
 			celula = linha.createCell(6);
 			celula.setCellValue(produto.getPreco());
 		}
-		indice++;
+		this.setIndice(getIndice() + 1);
 	}
 
 	/** 
@@ -139,16 +149,17 @@ public class RepositorioProdutosExcel implements RepositorioProdutos, Iterator {
 	 * Ele usa o metodo procurar linha pra encontrar a localização do produto no repositorio.
 	 * Depois, remove aquela linha e realoca todas as outras abaixo dela uma posicao acima.
 	 * @param id String - id do Produto a ser removido do repositorio.
+	 * @throws IOException 
+	 * @throws FileNotFoundException 
 	 */
-	public void remover(String id) {
+	public void remover(String id) throws IOException {
 		int posicao = this.procurarLinha(id);
 		Row aux = planilha.getRow(posicao);
 		planilha.removeRow(aux);
 		if(this.indice > 1) {
-			planilha.shiftRows((posicao + 1), (indice - 1), -1);
+			planilha.shiftRows((posicao + 1), (this.getIndice() - 1), -1);
 		}
-		indice--;
-
+		this.setIndice(getIndice() - 1);
 	}
 
 	public Produto procurarNome(String nome) {
@@ -192,7 +203,7 @@ public class RepositorioProdutosExcel implements RepositorioProdutos, Iterator {
 		Produto resposta = null;
 		boolean achou = false;
 
-		for (int i = 0; i < this.indice && !achou; i++) {
+		for (int i = 0; i < this.getIndice() && !achou; i++) {
 			linha = planilha.getRow(i);
 			celula = linha.getCell(2).toString();
 			if (codigo.equalsIgnoreCase(celula)) {
@@ -220,27 +231,24 @@ public class RepositorioProdutosExcel implements RepositorioProdutos, Iterator {
 	}
 
 	public Iterator<Produto> getIterator() throws EmptyListException {
-		Produto[] itr = new Produto[this.size()];
-		for(int i = 0; i < size(); i++) {
+		Produto[] itr = new Produto[this.getIndice()];
+		for(int i = 0; i < getIndice(); i++) {
 			itr[i] = this.clone(planilha.getRow(i));
 		}
 		RepositorioProdutosExcel iterator = new RepositorioProdutosExcel(itr);
 		return iterator;
 	}
-	public int size() {
-		int cont = 0;
-		Row linha = null;
-		boolean achou = false;
-
-		for (int i = 0; !achou; i++) {
-			linha = planilha.getRow(i);
-			if (linha.getCell(2) == null) {
-				achou = true;
-			} else {
-				cont++;
-			}
-		}
-		return cont;
+	
+	public int getIndice() {
+		Sheet indices = workbook.getSheet("Indices");
+		int size = (int)indices.getRow(1).getCell(1).getNumericCellValue();
+		return size;
+	}
+	
+	public void setIndice(int indice) throws FileNotFoundException, IOException {
+		Sheet indices = workbook.getSheet("Indices");
+		indices.getRow(1).getCell(1).setCellValue(indice);
+		workbook.write(new FileOutputStream(new File("planilha.xls")));
 	}
 	private Produto clone(Row linha) {
 		Produto resposta = null;

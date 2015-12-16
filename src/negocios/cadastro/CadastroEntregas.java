@@ -5,6 +5,10 @@ import negocios.exceptions.EmptyListException;
 import negocios.exceptions.EntregaJaExisteException;
 import negocios.exceptions.EntregaNaoEncontradaException;
 import negocios.exceptions.NaoHaEntregasException;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 import dados.repositorios.Iterator;
 import dados.repositorios.RepositorioEntregas;
 import dados.repositorios.RepositorioEntregasFila;
@@ -16,7 +20,7 @@ public class CadastroEntregas {
 	public CadastroEntregas(RepositorioEntregas repositorioEntregas) {
 		this.repositorioEntregas = repositorioEntregas;
 	}
-	public void cadastrar(Entrega entrega) throws EntregaJaExisteException {
+	public void cadastrar(Entrega entrega) throws EntregaJaExisteException, FileNotFoundException, IOException {
 		if(repositorioEntregas.procurar(entrega.getId()) == null){
 			repositorioEntregas.inserir(entrega);
 		}else {
@@ -25,7 +29,7 @@ public class CadastroEntregas {
 
 
 	} 
-	public void remover(String id) throws EntregaNaoEncontradaException, EmptyListException{
+	public void remover(String id) throws EntregaNaoEncontradaException, EmptyListException, FileNotFoundException, IOException{
 		if(repositorioEntregas.procurar(id) != null){
 			repositorioEntregas.remover(id);
 		}else{
@@ -43,7 +47,7 @@ public class CadastroEntregas {
 		}
 	}
 
-	public void enviar() throws NaoHaEntregasException {
+	public void enviar() throws NaoHaEntregasException, FileNotFoundException, IOException {
 		if (repositorioEntregas.isEmpty()) {
 			throw new NaoHaEntregasException();
 		} else {

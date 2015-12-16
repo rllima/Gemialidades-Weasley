@@ -15,7 +15,7 @@ public class TesteExcel {
 			file.createNewFile();
 			
 			FileOutputStream saidaArquivo = new FileOutputStream(file);
-			Workbook workbook = new HSSFWorkbook();
+			HSSFWorkbook workbook = new HSSFWorkbook();
 			
 			RepositorioProdutosExcel repositorio = new RepositorioProdutosExcel(workbook);
 			
