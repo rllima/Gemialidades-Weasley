@@ -132,7 +132,7 @@ public class RepositorioEntregasExcel implements RepositorioEntregas, Iterator {
 		int posicao = this.procurarLinha(id);
 		Row aux = planilhaPendentes.getRow(posicao);
 		planilhaPendentes.removeRow(aux);
-		if(getIndicePend() > 1) {
+		if(getIndicePend() >= 1 && !(posicao + 1 == getIndicePend())) {
 		planilhaPendentes.shiftRows((posicao + 1), (getIndicePend() - 1), -1);
 		}
 		setIndicePend(getIndicePend() - 1);

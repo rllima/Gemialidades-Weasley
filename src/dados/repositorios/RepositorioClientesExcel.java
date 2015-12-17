@@ -140,7 +140,7 @@ public class RepositorioClientesExcel implements RepositoriosClientes, Iterator 
 		int posicao = this.procurarLinha(id);
 		Row aux = planilha.getRow(posicao);
 		planilha.removeRow(aux);
-		if(this.getIndice() > 1) {
+		if(this.getIndice() >= 1 && !(posicao + 1 == getIndice())) {
 		planilha.shiftRows((posicao+1), (getIndice()-1), -1);
 		}
 		this.setIndice(getIndice() - 1);
