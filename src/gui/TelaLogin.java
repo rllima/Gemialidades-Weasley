@@ -132,12 +132,12 @@ public class TelaLogin extends JFrame {
 		telaLogin.add(lblNovoPorAqui);
 
 		JLabel lblNewLabel_1 = new JLabel("");
-		lblNewLabel_1.setIcon(new ImageIcon("images\\logo.png"));
+		lblNewLabel_1.setIcon(new ImageIcon(TelaLogin.class.getResource("/logo.png")));
 		lblNewLabel_1.setBounds(128, 11, 378, 146);
 		telaLogin.add(lblNewLabel_1);
 
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon("images\\Fundo.jpg"));
+		lblNewLabel.setIcon(new ImageIcon(TelaLogin.class.getResource("/Fundo.jpg")));
 		lblNewLabel.setBounds(0, 0, 626, 444);
 		telaLogin.add(lblNewLabel);
 

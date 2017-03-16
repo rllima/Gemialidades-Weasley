@@ -135,7 +135,7 @@ public class Relatorios extends JFrame {
 		});
 		btnEntregasEnviadas.setBounds(273, 272, 257, 23);
 		contentPane.add(btnEntregasEnviadas);
-		label.setIcon(new ImageIcon("images\\Fundo.jpg"));
+		label.setIcon(new ImageIcon(Relatorios.class.getResource("/Fundo.jpg")));
 		label.setBounds(0, 0, 540, 354);
 		contentPane.add(label);
 	}

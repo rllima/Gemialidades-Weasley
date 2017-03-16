@@ -136,7 +136,7 @@ public class AttGuloseima extends JFrame {
 		getContentPane().add(btnAtualizar);
 		
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon("images\\Fundo.jpg"));
+		lblNewLabel.setIcon(new ImageIcon(AttGuloseima.class.getResource("/Fundo.jpg")));
 		lblNewLabel.setBounds(0, 0, 491, 328);
 		getContentPane().add(lblNewLabel);
 		

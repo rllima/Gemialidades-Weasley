@@ -197,33 +197,33 @@ public class TelaAtualizarCliente extends JFrame {
 		passwordFieldA.setText(cliente.getSenha());
 
 		JLabel lblbastao4 = new JLabel("");
-		lblbastao4.setIcon(new ImageIcon("images\\2.2.png"));
+		lblbastao4.setIcon(new ImageIcon(TelaAtualizarCliente.class.getResource("/2.2.png")));
 		lblbastao4.setBounds(0, 113, 61, 16);
 		contentPane.add(lblbastao4);
 
 		JLabel lblbastao2 = new JLabel("");
-		lblbastao2.setIcon(new ImageIcon("images\\1.1.png"));
+		lblbastao2.setIcon(new ImageIcon(TelaAtualizarCliente.class.getResource("/1.1.png")));
 		lblbastao2.setBounds(205, 115, 96, 14);
 		contentPane.add(lblbastao2);
 
 		JLabel label_1 = new JLabel("");
-		label_1.setIcon(new ImageIcon("images\\equerda.png"));
+		label_1.setIcon(new ImageIcon(TelaAtualizarCliente.class.getResource("/equerda.png")));
 		label_1.setBounds(342, 113, 88, 14);
 		contentPane.add(label_1);
 
 		JLabel lblbastao1 = new JLabel("");
-		lblbastao1.setIcon(new ImageIcon("images\\direita.png"));
+		lblbastao1.setIcon(new ImageIcon(TelaAtualizarCliente.class.getResource("/direita.png")));
 		lblbastao1.setBounds(526, 113, 90, 14);
 		contentPane.add(lblbastao1);
 
 		JLabel lblCoruja = new JLabel("");
-		lblCoruja.setIcon(new ImageIcon("images\\topo.png"));
+		lblCoruja.setIcon(new ImageIcon(TelaAtualizarCliente.class.getResource("/topo.png")));
 		lblCoruja.setBounds(208, 11, 224, 65);
 		contentPane.add(lblCoruja);
 
 		JLabel lblBackground = new JLabel("");
 		lblBackground.setBackground(Color.GRAY);
-		lblBackground.setIcon(new ImageIcon("images\\Fundo.jpg"));
+		lblBackground.setIcon(new ImageIcon(TelaAtualizarCliente.class.getResource("/Fundo.jpg")));
 		lblBackground.setBounds(0, 0, 626, 443);
 		contentPane.add(lblBackground);
 

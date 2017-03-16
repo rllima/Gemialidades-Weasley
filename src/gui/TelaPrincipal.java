@@ -193,33 +193,33 @@ public class TelaPrincipal extends JFrame {
 		panel_Pedidos.add(btnVerPedido);
 		
 		JLabel label_1 = new JLabel("");
-		label_1.setIcon(new ImageIcon("images\\topo.png"));
+		label_1.setIcon(new ImageIcon(TelaPrincipal.class.getResource("/topo.png")));
 		label_1.setBounds(203, 11, 220, 53);
 		panel_Pedidos.add(label_1);
 		
 		JLabel label_2 = new JLabel("");
-		label_2.setIcon(new ImageIcon("images\\equerda.png"));
+		label_2.setIcon(new ImageIcon(TelaPrincipal.class.getResource("/equerda.png")));
 		label_2.setBounds(108, 250, 133, 14);
 		panel_Pedidos.add(label_2);
 		
 		JLabel label_3 = new JLabel("");
-		label_3.setIcon(new ImageIcon("images\\direita.png"));
+		label_3.setIcon(new ImageIcon(TelaPrincipal.class.getResource("/direita.png")));
 		label_3.setBounds(425, 250, 145, 14);
 		panel_Pedidos.add(label_3);
 		
 		JLabel bg_Pedidos = new JLabel("");
-		bg_Pedidos.setIcon(new ImageIcon("images\\Fundo.jpg"));
+		bg_Pedidos.setIcon(new ImageIcon(TelaPrincipal.class.getResource("/Fundo.jpg")));
 		bg_Pedidos.setBorder(new LineBorder(new Color(0, 0, 0)));
 		bg_Pedidos.setBounds(0, 0, 626, 444);
 		panel_Pedidos.add(bg_Pedidos);
 		
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon("images\\logo.png"));
+		lblNewLabel.setIcon(new ImageIcon(TelaPrincipal.class.getResource("/logo.png")));
 		lblNewLabel.setBounds(181, 103, 382, 262);
 		panel_Inicio.add(lblNewLabel);
 		
 		JLabel gb = new JLabel("");
-		gb.setIcon(new ImageIcon("images\\juro.gif"));
+		gb.setIcon(new ImageIcon(TelaPrincipal.class.getResource("/juro.gif")));
 		gb.setBorder(null);
 		gb.setBounds(0, 0, 605, 444);
 		panel_Inicio.add(gb);
@@ -308,32 +308,32 @@ public class TelaPrincipal extends JFrame {
 				panel_Compras.add(btnVoltar);
 				
 				JLabel label_4 = new JLabel("");
-				label_4.setIcon(new ImageIcon("images\\topo.png"));
+				label_4.setIcon(new ImageIcon(TelaPrincipal.class.getResource("/topo.png")));
 				label_4.setBounds(208, 11, 207, 74);
 				panel_Compras.add(label_4);
 				
 				JLabel label_5 = new JLabel("");
-				label_5.setIcon(new ImageIcon("images\\equerda.png"));
+				label_5.setIcon(new ImageIcon(TelaPrincipal.class.getResource("/equerda.png")));
 				label_5.setBounds(129, 248, 99, 14);
 				panel_Compras.add(label_5);
 				
 				JLabel label_6 = new JLabel("");
-				label_6.setIcon(new ImageIcon("images\\direita.png"));
+				label_6.setIcon(new ImageIcon(TelaPrincipal.class.getResource("/direita.png")));
 				label_6.setBounds(395, 248, 99, 14);
 				panel_Compras.add(label_6);
 				
 				JLabel label_7 = new JLabel("");
-				label_7.setIcon(new ImageIcon("images\\equerda.png"));
+				label_7.setIcon(new ImageIcon(TelaPrincipal.class.getResource("/equerda.png")));
 				label_7.setBounds(128, 409, 99, 14);
 				panel_Compras.add(label_7);
 				
 				JLabel label_8 = new JLabel("");
-				label_8.setIcon(new ImageIcon("images\\direita.png"));
+				label_8.setIcon(new ImageIcon(TelaPrincipal.class.getResource("/direita.png")));
 				label_8.setBounds(395, 409, 99, 14);
 				panel_Compras.add(label_8);
 				
 				JLabel bg_Compras = new JLabel("");
-				bg_Compras.setIcon(new ImageIcon("images\\Fundo.jpg"));
+				bg_Compras.setIcon(new ImageIcon(TelaPrincipal.class.getResource("/Fundo.jpg")));
 				bg_Compras.setBorder(new LineBorder(new Color(0, 0, 0)));
 				bg_Compras.setBounds(0, 0, 604, 444);
 				panel_Compras.add(bg_Compras);
@@ -341,7 +341,7 @@ public class TelaPrincipal extends JFrame {
 				JLabel background = new JLabel("");
 				panel_Principal.add(background, "name_9518700264771");
 				background.setBorder(new LineBorder(new Color(0, 0, 0)));
-				background.setIcon(new ImageIcon("images\\Fundo.jpg"));
+				background.setIcon(new ImageIcon(TelaPrincipal.class.getResource("/Fundo.jpg")));
 				btnGet.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
 						DefaultListModel<String> dlm = new DefaultListModel<String>();

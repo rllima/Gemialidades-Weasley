@@ -10,5 +10,6 @@
 	<classpathentry kind="lib" path="excel/poi-3.13/poi-ooxml-3.13-20150929.jar"/>
 	<classpathentry kind="lib" path="excel/poi-3.13/poi-ooxml-schemas-3.13-20150929.jar"/>
 	<classpathentry kind="lib" path="excel/poi-3.13/poi-scratchpad-3.13-20150929.jar"/>
+	<classpathentry kind="lib" path="C:/Users/rlo/git/gemialidades-weasley/images/img.zip"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

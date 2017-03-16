@@ -209,7 +209,7 @@ public class TelaAdmin extends JFrame {
 		panel_Trav.add(button);
 		
 		JLabel label_13 = new JLabel("");
-		label_13.setIcon(new ImageIcon("images\\Mapa-do-Maroto1.jpg"));
+		label_13.setIcon(new ImageIcon(TelaAdmin.class.getResource("/Mapa-do-Maroto1.jpg")));
 		label_13.setBounds(0, 0, 357, 235);
 		panel_Trav.add(label_13);
 		
@@ -256,7 +256,7 @@ public class TelaAdmin extends JFrame {
 		panel_Escolha.add(btnTravessuras);
 		
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon("images\\Mapa-do-Maroto1.jpg"));
+		lblNewLabel.setIcon(new ImageIcon(TelaAdmin.class.getResource("/Mapa-do-Maroto1.jpg")));
 		lblNewLabel.setBounds(0, 0, 357, 235);
 		panel_Escolha.add(lblNewLabel);
 		final TextField tf_NomeCad = new TextField();
@@ -332,7 +332,7 @@ public class TelaAdmin extends JFrame {
 				panel_CadastroGul.add(btnCadastrarG);
 				
 				JLabel label_14 = new JLabel("");
-				label_14.setIcon(new ImageIcon("images\\Mapa-do-Maroto1.jpg"));
+				label_14.setIcon(new ImageIcon(TelaAdmin.class.getResource("/Mapa-do-Maroto1.jpg")));
 				label_14.setBounds(0, 0, 357, 235);
 				panel_CadastroGul.add(label_14);
 		
@@ -379,7 +379,7 @@ public class TelaAdmin extends JFrame {
 		panel_AttProduto.add(btnAttProd);
 		
 		JLabel label_15 = new JLabel("");
-		label_15.setIcon(new ImageIcon("images\\Mapa-do-Maroto1.jpg"));
+		label_15.setIcon(new ImageIcon(TelaAdmin.class.getResource("/Mapa-do-Maroto1.jpg")));
 		label_15.setBounds(0, 0, 357, 235);
 		panel_AttProduto.add(label_15);
 		final Panel panel_AttCliente = new Panel();
@@ -427,7 +427,7 @@ public class TelaAdmin extends JFrame {
 		panel_AttCliente.add(btnAttClien);
 		
 		JLabel label_16 = new JLabel("");
-		label_16.setIcon(new ImageIcon("images\\Mapa-do-Maroto1.jpg"));
+		label_16.setIcon(new ImageIcon(TelaAdmin.class.getResource("/Mapa-do-Maroto1.jpg")));
 		label_16.setBounds(0, 0, 357, 235);
 		panel_AttCliente.add(label_16);
 		
@@ -465,7 +465,7 @@ public class TelaAdmin extends JFrame {
 		panel_RmvCliente.add(btnRemoverClien);
 		
 		JLabel label_17 = new JLabel("");
-		label_17.setIcon(new ImageIcon("images\\Mapa-do-Maroto1.jpg"));
+		label_17.setIcon(new ImageIcon(TelaAdmin.class.getResource("/Mapa-do-Maroto1.jpg")));
 		label_17.setBounds(0, 0, 357, 235);
 		panel_RmvCliente.add(label_17);
 		
@@ -501,7 +501,7 @@ public class TelaAdmin extends JFrame {
 		panel_RmvProd.add(btnRemoverProd);
 		
 		JLabel label_18 = new JLabel("");
-		label_18.setIcon(new ImageIcon("images\\Mapa-do-Maroto1.jpg"));
+		label_18.setIcon(new ImageIcon(TelaAdmin.class.getResource("/Mapa-do-Maroto1.jpg")));
 		label_18.setBounds(0, 0, 357, 235);
 		panel_RmvProd.add(label_18);
 		
@@ -623,7 +623,7 @@ public class TelaAdmin extends JFrame {
 		
 		JLabel lblBackground = new JLabel("");
 		lblBackground.setBounds(0, 0, 624, 428);
-		lblBackground.setIcon(new ImageIcon("images\\Fundo.jpg"));
+		lblBackground.setIcon(new ImageIcon(TelaAdmin.class.getResource("/Fundo.jpg")));
 		jPanel1.add(lblBackground);
 	}
 	

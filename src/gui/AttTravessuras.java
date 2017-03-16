@@ -151,7 +151,7 @@ public class AttTravessuras extends JFrame {
 		});
 		btnAtualizar.setBounds(175, 286, 163, 24);
 		getContentPane().add(btnAtualizar);
-		label_5.setIcon(new ImageIcon("images\\Fundo.jpg"));
+		label_5.setIcon(new ImageIcon(AttTravessuras.class.getResource("/Fundo.jpg")));
 		label_5.setBounds(0, 0, 535, 362);
 		getContentPane().add(label_5);
 		}

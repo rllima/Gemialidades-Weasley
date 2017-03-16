@@ -113,7 +113,7 @@ public class Estoque extends JFrame {
 		contentPane.add(btnRelatrio);
 		
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon("images\\Fundo.jpg"));
+		lblNewLabel.setIcon(new ImageIcon(Estoque.class.getResource("/Fundo.jpg")));
 		lblNewLabel.setBounds(0, 0, 554, 303);
 		contentPane.add(lblNewLabel);
 		
